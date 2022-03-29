@@ -20,9 +20,9 @@ const Login = () => {
   // }
 
   return (
-    <section className="d-flex justify-content-around m-5">
+    <section className="d-flex justify-content-around align-items-center m-5">
       <form id ="contact-form">
-        <h1 data-testid='h1tag'>Log in</h1>
+        <h1 className= "text-center" data-testid='h1tag'>Log in</h1>
         <div className="p-2">
           <label htmlFor="email">Email address :</label>
           <input type="email" name="email" />
