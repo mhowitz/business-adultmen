@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 
 import NavBar from './NavBar';
 import Footer from './Footer';
-import Login from '../components/pages/Login'
+import Login from '../components/pages/Login';
+import Profile from '../components/pages/Profile';
+import SignUp from '../components/pages/SignUp';
+import Home from '../components/pages/Home';
+
 
 const Container = () => {
   const [currentPage, setCurrentPage] = useState('Login');
@@ -10,6 +14,15 @@ const Container = () => {
   const renderPage = () => {
     if(currentPage === 'Login') {
       return <Login />;
+    }
+    else if(currentPage === 'Profile') {
+      return <Profile />;
+    }
+    else if(currentPage === 'SignUp') {
+      return <SignUp />;
+    }
+    else if(currentPage === 'Home') {
+      return <Home />;
     }
   }
 
