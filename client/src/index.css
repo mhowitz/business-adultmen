@@ -14,7 +14,11 @@ body {
 }
 
 .height-100 {
-  height: fit-content;
+  height: 100vh;
+}
+
+.height-20 {
+  height: 8vh;
 }
 
 .red {
