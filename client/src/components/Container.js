@@ -11,6 +11,19 @@ const Container = () => {
     if(currentPage === 'Login') {
       return <Login />;
     }
+    if(currentPage === 'Post') {
+      return <Post />;
+    }
+    if(currentPage === 'SignUp') {
+      return <SignUp />;
+    }
+    if(currentPage === 'Home') {
+      return <Home />;
+    }
+    if(currentPage === 'Profile') {
+      return <Profile />;
+    }
+
   }
 
   const handlePageChange = (page) => setCurrentPage(page);
