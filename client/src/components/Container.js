@@ -6,7 +6,7 @@ import Login from '../components/pages/Login';
 import Profile from '../components/pages/Profile';
 import SignUp from '../components/pages/SignUp';
 import Home from '../components/pages/Home';
-
+import Post from '../components/pages/Post';
 
 const Container = () => {
   const [currentPage, setCurrentPage] = useState('Login');
@@ -23,6 +23,9 @@ const Container = () => {
     }
     else if(currentPage === 'Home') {
       return <Home />;
+    }
+    else if(currentPage === 'Post') {
+      return <Post />;
     }
   }
 
