@@ -44,6 +44,16 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           Profile
         </a>
       </li>
+      <li className="nav-item">
+        <a
+          href="#Post"
+          onClick={() => handlePageChange('Post')}
+          // Check to see if the currentPage is `Post`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
+          className={currentPage === 'Post' ? 'nav-link active' : 'nav-link'}
+        >
+          Post
+        </a>
+      </li>
     </ul>
   )
 }
