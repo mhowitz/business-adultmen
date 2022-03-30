@@ -30,7 +30,9 @@ const Login = () => {
         <label className="p-2" htmlFor="name">Password :</label>
         <input className="m-2" type="text" name="name"/>
 
-        <button className="btn btn-primary m-2"> sign up here</button>
+        <button className="btn btn-primary m-2">Login</button>
+
+        <button className="btn btn-warning m-2"> sign up here</button>
       </form>
       
 
