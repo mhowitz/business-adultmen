@@ -1,5 +1,21 @@
 import React, { useState } from 'react'
 
+const getImageDetails = async function(url) {
+
+  var apiUrl = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_API_URL}&image=${url}`;
+  try {
+    return fetch(apiUrl).then((response) => {
+      return response.json()
+    }).then((data) => {
+      console.log(data);
+      return data;
+    })
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
 const Post = () => {
   // states to grab user inputs
   const[price, setPrice] = useState();
@@ -25,11 +41,15 @@ const Post = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const item = { price, description, image, category };
 
     setIsPending(true);
+
+    const displayImage = await getImageDetails(item.image);
+
+    item.image = displayImage.data.display_url;
 
     fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
         method: 'post',
