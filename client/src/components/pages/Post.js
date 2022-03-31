@@ -6,7 +6,7 @@ const Post = () => {
   const[description, setDescription] = useState();
   const[image, setImage] = useState();
   const [category, setCategory] = useState();
-  const [isPending, setIsPending] = useState('false');
+  const [isPending, setIsPending] = useState(false);
 
   // verification that user enters correct data.
   const handleChange = (e) => {
@@ -87,7 +87,7 @@ const Post = () => {
           <option value="junk">junk</option>
         </select>
         { !isPending && <button className="btn btn-primary m-2" >Submit</button>}
-        { isPending && <button className="btn btn-primary m-2" disabled>Submitting Post</button>}
+        { isPending && <button className="btn btn-primary m-2" disabled>Submitting Post...</button>}
 
       </form>
     </section>  
