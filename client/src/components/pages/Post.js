@@ -1,23 +1,4 @@
 import React, { useState } from 'react'
-// require('dotenv').config();
-
-// const API_KEY = 'ccf6a81bde3315fe4aa9e6ad510f5549';
-
-const getImageDetails = async function(url) {
-
-  var apiUrl = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_API_URL}&image=${url}`;
-  try {
-    return fetch(apiUrl).then((response) => {
-      return response.json()
-    }).then((data) => {
-      console.log(data);
-      return data;
-    })
-  } catch (error) {
-    console.log(error)
-  }
-
-}
 
 const Post = () => {
   // states to grab user inputs
@@ -43,13 +24,9 @@ const Post = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const item = { price, description, image, category };
-
-    const displayImage = await getImageDetails(item.image);
-
-    item.image = displayImage.data.display_url;
 
     fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
         method: 'post',
