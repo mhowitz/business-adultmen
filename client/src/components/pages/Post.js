@@ -6,6 +6,7 @@ const Post = () => {
   const[description, setDescription] = useState();
   const[image, setImage] = useState();
   const [category, setCategory] = useState();
+  const [isPending, setIsPending] = useState('false');
 
   // verification that user enters correct data.
   const handleChange = (e) => {
@@ -28,6 +29,8 @@ const Post = () => {
     e.preventDefault();
     const item = { price, description, image, category };
 
+    setIsPending(true);
+
     fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
         method: 'post',
         mode: 'no-cors',
@@ -38,6 +41,7 @@ const Post = () => {
         body: JSON.stringify(item)
       }).then(() => {
         console.log('new item posted')
+        setIsPending(false);
       });
   }
 
@@ -82,7 +86,8 @@ const Post = () => {
           <option value="books">books</option>
           <option value="junk">junk</option>
         </select>
-        <button className="btn btn-primary m-2" >Submit</button>
+        { !isPending && <button className="btn btn-primary m-2" >Submit</button>}
+        { isPending && <button className="btn btn-primary m-2" disabled>Submitting Post</button>}
 
       </form>
     </section>  
