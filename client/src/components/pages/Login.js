@@ -19,7 +19,7 @@ const Login = () => {
 
     // need to check with seeded data that this works.
     fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
-      method: 'get',
+      method: 'post',
       mode: 'no-cors',
       headers: {
         'Accept': 'application/json',

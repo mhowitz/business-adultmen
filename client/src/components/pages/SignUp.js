@@ -50,8 +50,8 @@ const SignUp = () => {
         <label className="p-2" htmlFor="email">Email address :</label>
         <input className="m-2"
           value={email} 
-          onChange={setEmail}
-          onBlur={(e) => handleChange(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
+          
           type="email" 
           name="email" />
 
