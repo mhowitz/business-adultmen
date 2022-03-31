@@ -37,7 +37,7 @@ const Post = () => {
         },
         body: JSON.stringify(item)
       }).then(() => {
-        console.log('new blog added')
+        console.log('new item posted')
       });
   }
 
