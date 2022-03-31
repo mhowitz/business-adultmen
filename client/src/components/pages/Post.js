@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-// require('dotenv').config();
-
-// const API_KEY = 'ccf6a81bde3315fe4aa9e6ad510f5549';
 
 const getImageDetails = async function(url) {
 
