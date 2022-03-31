@@ -22,6 +22,7 @@ const Post = () => {
   const[description, setDescription] = useState();
   const[image, setImage] = useState();
   const [category, setCategory] = useState();
+  const [isPending, setIsPending] = useState(false);
 
   // verification that user enters correct data.
   const handleChange = (e) => {
@@ -44,6 +45,8 @@ const Post = () => {
     e.preventDefault();
     const item = { price, description, image, category };
 
+    setIsPending(true);
+
     const displayImage = await getImageDetails(item.image);
 
     item.image = displayImage.data.display_url;
@@ -57,7 +60,8 @@ const Post = () => {
         },
         body: JSON.stringify(item)
       }).then(() => {
-        console.log('new blog added')
+        console.log('new item posted')
+        setIsPending(false);
       });
   }
 
@@ -102,7 +106,8 @@ const Post = () => {
           <option value="books">books</option>
           <option value="junk">junk</option>
         </select>
-        <button className="btn btn-primary m-2" >Submit</button>
+        { !isPending && <button className="btn btn-primary m-2" >Submit</button>}
+        { isPending && <button className="btn btn-primary m-2" disabled>Submitting Post...</button>}
 
       </form>
     </section>  
