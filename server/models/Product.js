@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat')
+// const { CommentSchema } = require('./Comment')
 
 const ProductSchema = new Schema(
   {
@@ -24,7 +25,7 @@ const ProductSchema = new Schema(
       minLength: 1
     },
     price: {
-      type: Double,
+      type: Schema.Types.Decimal128,
       required: true
     },
     city: {
@@ -37,7 +38,12 @@ const ProductSchema = new Schema(
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal)
     },
-    comments: [CommentSchema]
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+      }
+    ],
   },
   {
     toJSON: {
