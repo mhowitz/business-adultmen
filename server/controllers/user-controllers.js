@@ -34,10 +34,11 @@ const userController = {
 				email: req.body.email
 			}, function(err, user){
 				if( err) throw err;
-				if(!user || !user.comoparePassword(req.body.password)) {
+				if(!user || !user.isCorrectPassword(req.body.password)) {
 					return res.status(401).json({ message: 'Authentication failed, Invalid user or password!'});
 				}
-				return res.json({ token: jwt.sign({ email: user.email, password: user.password, _id: user._id }, 'RESTFULapis ')});
+				return res.json({ token: jwt.sign({ email: user.email, password: user.password, _id: user._id },' REsfulapis' )});
+				
 			})
 		}
 		catch (error) {

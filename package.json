@@ -18,6 +18,8 @@
     "dotenv": "^16.0.0"
   },
   "dependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15",
     "react-dotenv": "^0.1.3"
   }
 }
