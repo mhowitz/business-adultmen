@@ -24,6 +24,13 @@ const ProductSchema = new Schema(
       maxLength: 280,
       minLength: 1
     },
+    category: {
+      type: String,
+      trim: true,
+      maxLength: 50,
+      minLength: 1,
+      required: true
+    },
     price: {
       type: Schema.Types.Decimal128,
       required: true

@@ -6,7 +6,7 @@ const productController = {
 			const productData = 
         await Product.find({})
           .select("-__v")
-          .sort({ createdAt: -1})
+          .sort("-createdAt")
 
 			res.json(productData)
 		} catch (error) {
@@ -28,7 +28,32 @@ const productController = {
 		} catch (error) {
 			res.status(500).json(error)
 		}
-	}
+	},
+  getProductsByCat: async function(req, res) {
+    try {
+			const productData = 
+        await Product.find({category: req.params.name})
+          .select("-__v")
+          .sort("-createdAt")
+
+			res.json(productData)
+		} catch (error) {
+			res.status(500).json(error)
+		}
+  },
+  getProductsByCatAndPrice: async function(req, res) {
+    try {
+      const direction = (req.params.direction).toString();
+			const productData = 
+        await Product.find({category: req.params.name})
+          .select("-__v")
+          .sort({ price: direction})
+
+			res.json(productData)
+		} catch (error) {
+			res.status(500).json(error)
+		}
+  }
 }
 
 module.exports = productController;
