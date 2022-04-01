@@ -13,11 +13,12 @@ const getImageDetails = async function(url) {
   } catch (error) {
     console.log(error)
   }
-
 }
 
 const Post = () => {
   // states to grab user inputs
+  const [title, setTitle] = useState();
+  const [city, setCity] = useState();
   const[price, setPrice] = useState();
   const[description, setDescription] = useState();
   const[image, setImage] = useState();
@@ -47,12 +48,12 @@ const Post = () => {
     console.log("category before", category);
 
     const item = { 
-                  title: "new item",
+                  title: title,
                   photo: image, 
                   description: description, 
                   category: category,
                   price: price,
-                  city: "slc"
+                  city: city
                   };
 
     console.log("CATEGORY", item.category);
@@ -117,9 +118,27 @@ const Post = () => {
           type="text" 
           name="category">
           
+          <option value="" disabled selected> Choose a category... </option>
           <option value="books">books</option>
           <option value="junk">junk</option>
         </select>
+
+        <label className="p-2" htmlFor="Category">Title</label>
+        <input className="m-2" 
+          value = {title}
+          onChange = {(e) => setTitle(e.target.value)}
+          type="text" 
+          name="title"
+          onBlur={handleChange}/>
+
+        <label className="p-2" htmlFor="Category">City</label>
+        <input className="m-2" 
+          value = {city}
+          onChange = {(e) => setCity(e.target.value)}
+          type="text" 
+          name="city"
+          onBlur={handleChange}/>
+          
         { !isPending && <button className="btn btn-primary m-2" >Submit</button>}
         { isPending && <button className="btn btn-primary m-2" disabled>Submitting Post...</button>}
 
