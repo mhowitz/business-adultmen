@@ -15,6 +15,7 @@ const productController = {
   },
   createProduct: async function (req, res) {
 		try {
+      console.log(req.body);
 			const productData = await Product.create(req.body)
 			res.json(productData)
 		} catch (error) {

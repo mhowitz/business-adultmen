@@ -43,26 +43,40 @@ const Post = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const item = { price, description, image, category };
+
+    console.log("category before", category);
+
+    const item = { 
+                  title: "new item",
+                  photo: image, 
+                  description: description, 
+                  category: category,
+                  price: price,
+                  city: "slc"
+                  };
+
+    console.log("CATEGORY", item.category);
 
     setIsPending(true);
 
-    const displayImage = await getImageDetails(item.image);
+    const displayImage = await getImageDetails(item.photo);
 
-    item.image = displayImage.data.display_url;
+    item.photo = displayImage.data.display_url;
 
-    fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
-        method: 'post',
-        mode: 'no-cors',
+    fetch('/api/products', {
+        method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(item)
       }).then(() => {
         console.log('new item posted')
         setIsPending(false);
-      });
+      })
+        .catch(() => {
+          setIsPending(false);
+        });
   }
 
   return (
@@ -101,7 +115,7 @@ const Post = () => {
           value = {category}
           onChange = {(e) => setCategory(e.target.value)}
           type="text" 
-          name="Category">
+          name="category">
           
           <option value="books">books</option>
           <option value="junk">junk</option>
