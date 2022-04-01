@@ -48,12 +48,12 @@ const Post = () => {
     console.log("category before", category);
 
     const item = { 
-                  title: "new item",
+                  title: title,
                   photo: image, 
                   description: description, 
                   category: category,
                   price: price,
-                  city: "slc"
+                  city: city
                   };
 
     console.log("CATEGORY", item.category);
