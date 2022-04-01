@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+const jsonwebtoken = require('jsonwebtoken');
+const { authMiddleware } = require('./utils/auth');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -17,6 +18,19 @@ if (process.env.NODE_ENV === 'production') {
 mongoose.connect('mongodb://localhost:27017/business-adultmen', {
   useNewUrlParser: true,
   useUnifiedTopology: true
+});
+
+app.use(function(req, res, next) {
+  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'mysecretsshhhhh', function(err, decode) {
+      if (err) req.user = undefined;
+      req.user = decode;
+      next();
+    });
+  } else {
+    req.user = undefined;
+    next();
+  }
 });
 
 // Use this to log mongo queries being executed!
