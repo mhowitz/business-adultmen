@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useHistory } from 'react';
 import SignUp from './SignUp';
 import { validateEmail } from '../../utils/helpers';
 
@@ -7,7 +7,7 @@ const Login = () => {
   const [currentPage, setCurrentPage] = useState('SignUp');
   const handlePageChange = (page) => setCurrentPage(page);
 
-
+  const History = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -42,6 +42,10 @@ const Login = () => {
     }
   }
 
+  const renderSignUp = () => {
+    history.push("/SignUp");
+  }
+
   return (
     <section className="d-flex justify-content-around align-items-center p-5 bg-primary height-100">
       <form className="card p-5" id="logInForm" onSubmit ={handleSubmit}>
@@ -67,7 +71,7 @@ const Login = () => {
         Login</button>
 
         <button className="btn btn-warning m-2"
-          onClick={handlePageChange}>
+          onClick={renderSignUp}>
           sign up here</button>
       </form>
       

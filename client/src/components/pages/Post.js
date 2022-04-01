@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const getImageDetails = async function(url) {
 
@@ -63,7 +63,7 @@ const Post = () => {
         console.log('new item posted')
         setIsPending(false);
       });
-  }
+  }  
 
   return (
     <section className="d-flex justify-content-around align-items-center p-5 bg-primary height-100">
