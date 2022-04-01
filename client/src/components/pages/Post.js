@@ -66,7 +66,7 @@ const Post = () => {
   }
 
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 bg-primary height-100">
+    <section className="d-flex justify-content-around align-items-center p-5 height-100">
       <form className="card p-5" id ="contact-form red"
         onSubmit = {handleSubmit}>
 
