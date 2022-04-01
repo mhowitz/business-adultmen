@@ -118,7 +118,7 @@ const Post = () => {
           type="text" 
           name="category">
           
-          <option value="choose"> Choose a category </option>
+          <option value="" disabled selected> Choose a category... </option>
           <option value="books">books</option>
           <option value="junk">junk</option>
         </select>
