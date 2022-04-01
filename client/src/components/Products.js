@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 const Products = () => {
   function fetchApi() {
     fetch("http://localhost:3001/api/products");
@@ -20,57 +19,21 @@ const Products = () => {
     //   }
   ]);
 
-  // useEffect(() => {
-  //     (async () => {
-  //        fetch('http://localhost:3001/api/products', {
-  //             method: 'get',
-  //             mode: 'no-cors',
-  //         })
-  //         .then((response) => {
-  //             const res = await response.json()
-  //             return res
-  //             // setProducts(response)
-  //         }).then((data) => {
-  //             console.log(data);
-  //         })
-  //     })()
-  // }, [])
-
-//   useEffect(() => {
-//     const newProducts = async () => {
-//       const data = await fetch("http://localhost:3001/api/products", {
-//           method: 'get',
-//           mode: 'no-cors',
-//       });
-//       const json = await data.json();
-//       setProducts(json);
-//     };
-//     newProducts()
-//     .catch(console.error);
-//   }, []);
-
-// useEffect(() => {
-//     async function newProducts() {
-//         let response = await fetch("http://localhost:3001/api/products", {
-//             method: 'get',
-//             mode: 'no-cors',
-//         })
-//         response = await response.json()
-//         setProducts(response)
-//     }
-//     newProducts()
-//     .catch(console.error);
-// }, [])
-
-useEffect( () => {
-    newProducts();
-}, [])
-
-const newProducts = async () => {
-    fetch("http://localhost:3001/api/products")
-    .then(response => response.json())
-    .then(receivedData => setProducts(receivedData));
-}
+  useEffect(() => {
+    async function newProducts() {
+      let response = await fetch("/api/products", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      response = await response.json();
+      console.log(response);
+      setProducts(response);
+    }
+    newProducts().catch(console.error);
+  }, []);
 
   return (
     <div>
@@ -84,7 +47,13 @@ const newProducts = async () => {
             <div>
               {product.name}
               {product.category}
+              <img alt={product.name} src={product.photo}></img>
               {product.description}
+              {product.price.$numberDecimal}
+              {product.city}
+
+              <button className="btn">Save for later</button>
+              <button className="btn">Venmo!</button>
             </div>
           </div>
         ))}
