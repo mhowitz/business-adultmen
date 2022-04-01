@@ -1,9 +1,14 @@
 import React from 'react'
+import Products from '../Products'
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
+    <div>Marketplace
+          <Products/>
+    </div>
+  );
 }
+
+
 
 export default Home
