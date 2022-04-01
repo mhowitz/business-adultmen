@@ -1,16 +1,23 @@
 :root {
-  --primary-color: blue;
-  --secondary-color: yellow;
-  --third-color: green;
+  --primary-color: #204629;
+  --secondary-color: #f3e8d5;
+  --third-color: #90a778;
+  /* --primary-color: #B4A195;
+  --secondary-color: #FFF2E2;
+  --third-color: #2D2116; */
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
   height: 100vh;
   width: 100vw;
+  color: #fff !important;
+   background-color: var(--primary-color)!important;
 }
 
 .height-100 {
@@ -21,7 +28,42 @@ body {
   height: 8vh;
 }
 
-.red {
-  background-color: red;
+.card {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background-color: var(--third-color) !important;
 }
 
+html {
+  font-family: "Martel Sans", sans-serif !important;
+  font-size: 22px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200&display=swap");
+
+div {
+  margin-bottom: 3rem;
+}
+div:last-child {
+  margin-bottom: 0;
+}
+
+/* .red {
+  background-color: red;
+} */
+
+.btn {
+  background-color: var(--secondary-color) !important;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+  text-decoration: none !important;
+}
+
+.nav-tabs {
+  background-color: var(--third-color) !important;
+}
