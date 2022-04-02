@@ -24,8 +24,16 @@ body {
   height: 100vh;
 }
 
+.height-150 {
+  height: 150vh;
+}
+
 .height-20 {
   height: 8vh;
+}
+
+.width-100 {
+  width: 100vw;
 }
 
 .card {
@@ -59,11 +67,14 @@ div:last-child {
 }
 
 footer {
-	position: absolute;
 	bottom: 0;
   text-decoration: none !important;
 }
 
 .nav-tabs {
   background-color: var(--third-color) !important;
+}
+
+.noBullets {
+  list-style-type: none;
 }
