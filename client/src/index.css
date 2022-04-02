@@ -76,6 +76,7 @@ footer {
 
 .nav-tabs {
   background-color: var(--third-color) !important;
+  border-bottom: 0px !important;
 }
 
 a {
@@ -121,8 +122,8 @@ ul {
 }
 
 .wrapper{
-  max-height: 200px;
-  border: 1px solid #ddd;
+  max-height: 400px;
+  border-bottom: 8px solid #ddd;
   display: flex;
   overflow-x: auto;
 }
@@ -133,9 +134,7 @@ ul {
 
 .wrapper .item {
   min-width: 180px;
-  height: 110px;
-  line-height: 180px;
   text-align: center;
   background-color: green;
-  margin-right: 2px;
+  margin: 4vw;
 }
