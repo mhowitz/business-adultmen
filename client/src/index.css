@@ -46,6 +46,7 @@ body {
   padding-bottom: 20px;
   padding-top: 20px;
   background-color: var(--third-color) !important;
+  border-radius: 0 !important;
 }
 
 html {
@@ -73,15 +74,21 @@ div:last-child {
 footer {
 	bottom: 0;
   text-decoration: none !important;
-}
+  list-style-type: none !important;
+} 
 
 .nav-tabs {
   background-color: var(--third-color) !important;
 }
 
-.noBullets {
-  list-style-type: none;
+a {
+  color: var(--secondary-color)!important;
+  text-decoration: none !important;
+  list-style: none !important;
 }
+ul {
+  list-style: none !important;
+
 
 /* not working since position rel for cards on other pages, overlap nav bar */
 /* .sticky {
