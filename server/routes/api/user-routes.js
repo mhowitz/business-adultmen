@@ -4,8 +4,10 @@ const {
   getUsers,
   createUser,
   getUser,
+  userLogin,
   saveProduct,
   getSavedProducts
+
 } = require('../../controllers/user-controllers')
 
 router
@@ -16,6 +18,11 @@ router
 router
   .route('/:id')
   .get(getUser);
+
+
+router 
+  .route('/login')
+  .post(userLogin);
 
 router
   .route('/saves/:id')
