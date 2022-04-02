@@ -42,7 +42,7 @@ const SignUp = () => {
   };
 
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 bg-primary height-100">
+    <section className="d-flex justify-content-around align-items-center p-5 height-100">
       <form className="card p-5"
         onSubmit={handleSubmit}>
         <h1 className= "text-center pb-4" data-testid='h1tag'>Sign Up</h1>
@@ -62,7 +62,7 @@ const SignUp = () => {
           type="text" 
           name="name"/>
 
-        <button className="btn btn-primary m-2">Sign Up</button>
+        <button className="btn m-2">Sign Up</button>
       </form>
       
 

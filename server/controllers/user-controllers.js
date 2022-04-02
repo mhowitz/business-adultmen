@@ -25,7 +25,7 @@ const userController = {
 	},
   getUser: async function (req, res) {
 		try {
-			const userData = await User.findById(req.params.userId)
+			const userData = await User.findById(req.params.id)
 			res.json(userData)
 		} catch (error) {
 			res.status(500).json(error)
@@ -62,7 +62,25 @@ const userController = {
 		} catch (error) {
 			res.status(500).json(err)
 		}
-	}
+	},
+  saveProduct: async function (req, res) {
+    try {
+      const userData = await User.findByIdAndUpdate(req.params.id, {$addToSet: {saves: req.body.productId}})
+      res.json(userData);
+    } catch (error) {
+      res.status(500).json(error)
+    }
+  },
+  getSavedProducts: async function (req, res) {
+    try {
+      const productData = await User.findById(req.params.id)
+        .populate("saves");
+      res.json(productData.saves);
+    } catch (error) {
+      res.status(500).json(error)
+    }
+  }
+
 }
 
 module.exports = userController;

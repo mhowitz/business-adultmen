@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import SignUp from './SignUp';
 import { validateEmail } from '../../utils/helpers';
 
+
 const Login = () => {
+  
 
   const [currentPage, setCurrentPage] = useState('SignUp');
   const handlePageChange = (page) => setCurrentPage(page);
@@ -27,7 +29,7 @@ const Login = () => {
       },
       body: JSON.stringify(login)
     }).then(() => {
-      console.log('new item posted')
+      console.log('new login posted')
     });
   };
   
@@ -41,9 +43,9 @@ const Login = () => {
       }
     }
   }
-
+ 
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 bg-primary height-100">
+    <section className="d-flex justify-content-around align-items-center p-5 height-100">
       <form className="card p-5" id="logInForm" onSubmit ={handleSubmit}>
         <h1 className= "text-center pb-4" data-testid='h1tag'>Log in</h1>
         
@@ -63,11 +65,11 @@ const Login = () => {
           type="text" 
           name="name"/>
 
-        <button className="btn btn-primary m-2">
+        <button className="btn m-2">
         Login</button>
 
-        <button className="btn btn-warning m-2"
-          onClick={handlePageChange}>
+        <button className="btn m-2"
+          >
           sign up here</button>
       </form>
       

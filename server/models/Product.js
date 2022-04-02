@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat')
 // const { CommentSchema } = require('./Comment')
 
@@ -23,6 +23,13 @@ const ProductSchema = new Schema(
       trim: true,
       maxLength: 280,
       minLength: 1
+    },
+    category: {
+      type: String,
+      trim: true,
+      maxLength: 50,
+      minLength: 1,
+      required: true
     },
     price: {
       type: Schema.Types.Decimal128,

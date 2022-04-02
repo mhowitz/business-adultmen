@@ -13,11 +13,14 @@ const getImageDetails = async function(url) {
   } catch (error) {
     console.log(error)
   }
-
 }
 
 const Post = () => {
+
+  
   // states to grab user inputs
+  const [title, setTitle] = useState();
+  const [city, setCity] = useState();
   const[price, setPrice] = useState();
   const[description, setDescription] = useState();
   const[image, setImage] = useState();
@@ -43,30 +46,44 @@ const Post = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const item = { price, description, image, category };
+
+    console.log("category before", category);
+    const item = { 
+      title: title,
+      photo: image, 
+      description: description, 
+      category: category,
+      price: price,
+      city: city
+    };
+    console.log('item', item);
+    
+    console.log("CATEGORY", item.category);
 
     setIsPending(true);
 
-    const displayImage = await getImageDetails(item.image);
+    const displayImage = await getImageDetails(item.photo);
 
-    item.image = displayImage.data.display_url;
+    item.photo = displayImage.data.display_url;
 
-    fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
-        method: 'post',
-        mode: 'no-cors',
+    fetch('/api/products', {
+        method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(item)
       }).then(() => {
         console.log('new item posted')
         setIsPending(false);
-      });
+      })
+        .catch(() => {
+          setIsPending(false);
+        });
   }
 
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 bg-primary height-100">
+    <section className="d-flex justify-content-around align-items-center p-5 height-150">
       <form className="card p-5" id ="contact-form red"
         onSubmit = {handleSubmit}>
 
@@ -101,11 +118,29 @@ const Post = () => {
           value = {category}
           onChange = {(e) => setCategory(e.target.value)}
           type="text" 
-          name="Category">
+          name="category">
           
+          <option value="" disabled selected> Choose a category... </option>
           <option value="books">books</option>
           <option value="junk">junk</option>
         </select>
+
+        <label className="p-2" htmlFor="Category">Title</label>
+        <input className="m-2" 
+          value = {title}
+          onChange = {(e) => setTitle(e.target.value)}
+          type="text" 
+          name="title"
+          onBlur={handleChange}/>
+
+        <label className="p-2" htmlFor="Category">City</label>
+        <input className="m-2" 
+          value = {city}
+          onChange = {(e) => setCity(e.target.value)}
+          type="text" 
+          name="city"
+          onBlur={handleChange}/>
+          
         { !isPending && <button className="btn btn-primary m-2" >Submit</button>}
         { isPending && <button className="btn btn-primary m-2" disabled>Submitting Post...</button>}
 

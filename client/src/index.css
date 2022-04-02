@@ -1,27 +1,117 @@
 :root {
-  --primary-color: blue;
-  --secondary-color: yellow;
-  --third-color: green;
+  --primary-color: #204629;
+  --secondary-color: #f3e8d5;
+  --third-color: #90a778;
+  /* --primary-color: #B4A195;
+  --secondary-color: #FFF2E2;
+  --third-color: #2D2116; */
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
   height: 100vh;
   width: 100vw;
+  color: #fff !important;
+   background-color: var(--primary-color)!important;
 }
 
 .height-100 {
   height: 100vh;
 }
 
+.height-150 {
+  height: 150vh;
+}
+
 .height-20 {
   height: 8vh;
 }
 
-.red {
-  background-color: red;
+.height-36 {
+  height: 36vh;
 }
 
+.width-100 {
+  width: 100vw;
+}
+
+.card {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background-color: var(--third-color) !important;
+}
+
+html {
+  font-family: "Martel Sans", sans-serif !important;
+  font-size: 22px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200&display=swap");
+
+div {
+  margin-bottom: 3rem;
+}
+div:last-child {
+  margin-bottom: 0;
+}
+
+/* .red {
+  background-color: red;
+} */
+
+.btn {
+  background-color: var(--secondary-color) !important;
+}
+
+footer {
+	bottom: 0;
+  text-decoration: none !important;
+}
+
+.nav-tabs {
+  background-color: var(--third-color) !important;
+}
+
+.noBullets {
+  list-style-type: none;
+}
+
+/* not working since position rel for cards on other pages, overlap nav bar */
+/* .sticky {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  padding-bottom: 2rem;
+} */
+
+.modalBackdrop {
+	background: rgba(0, 0, 0, .65);
+	bottom: 0;
+	left: 0;
+	overflow: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+.modalContainer {
+	background: var(--darker);
+	border-radius: 5px;
+	max-width: 100%;
+  height: 100%;
+	margin: 50px auto;
+	padding: 15px;
+	width: 960px;
+}
+
+.modalButton {
+  width: 20%;
+}
