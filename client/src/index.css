@@ -24,8 +24,20 @@ body {
   height: 100vh;
 }
 
+.height-150 {
+  height: 150vh;
+}
+
 .height-20 {
   height: 8vh;
+}
+
+.height-36 {
+  height: 36vh;
+}
+
+.width-100 {
+  width: 100vw;
 }
 
 .card {
@@ -59,7 +71,6 @@ div:last-child {
 }
 
 footer {
-	position: absolute;
 	bottom: 0;
   text-decoration: none !important;
 }
@@ -67,6 +78,18 @@ footer {
 .nav-tabs {
   background-color: var(--third-color) !important;
 }
+
+.noBullets {
+  list-style-type: none;
+}
+
+/* not working since position rel for cards on other pages, overlap nav bar */
+/* .sticky {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  padding-bottom: 2rem;
+} */
 
 .modalBackdrop {
 	background: rgba(0, 0, 0, .65);
