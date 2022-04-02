@@ -8,6 +8,10 @@ const ProductSchema = new Schema(
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId()
     },
+    ownedBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    },
     title: {
       type: String,
       required: true,

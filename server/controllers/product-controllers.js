@@ -16,6 +16,8 @@ const productController = {
   createProduct: async function (req, res) {
 		try {
 			const productData = await Product.create(req.body)
+			const userData = await User.findByIdAndUpdate({_id: req.body.ownedBy}, {$push: {ownedProducts: productData}});
+			console.log(userData);
 			res.json(productData)
 		} catch (error) {
 			res.status(500).json(error)

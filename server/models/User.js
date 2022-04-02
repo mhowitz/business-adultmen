@@ -26,7 +26,13 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Product"
     }
-  ]
+  ],
+  ownedProducts: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: "Product"
+  }
+],
   },
   {
     toJSON: {

@@ -6,6 +6,7 @@ const userController = {
   getUsers: async function(req, res) {
     try {
 			const userData = await User.find({})
+			console.log(userData);
 			res.json(userData);
 
 		} catch (error) {
