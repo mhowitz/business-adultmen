@@ -7,10 +7,15 @@ const {
   userLogin,
   saveProduct,
   getSavedProducts,
+  userLogout,
   getOwnedProducts
 
-} = require('../../controllers/user-controllers')
 
+} = require('../../controllers/user-controllers');
+
+// const { authMiddleware } = require('../../utils/auth');
+
+// router.use(authMiddleware);
 router
   .route('/')
   .get(getUsers)
@@ -24,6 +29,10 @@ router
 router 
   .route('/login')
   .post(userLogin);
+
+router  
+  .route('/logout')
+  .post(userLogout)
 
 router
   .route('/saves/:id')

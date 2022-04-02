@@ -8,12 +8,18 @@ const {
   getProductsByCatAndPrice,
   deleteProduct,
   unSaveProduct
-} = require('../../controllers/product-controllers')
+} = require('../../controllers/product-controllers');
+
+const { authMiddleware } = require('../../utils/auth');
+
+router.use(authMiddleware)
+
 
 router
   .route('/')
   .get(getProducts)
   .post(createProduct);
+
 
 router
   .route('/:id')
