@@ -24,7 +24,7 @@ const productController = {
 	},
   getProduct: async function (req, res) {
 		try {
-			const productData = await Product.findById(req.params.productId)
+			const productData = await Product.findById(req.params.id)
 			res.json(productData)
 		} catch (error) {
 			res.status(500).json(error)
@@ -54,7 +54,16 @@ const productController = {
 		} catch (error) {
 			res.status(500).json(error)
 		}
-  }
+  },
+	deleteProduct: async function(req, res) {
+		try {
+			const productData = await Product.findByIdAndDelete({_id: req.params.id});
+
+			res.json(productData);
+		} catch (error) {
+			res.status(500).json(error);
+		}
+	}
 }
 
 module.exports = productController;

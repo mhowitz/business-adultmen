@@ -5,7 +5,8 @@ const {
   createProduct,
   getProduct,
   getProductsByCat,
-  getProductsByCatAndPrice
+  getProductsByCatAndPrice,
+  deleteProduct
 } = require('../../controllers/product-controllers')
 
 router
@@ -14,8 +15,9 @@ router
   .post(createProduct);
 
 router
-  .route('/:productId')
-  .get(getProduct);
+  .route('/:id')
+  .get(getProduct)
+  .post(deleteProduct);
 
 router
   .route('/category/:name')
