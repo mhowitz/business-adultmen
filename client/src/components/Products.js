@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Modal from './Modal';
 
 const Products = () => {
-  function fetchApi() {
-    fetch("http://localhost:3001/api/products");
-  }
+
   const [products, setProducts] = useState([
     // {
     //     name: 'Park bench',
@@ -35,8 +34,18 @@ const Products = () => {
     newProducts().catch(console.error);
   }, []);
 
+  const [currentPhoto, setCurrentPhoto] = useState();
+  const toggleModal = (image) => {
+    setCurrentPhoto(image)
+    setIsModalOpen(!isModalOpen);
+  }
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div>
+      {isModalOpen && (
+        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
+      )}
       <section className="flex-row d-flex mt-3">
         {products.map((product, i) => (
           <div
@@ -47,7 +56,13 @@ const Products = () => {
             <div>
               {product.name}
               {product.category}
-              <img alt={product.name} src={product.photo}></img>
+              <img 
+                key={product.name}
+                alt={product.name} 
+                src={product.photo}
+                onClick={() => toggleModal(product.photo)}
+              >
+              </img>
               {product.description}
               {product.price.$numberDecimal}
               {product.city}
