@@ -1,4 +1,4 @@
-const { Product } = require("../models");
+const { Product, User } = require("../models");
 
 const productController = {
   getProducts: async function(req, res) {
@@ -15,8 +15,11 @@ const productController = {
   },
   createProduct: async function (req, res) {
 		try {
-      console.log(req.body);
+      console.log(req.user);
 			const productData = await Product.create(req.body)
+			const userData = await User.findByIdAndUpdate(
+				{_id: req.user._id},
+				 {$push: {ownedProducts: productData}});
 			res.json(productData)
 		} catch (error) {
 			res.status(500).json(error)

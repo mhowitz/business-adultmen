@@ -9,8 +9,11 @@ const {
   getSavedProducts,
   userLogout
 
-} = require('../../controllers/user-controllers')
+} = require('../../controllers/user-controllers');
 
+// const { authMiddleware } = require('../../utils/auth');
+
+// router.use(authMiddleware);
 router
   .route('/')
   .get(getUsers)

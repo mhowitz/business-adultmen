@@ -6,12 +6,22 @@ const {
   getProduct,
   getProductsByCat,
   getProductsByCatAndPrice
-} = require('../../controllers/product-controllers')
+} = require('../../controllers/product-controllers');
+const { authMiddleware } = require('../../utils/auth');
+
+// const jwt = require('jsonwebtoken');
+
+// const secret = 'mysecretsshhhhh';
+// const expiration = '2h';
+// const protectedRouter = authMiddleware(router);
+router.use(authMiddleware)
 
 router
   .route('/')
   .get(getProducts)
   .post(createProduct);
+
+
 
 router
   .route('/:productId')
