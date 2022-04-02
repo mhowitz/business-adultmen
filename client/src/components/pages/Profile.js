@@ -6,13 +6,26 @@ const Profile = () => {
   return (
     <>
       <section className=" vh-100">
-        <div className= "border-bottom pb-5">
-          top row
+        {/* top bar */}
+        <div className ="wrapper">
+          <div className="item">box 1</div>
+          <div className="item">box 2</div>
+          <div className="item">box 3</div>
+          <div className="item">box 4</div>
+          <div className="item">box 5</div>
+          <div className="item">box 6</div>
         </div>
 
-        <div>
-          bottom row
+        {/* bottom bar */}
+        <div className ="wrapper">
+          <div className="item">box 1</div>
+          <div className="item">box 2</div>
+          <div className="item">box 3</div>
+          <div className="item">box 4</div>
+          <div className="item">box 5</div>
+          <div className="item">box 6</div>
         </div>
+        
       </section>
     </>
   )

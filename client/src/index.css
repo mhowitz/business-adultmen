@@ -56,11 +56,8 @@ html {
 
 @import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200&display=swap");
 
-div {
-  margin-bottom: 3rem;
-}
 div:last-child {
-  margin-bottom: 0;
+  margin-botom: 0;
 }
 
 /* .red {
@@ -91,12 +88,12 @@ ul {
 }
 
 /* not working since position rel for cards on other pages, overlap nav bar */
-/* .sticky {
+.sticky {
   position: fixed;
   top: 0;
   width: 100vw;
   padding-bottom: 2rem;
-} */
+}
 
 .modalBackdrop {
 	background: rgba(0, 0, 0, .65);
@@ -121,4 +118,24 @@ ul {
 
 .modalButton {
   width: 20%;
+}
+
+.wrapper{
+  max-height: 200px;
+  border: 1px solid #ddd;
+  display: flex;
+  overflow-x: auto;
+}
+
+.wrapper::-webkit-scrollbar{
+  width: 0;
+}
+
+.wrapper .item {
+  min-width: 180px;
+  height: 110px;
+  line-height: 180px;
+  text-align: center;
+  background-color: green;
+  margin-right: 2px;
 }
