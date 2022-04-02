@@ -86,7 +86,7 @@ const userController = {
 			const userData = await User.findById(req.params.id)
 				.populate("ownedProducts");
 			console.log(userData);
-			res.json(userData.ownedProducts);
+			res.json(userData);
 		} catch (error) {
 			res.status(500).json(error)
 		}
