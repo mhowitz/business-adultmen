@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import SignUp from './SignUp';
 import { validateEmail } from '../../utils/helpers';
 
+
 const Login = () => {
+  
 
   const [currentPage, setCurrentPage] = useState('SignUp');
   const handlePageChange = (page) => setCurrentPage(page);
@@ -27,7 +29,7 @@ const Login = () => {
       },
       body: JSON.stringify(login)
     }).then(() => {
-      console.log('new item posted')
+      console.log('new login posted')
     });
   };
   
@@ -67,7 +69,7 @@ const Login = () => {
         Login</button>
 
         <button className="btn m-2"
-          onClick={handlePageChange}>
+          >
           sign up here</button>
       </form>
       

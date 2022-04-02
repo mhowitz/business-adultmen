@@ -16,6 +16,8 @@ const getImageDetails = async function(url) {
 }
 
 const Post = () => {
+
+  
   // states to grab user inputs
   const [title, setTitle] = useState();
   const [city, setCity] = useState();
@@ -46,16 +48,16 @@ const Post = () => {
     e.preventDefault();
 
     console.log("category before", category);
-
     const item = { 
-                  title: title,
-                  photo: image, 
-                  description: description, 
-                  category: category,
-                  price: price,
-                  city: city
-                  };
-
+      title: title,
+      photo: image, 
+      description: description, 
+      category: category,
+      price: price,
+      city: city
+    };
+    console.log('item', item);
+    
     console.log("CATEGORY", item.category);
 
     setIsPending(true);
@@ -81,7 +83,7 @@ const Post = () => {
   }
 
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 height-100">
+    <section className="d-flex justify-content-around align-items-center p-5 height-150">
       <form className="card p-5" id ="contact-form red"
         onSubmit = {handleSubmit}>
 
