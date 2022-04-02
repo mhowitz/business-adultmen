@@ -32,6 +32,10 @@ body {
   height: 8vh;
 }
 
+.height-36 {
+  height: 36vh;
+}
+
 .width-100 {
   width: 100vw;
 }
@@ -78,3 +82,11 @@ footer {
 .noBullets {
   list-style-type: none;
 }
+
+/* not working since position rel for cards on other pages, overlap nav bar */
+/* .sticky {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  padding-bottom: 2rem;
+} */
