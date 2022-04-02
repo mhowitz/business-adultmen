@@ -66,6 +66,7 @@ div:last-child {
 
 .btn {
   background-color: var(--secondary-color) !important;
+  border-radius: 0;
 }
 
 footer {
@@ -76,6 +77,7 @@ footer {
 
 .nav-tabs {
   background-color: var(--third-color) !important;
+  border-bottom: 0px !important;
 }
 
 a {
@@ -136,6 +138,16 @@ ul {
   height: 110px;
   line-height: 180px;
   text-align: center;
-  background-color: green;
+  background-color: var(--secondary-color);
   margin-right: 2px;
+}
+
+.card{
+  padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;	
+	padding-top: 20px;
+  background-color: var(--third-color) !important;
+  flex: flex;
+  
 }

@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <footer className='width-100'>
     <div className="d-flex flex-column text-center">
+      <p>Created By</p>
       <ul className='noBullets'>
         <li>
           <a href='https://github.com/JasonWisniewski'>
