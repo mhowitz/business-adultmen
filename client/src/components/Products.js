@@ -56,7 +56,8 @@ const Products = () => {
             <div>
               {product.name}
               {product.category}
-              <img 
+              <img
+                className="img-fluid"
                 key={product.name}
                 alt={product.name} 
                 src={product.photo}

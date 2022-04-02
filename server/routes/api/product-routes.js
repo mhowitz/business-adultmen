@@ -5,16 +5,15 @@ const {
   createProduct,
   getProduct,
   getProductsByCat,
-  getProductsByCatAndPrice
+  getProductsByCatAndPrice,
+  deleteProduct,
+  unSaveProduct
 } = require('../../controllers/product-controllers');
+
 const { authMiddleware } = require('../../utils/auth');
 
-// const jwt = require('jsonwebtoken');
-
-// const secret = 'mysecretsshhhhh';
-// const expiration = '2h';
-// const protectedRouter = authMiddleware(router);
 router.use(authMiddleware)
+
 
 router
   .route('/')
@@ -22,10 +21,10 @@ router
   .post(createProduct);
 
 
-
 router
-  .route('/:productId')
-  .get(getProduct);
+  .route('/:id')
+  .get(getProduct)
+  .post(deleteProduct);
 
 router
   .route('/category/:name')
@@ -34,5 +33,9 @@ router
 router
   .route('/category/:name/price/:direction')
   .get(getProductsByCatAndPrice);
+
+router
+  .route('/unSave/:id')
+  .post(unSaveProduct);
 
 module.exports = router;

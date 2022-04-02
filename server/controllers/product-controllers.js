@@ -15,6 +15,7 @@ const productController = {
   },
   createProduct: async function (req, res) {
 		try {
+
       console.log(req.user);
 			const productData = await Product.create(req.body)
 			const userData = await User.findByIdAndUpdate(
@@ -27,7 +28,7 @@ const productController = {
 	},
   getProduct: async function (req, res) {
 		try {
-			const productData = await Product.findById(req.params.productId)
+			const productData = await Product.findById(req.params.id)
 			res.json(productData)
 		} catch (error) {
 			res.status(500).json(error)
@@ -57,7 +58,41 @@ const productController = {
 		} catch (error) {
 			res.status(500).json(error)
 		}
-  }
+  },
+	deleteProduct: async function(req, res) {
+		try {
+			const productData = await Product.findByIdAndDelete({_id: req.params.id});
+
+			const usersData =
+				await User.find({ saves: { $in: [req.params.id] }}).then(users => {
+					Promise.all(
+						users.map(user =>
+							User.findOneAndUpdate(
+								user._id,
+								{ $pull: { saves: req.params.id } },
+								{ new: true }
+							)
+						)
+					);
+				});
+
+			res.json(productData);
+		} catch (error) {
+			res.status(500).json(error);
+		}
+	},
+	unSaveProduct: async function(req, res) {
+		try {
+			const productData = await User.findByIdAndUpdate({_id: req.params.id}, 
+				{$pull: 
+					{saves: req.body.productId}
+				});
+			res.json(productData);
+
+		} catch(error) {
+			res.status(500).json(error);
+		}
+	}
 }
 
 module.exports = productController;

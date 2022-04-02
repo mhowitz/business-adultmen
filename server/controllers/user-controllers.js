@@ -8,6 +8,7 @@ const userController = {
   getUsers: async function(req, res) {
     try {
 			const userData = await User.find({})
+			console.log(userData);
 			res.json(userData);
 
 		} catch (error) {
@@ -102,7 +103,17 @@ const userController = {
     } catch (error) {
       res.status(500).json(error)
     }
-  }
+  },
+	getOwnedProducts: async function (req, res) {
+		try {
+			const userData = await User.findById(req.params.id)
+				.populate("ownedProducts");
+			console.log(userData);
+			res.json(userData);
+		} catch (error) {
+			res.status(500).json(error)
+		}
+	}
 
 }
 
