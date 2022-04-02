@@ -88,7 +88,7 @@ a {
 }
 ul {
   list-style: none !important;
-
+}
 
 /* not working since position rel for cards on other pages, overlap nav bar */
 /* .sticky {
