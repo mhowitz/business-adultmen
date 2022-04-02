@@ -6,7 +6,8 @@ const {
   getUser,
   userLogin,
   saveProduct,
-  getSavedProducts
+  getSavedProducts,
+  userLogout
 
 } = require('../../controllers/user-controllers')
 
@@ -23,6 +24,10 @@ router
 router 
   .route('/login')
   .post(userLogin);
+
+router  
+  .route('/logout')
+  .post(userLogout)
 
 router
   .route('/saves/:id')
