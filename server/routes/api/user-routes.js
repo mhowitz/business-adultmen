@@ -6,7 +6,8 @@ const {
   getUser,
   userLogin,
   saveProduct,
-  getSavedProducts
+  getSavedProducts,
+  getOwnedProducts
 
 } = require('../../controllers/user-controllers')
 
@@ -28,5 +29,9 @@ router
   .route('/saves/:id')
   .post(saveProduct)
   .get(getSavedProducts)
+
+router
+  .route('/owned/:id')
+  .get(getOwnedProducts);
 
 module.exports = router;
