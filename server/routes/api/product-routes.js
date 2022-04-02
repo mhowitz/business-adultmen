@@ -6,7 +6,8 @@ const {
   getProduct,
   getProductsByCat,
   getProductsByCatAndPrice,
-  deleteProduct
+  deleteProduct,
+  unSaveProduct
 } = require('../../controllers/product-controllers')
 
 router
@@ -26,5 +27,9 @@ router
 router
   .route('/category/:name/price/:direction')
   .get(getProductsByCatAndPrice);
+
+router
+  .route('/unSave/:id')
+  .post(unSaveProduct);
 
 module.exports = router;

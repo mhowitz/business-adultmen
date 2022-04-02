@@ -1,6 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat')
-// const { CommentSchema } = require('./Comment')
+const User = require('./User')
 
 const ProductSchema = new Schema(
   {
@@ -63,23 +63,21 @@ ProductSchema.virtual('commentCount').get(function() {
   return this.comments.length;
 });
 
-// // set up pre-save middleware to create password
-// userSchema.pre('save', async function(next) {
-//   if (this.isNew || this.isModified('password')) {
-//     const saltRounds = 10;
-//     this.password = await bcrypt.hash(this.password, saltRounds);
-//   }
-
-//   next();
-// });
-
-// // compare the incoming password with the hashed password
-// userSchema.methods.isCorrectPassword = async function(password) {
-//   return bcrypt.compare(password, this.password);
-// };
-
-// userSchema.virtual('friendCount').get(function() {
-//   return this.friends.length;
+// ProductSchema.post("findOneAndDelete", document => {
+//   const productId = document._id;
+//   console.log(User);
+//   User.find({ saves: { $in: [productId] } }).then(users => {
+//     console.log(users);
+//     Promise.all(
+//       users.map(user =>
+//         User.findOneAndUpdate(
+//           user._id,
+//           { $pull: { saves: productId } },
+//           { new: true }
+//         )
+//       )
+//     );
+//   });
 // });
 
 const Product = model('Product', ProductSchema);
