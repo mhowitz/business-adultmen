@@ -14,23 +14,28 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const login = { email, password };
+    // const login = { email, password };
 
     // need to check with seeded data that this works.
 
 
-   const response = await fetch('/api/users/login', {
-      method: 'post',
+   const response = await fetch('api/users/login', {
+      method: 'POST',
       mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
         // 'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(login)
+      body: JSON.stringify({
+        email,
+        password
+      })
 
     })
+
     const data = await response.json();
+    console.log(data);
     if(data.user) {
       alert('login successful')
     } else {
@@ -49,7 +54,7 @@ const Login = () => {
 //         console.log(err);
 //       }
 //     });
-//   };
+  };
   
   const handleChange = (e) => {
     if (e.target.name === 'email') {
@@ -80,7 +85,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           onBlur ={handleChange}
-          type="text" 
+          type="password" 
           name="name"/>
 
         <button className="btn m-2">
