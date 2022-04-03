@@ -1,5 +1,5 @@
 const { Product, User } = require("../models");
-
+const authMiddleware = require('../utils/auth');
 const productController = {
   getProducts: async function(req, res) {
     try {
@@ -17,7 +17,7 @@ const productController = {
   createProduct: async function (req, res) {
 		try {
 
-      console.log(req.user);
+      		console.log(req.user);
 			const productData = await Product.create(req.body)
 			const userData = await User.findByIdAndUpdate(
 				{_id: req.user._id},

@@ -18,7 +18,8 @@ const { authMiddleware } = require('../../utils/auth');
 router
   .route('/')
   .get(getProducts)
-  .post(createProduct);
+
+router.post('/', authMiddleware, createProduct);
 
 
 router
