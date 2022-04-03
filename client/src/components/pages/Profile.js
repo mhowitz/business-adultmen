@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import Slider from "react-slick";
+import Products from "../Products";
 
 const Profile = () => {
 
@@ -14,6 +15,7 @@ const Profile = () => {
       <section className=" vh-100">
         {/* top bar */}
         <div className ="wrapper mt-4">
+          <Products/>
           <div className="item">
             <h1>Title</h1>
             <div>image</div>

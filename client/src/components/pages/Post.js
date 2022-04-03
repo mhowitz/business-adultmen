@@ -54,11 +54,10 @@ const Post = () => {
       description: description, 
       category: category,
       price: price,
-      city: city
+      city: city,
+      // hard coded till we have login tokens working
+      ownedBy: "6248e8b0b102111350421ec6"
     };
-    console.log('item', item);
-    
-    console.log("CATEGORY", item.category);
 
     setIsPending(true);
 

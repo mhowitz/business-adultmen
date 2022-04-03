@@ -94,6 +94,7 @@ ul {
   top: 0;
   width: 100vw;
   padding-bottom: 2rem;
+  z-index: 1;
 }
 
 .modalBackdrop {

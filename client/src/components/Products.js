@@ -1,22 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Modal from './Modal';
+import Modal from "./Modal";
+import { Card, Row, Col } from "react-bootstrap";
 
 const Products = () => {
-
-  const [products, setProducts] = useState([
-    // {
-    //     name: 'Park bench',
-    //     category: 'landscape',
-    //     description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricie'
-    //   },
-    //   {
-    //     name: 'Park bench',
-    //     category: 'landscape',
-    //     description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricie'
-    //   }
-  ]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function newProducts() {
@@ -36,9 +23,9 @@ const Products = () => {
 
   const [currentPhoto, setCurrentPhoto] = useState();
   const toggleModal = (image) => {
-    setCurrentPhoto(image)
+    setCurrentPhoto(image);
     setIsModalOpen(!isModalOpen);
-  }
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -46,34 +33,27 @@ const Products = () => {
       {isModalOpen && (
         <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}
-      <section className="flex-row d-flex mt-3">
+      
+      <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+        
         {products.map((product, i) => (
-          <div
-            key={i}
-            className="card mx-3"
-            style={{ height: "500px", objectFit: "cover" }}
-          >
-            <div>
-              {product.name}
-              {product.category}
-              <img
-                className="img-fluid"
-                key={product.name}
-                alt={product.name} 
-                src={product.photo}
-                onClick={() => toggleModal(product.photo)}
-              >
-              </img>
-              {product.description}
-              {product.price.$numberDecimal}
-              {product.city}
-
-              <button className="btn">Save for later</button>
-              <button className="btn">Venmo!</button>
-            </div>
-          </div>
+          <Col>
+            <Card>
+              <Card.Img variant="top"               onClick={() => toggleModal(product.photo)}
+              src={product.photo} />
+              <Card.Body>
+                <Card.Title>{product.title}</Card.Title>
+                <Card.Text>Category: {product.category}</Card.Text>
+                <Card.Text>City: {product.city}</Card.Text>
+                <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
+                <Card.Text> {product.description}</Card.Text>
+                <button className="btn m-2">Save for later</button>
+                <button className="btn m-2">Venmo!</button>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </section>
+      </Row>
     </div>
   );
 };
