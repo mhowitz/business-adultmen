@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Product } = require("../models");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const  { signToken, authMiddleware }  = require('../utils/auth');
@@ -8,6 +8,9 @@ const userController = {
   getUsers: async function(req, res) {
     try {
 			const userData = await User.find({})
+			.populate({
+				path: 'product'
+			})
 			console.log(userData);
 			res.json(userData);
 
@@ -37,17 +40,17 @@ const userController = {
 	userLogin: async function (req, res){
 		try {
 			const user = await User.findOne({ email: req.body.email })
-			if(!user || !user.isCorrectPassword(req.body.password)) {
+			if(!user) {
 					return res.status(401).json({ message: 'Authentication failed, Invalid user or password!'});
 				}
-
-				// let token = jwt.sign({ email: userData.email,  _id: userData._id }, 'mysecretsshhhhh', { expiresIn: '2h'});
-				// req.headers.token = token;
+				const correctPw = await user.isCorrectPassword(req.body.password);
+				if(!correctPw) {
+					return res.status(401).json({ message: 'Authentication failed, Invalid user or password' });
+				}
 				const token = signToken(user);
 				console.log(token, user);
-				res.json({token, user})
-				return {token, user};
-			
+				// const userToken = await User.findOneAndUpdate({_id: user._id}, {$addToSet:{token: token}})
+				return res.json({ status: 'ok', user: token })
 		}
 		catch (error) {
 			res.status(500).json(error)
@@ -89,6 +92,10 @@ const userController = {
   saveProduct: async function (req, res) {
     try {
       const userData = await User.findByIdAndUpdate(req.params.id, {$addToSet: {saves: req.body.productId}})
+	  .populate({
+		  path: 'product'
+
+	  })
       res.json(userData);
     } catch (error) {
       res.status(500).json(error)

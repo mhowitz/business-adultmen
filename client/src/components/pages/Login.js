@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import SignUp from './SignUp';
+
 import { validateEmail } from '../../utils/helpers';
 // import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   
@@ -10,31 +12,44 @@ const Login = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const login = { email, password };
 
     // need to check with seeded data that this works.
-    fetch('api/users/login', {
-      method: 'POST',
+
+
+   const response = await fetch('/api/users/login', {
+      method: 'post',
+      mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
+        // 'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(login)
-    }).then((res, err) => {
-      if(res){
-      console.log('new login created')
-      console.log('res',res);}
-      // not giving us token in res because outside of user in response (insomnia)
+
+    })
+    const data = await response.json();
+    if(data.user) {
+      alert('login successful')
+    } else {
+      alert('please check your username and password ')
+    }
+
+//     }).then((res, err) => {
+//       if(res){
+//       console.log('new login created')
+//       console.log('res',res);}
+//       // not giving us token in res because outside of user in response (insomnia)
       
-      // render home or profile page
-      else {
-        // if login fails
-        console.log(err);
-      }
-    });
-  };
+//       // render home or profile page
+//       else {
+//         // if login fails
+//         console.log(err);
+//       }
+//     });
+//   };
   
   const handleChange = (e) => {
     if (e.target.name === 'email') {
