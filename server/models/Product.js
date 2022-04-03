@@ -51,6 +51,10 @@ const ProductSchema = new Schema(
         ref: "Comment"
       }
     ],
+    ownedBy: {
+      type: String,
+      required: true
+    },
   },
   {
     toJSON: {
