@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import SignUp from './SignUp';
+import { UserContext } from "../../contexts"
+import jwt_decode from "jwt-decode"
 
 import { validateEmail } from '../../utils/helpers';
 // import { useNavigate } from "react-router-dom";
@@ -7,6 +9,8 @@ import { validateEmail } from '../../utils/helpers';
 
 const Login = () => {
   
+  const [ userState, dispatch ] = useContext(UserContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -38,6 +42,14 @@ const Login = () => {
     console.log(data);
     if(data.user) {
       alert('login successful')
+      const decoded = jwt_decode(data.user);
+      console.log(decoded);
+      dispatch({
+        type: "login",
+        username: decoded.data.username,
+        _id: decoded.data._id
+      })
+      console.log("userstate", userState)
     } else {
       alert('please check your username and password ')
     }

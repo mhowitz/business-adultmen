@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext} from 'react'
+import { UserContext } from "../../contexts/"
+
+
 
 const getImageDetails = async function(url) {
 
@@ -17,6 +20,7 @@ const getImageDetails = async function(url) {
 
 const Post = () => {
 
+  const [ userState, dispatch ] = useContext(UserContext);
   
   // states to grab user inputs
   const [title, setTitle] = useState();
@@ -47,6 +51,7 @@ const Post = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("userState", userState);
     console.log("category before", category);
     const item = { 
       title: title,
