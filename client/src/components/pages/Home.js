@@ -3,7 +3,7 @@ import Products from '../Products'
 
 const Home = () => {
   return (
-    <div>Marketplace
+    <div>Money Bags Marketplace
           <Products/>
     </div>
   );
