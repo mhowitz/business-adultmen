@@ -54,7 +54,8 @@ const Post = () => {
       description: description, 
       category: category,
       price: price,
-      city: city
+      city: city,
+      ownedBy: "6248e8b0b102111350421ec6"
     };
 
     setIsPending(true);
