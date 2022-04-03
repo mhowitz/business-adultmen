@@ -55,6 +55,7 @@ const Post = () => {
       category: category,
       price: price,
       city: city,
+      // hard coded till we have login tokens working
       ownedBy: "6248e8b0b102111350421ec6"
     };
 
