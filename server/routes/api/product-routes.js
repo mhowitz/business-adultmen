@@ -19,7 +19,7 @@ router
   .route('/')
   .get(getProducts)
 
-router.post('/', authMiddleware, createProduct)
+router.post('/', authMiddleware, createProduct);
 
 
 router

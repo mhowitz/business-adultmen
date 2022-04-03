@@ -53,21 +53,20 @@ const userController = {
 			res.status(500).json(error)
 		}
 	}, 
-	userLogout: async function (req, res, next) {
-		console.log(req.headers)
+	userLogout: async function (req, res) {
+		console.log(req.header('Authorization'));
 		try {
-			if (req.user.token) {
-				// token = token
-				//   .split(' ')
-				//   .pop()
-				//   .trim();
-				const user = await User.findByToken(token, (req, res) => {
-					console.log(token)
-
+			if (req.header('Authorization')) {
+			
+				const token = req.header('Authorization');
+				jwt.sign(token, ' ', { expiresIn: 1 }, (logout, err) => {
+					if(logout) {
+						res.json({ message: 'You have been logged out'})
+					} else {
+						res.json({ message: "error"})
+					}
 				})
-				const token = authMiddleware(user);
-				jwt.destroy(token);
-				res.status(200).json({message: "successfully logged out"})
+				// res.status(200).json({message: "successfully logged out"})
 				// .then(userToken => {
 				// 	console.log(userToken)
 				// 	res.status(200).json({message: "successfully logged out"})
