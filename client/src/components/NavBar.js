@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = ({ currentPage, handlePageChange }) => {
   return (
-    <ul className="nav nav-tabs height-20">
+    <ul className="nav nav-tabs height-20 sticky">
       <li className="nav-item text-white">
         <a
           href="#home"

@@ -3,20 +3,7 @@ import Modal from './Modal';
 
 const Products = () => {
 
-  const [products, setProducts] = useState([
-    // {
-    //     name: 'Park bench',
-    //     category: 'landscape',
-    //     description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricie'
-    //   },
-    //   {
-    //     name: 'Park bench',
-    //     category: 'landscape',
-    //     description:
-    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricie'
-    //   }
-  ]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function newProducts() {
@@ -50,7 +37,7 @@ const Products = () => {
         {products.map((product, i) => (
           <div
             key={i}
-            className="card mx-3"
+            className="card mx-3 mt-4"
             style={{ height: "500px", objectFit: "cover" }}
           >
               <h4>{product.title}</h4>
@@ -67,6 +54,7 @@ const Products = () => {
               {product.price.$numberDecimal}
               {product.city}
 
+              {/* going to need onclick to set state in button below */}
               <button className="btn m-2">Save for later</button>
               <button className="btn m-2">Venmo!</button>
             
