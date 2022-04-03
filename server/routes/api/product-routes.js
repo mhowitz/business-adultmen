@@ -12,13 +12,14 @@ const {
 
 const { authMiddleware } = require('../../utils/auth');
 
-router.use(authMiddleware)
+// router.use(authMiddleware)
 
 
 router
   .route('/')
   .get(getProducts)
-  .post(createProduct);
+
+router.post('/', authMiddleware, createProduct);
 
 
 router

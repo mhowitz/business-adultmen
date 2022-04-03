@@ -13,7 +13,7 @@ const {
 
 } = require('../../controllers/user-controllers');
 
-// const { authMiddleware } = require('../../utils/auth');
+const { authMiddleware } = require('../../utils/auth');
 
 // router.use(authMiddleware);
 router
@@ -30,17 +30,15 @@ router
   .route('/login')
   .post(userLogin);
 
-router  
-  .route('/logout')
-  .post(userLogout)
+router.post('/logout', authMiddleware, userLogout)
 
 router
-  .route('/saves/:id')
+  .route('/saves/:id', authMiddleware)
   .post(saveProduct)
   .get(getSavedProducts)
 
 router
-  .route('/owned/:id')
+  .route('/owned/:id', authMiddleware)
   .get(getOwnedProducts);
 
 module.exports = router;
