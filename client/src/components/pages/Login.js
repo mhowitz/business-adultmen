@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SignUp from './SignUp';
-import { validateEmail } from '../../utils/helpers';
+import { validateEmail} from '../../utils/helpers';
 
 
 const Login = () => {
@@ -15,22 +15,28 @@ const Login = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const login = { email, password };
 
     // need to check with seeded data that this works.
-    fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
+
+   const response = await fetch('/api/users/login', {
       method: 'post',
       mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
+        // 'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(login)
-    }).then(() => {
-      console.log('new login posted')
-    });
+    })
+    const data = await response.json();
+    if(data.user) {
+      alert('login successful')
+    } else {
+      alert('please check your username and password ')
+    }
   };
   
   const handleChange = (e) => {
