@@ -1,16 +1,49 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 // import Slider from "react-slick";
 import Products from "../Products";
 
 const Profile = () => {
+  const [ownedProducts, setOwnedProducts] = useState([]);
+  const [savedProducts, setSavedProducts] = useState([]);
 
-  // fetch routes to un-save items
+  useEffect(() => {
+    async function _newProducts(req, res) {
+      let response = await fetch(`/api/users/owned/${req.header.id}`, {
+        method: "GET",
+        headers: {
+          'Accept': "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      response = await response.json();
+      setOwnedProducts(response);
+    }
+    _newProducts().catch(console.error);
+
+    async function _savedProducts(req, res) {
+      let response = await fetch(`/api/users/saves/${req.header.id}`, {
+        method: "GET",
+        headers: {
+          'Accept': "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      response = await response.json();
+      setSavedProducts(response);
+    }
+    _savedProducts().catch(console.error);
+  }, []);
+
+  
  
   // pull up a modal when user clicks photo
  
   // change page to post page when title clicked
   
   return (
+
+
+
     <>
       <section className=" vh-100">
         {/* top bar */}
