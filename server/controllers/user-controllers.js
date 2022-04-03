@@ -39,12 +39,15 @@ const userController = {
 	},
 	userLogin: async function (req, res){
 		try {
+			console.log(req.body)
 			const user = await User.findOne({ email: req.body.email })
 			if(!user) {
+					console.log('no user found')
 					return res.status(401).json({ message: 'Authentication failed, Invalid user or password!'});
 				}
 				const correctPw = await user.isCorrectPassword(req.body.password);
 				if(!correctPw) {
+					console.log('incorrect passwrod')
 					return res.status(401).json({ message: 'Authentication failed, Invalid user or password' });
 				}
 				const token = signToken(user);
