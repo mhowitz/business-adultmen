@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import SignUp from './SignUp';
-import { validateEmail} from '../../utils/helpers';
+
+import { validateEmail } from '../../utils/helpers';
+// import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
   
-
-  const [currentPage, setCurrentPage] = useState('SignUp');
-  const handlePageChange = (page) => setCurrentPage(page);
-
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,6 +18,7 @@ const Login = () => {
 
     // need to check with seeded data that this works.
 
+
    const response = await fetch('/api/users/login', {
       method: 'post',
       mode: 'no-cors',
@@ -30,6 +28,7 @@ const Login = () => {
         // 'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(login)
+
     })
     const data = await response.json();
     if(data.user) {
@@ -37,7 +36,20 @@ const Login = () => {
     } else {
       alert('please check your username and password ')
     }
-  };
+
+//     }).then((res, err) => {
+//       if(res){
+//       console.log('new login created')
+//       console.log('res',res);}
+//       // not giving us token in res because outside of user in response (insomnia)
+      
+//       // render home or profile page
+//       else {
+//         // if login fails
+//         console.log(err);
+//       }
+//     });
+//   };
   
   const handleChange = (e) => {
     if (e.target.name === 'email') {
@@ -73,12 +85,10 @@ const Login = () => {
 
         <button className="btn m-2">
         Login</button>
-
-        <button className="btn m-2"
-          >
+        
+        <button className="btn m-2">
           sign up here</button>
       </form>
-      
     </section>
   )
 }
