@@ -1,4 +1,6 @@
 import React,{ useState} from 'react'
+import auth from '../../utils/auth';
+import Auth from '../../utils/auth';
 
 import { validateEmail } from '../../utils/helpers';
 
@@ -24,8 +26,10 @@ const SignUp = () => {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(login)
-    }).then(() => {
-      console.log(login)
+    }).then(res => res.json())
+    .then((data) => {
+      console.log(data)
+      Auth.login(data.username)
       console.log('new user posted')
     });
   };

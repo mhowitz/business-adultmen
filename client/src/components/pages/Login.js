@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import SignUp from './SignUp';
+import Auth from '../../utils/auth';
 
 import { validateEmail } from '../../utils/helpers';
+import auth from '../../utils/auth';
 // import { useNavigate } from "react-router-dom";
 
 
-const Login = () => {
+const Login = ({handlePageChange}) => {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +17,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const login = { email, password };
-
     // need to check with seeded data that this works.
 
 
@@ -31,11 +32,14 @@ const Login = () => {
 
     })
     const data = await response.json();
+    console.log(data)
     if(data.user) {
       alert('login successful')
     } else {
       alert('please check your username and password ')
     }
+
+    Auth.login(data.username)
 
 //     }).then((res, err) => {
 //       if(res){
@@ -50,7 +54,7 @@ const Login = () => {
 //       }
 //     });
 //   };
-  
+  }
   const handleChange = (e) => {
     if (e.target.name === 'email') {
       const isValid = validateEmail(e.target.value);
@@ -84,10 +88,10 @@ const Login = () => {
           name="name"/>
 
         <button className="btn m-2">
-        Login</button>
+        login</button>
         
-        <button className="btn m-2">
-          sign up here</button>
+        <button className="btn m-2" onClick={()=> handlePageChange("SignUp")}>
+          Sign up here</button>
       </form>
     </section>
   )

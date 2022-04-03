@@ -1,9 +1,11 @@
 import React from "react";
 import logo from "../assets/elements/flying-money.png";
+import Auth from "../utils/auth";
 
 const Navbar = ({ currentPage, handlePageChange }) => {
   return (
-    <ul className="nav nav-tabs height-20">
+    // <div className= "d-flex justify-content-between">
+    <ul className="nav nav-tabs height-20 d-flex justify-content-between">
       <li className="nav-item text-white">
         <a
           href="#home"
@@ -13,31 +15,38 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           className={currentPage === "Home" ? "nav-link active" : "nav-link"}
         >
           <span>
-            <img src={logo} alt="flying money" width="50" height="50"/>
-            {/* <h5>Money Bags Marketplace{" "}</h5> */}
+            <img src={logo} alt="flying money" width="50" height="50" />
           </span>
         </a>
       </li>
-      <li className="nav-item">
-        <a
-          href="#login"
-          onClick={() => handlePageChange("Login")}
-          // Check to see if the currentPage is `Login`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
-          className={currentPage === "Login" ? "nav-link active" : "nav-link"}
-        >
-          Log In
-        </a>
-      </li>
-      <li className="nav-item">
-        <a
-          href="#signup"
-          onClick={() => handlePageChange("SignUp")}
-          // Check to see if the currentPage is `SignUp`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
-          className={currentPage === "SignUp" ? "nav-link active" : "nav-link"}
-        >
-          Sign Up
-        </a>
-      </li>
+      {/* {!Auth.loggedIn ? (
+        <> */}
+          <li className="nav-item">
+            <a
+              href="#login"
+              onClick={() => handlePageChange("Login")}
+              // Check to see if the currentPage is `Login`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
+              className={
+                currentPage === "Login" ? "nav-link active" : "nav-link"
+              }
+            >
+              log in
+            </a>
+          </li>
+          <li className="nav-item">
+            <a
+              href="#signup"
+              onClick={() => handlePageChange("SignUp")}
+              // Check to see if the currentPage is `SignUp`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
+              className={
+                currentPage === "SignUp" ? "nav-link active" : "nav-link"
+              }
+            >
+              Sign Up
+            </a>
+          </li>
+        {/* </>
+      ) : null} */}
       <li className="nav-item">
         <a
           href="#Profile"
@@ -45,7 +54,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           // Check to see if the currentPage is `Profile`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
           className={currentPage === "Profile" ? "nav-link active" : "nav-link"}
         >
-          My Stuff
+          my stuff
         </a>
       </li>
       <li className="nav-item">
@@ -55,10 +64,11 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           // Check to see if the currentPage is `Post`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
           className={currentPage === "Post" ? "nav-link active" : "nav-link"}
         >
-          Sell Somethin'
+          sell somethin'
         </a>
       </li>
     </ul>
+    // </div>
   );
 };
 
