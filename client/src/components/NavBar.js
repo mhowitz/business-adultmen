@@ -3,7 +3,7 @@ import logo from "../assets/elements/flying-money.png";
 
 const Navbar = ({ currentPage, handlePageChange }) => {
   return (
-    <ul className="nav nav-tabs height-20 sticky">
+    <ul className="nav nav-tabs height-20">
       <li className="nav-item text-white">
         <a
           href="#home"

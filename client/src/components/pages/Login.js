@@ -1,37 +1,55 @@
 import React, { useState } from 'react';
 import SignUp from './SignUp';
+
 import { validateEmail } from '../../utils/helpers';
+// import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
   
-
-  const [currentPage, setCurrentPage] = useState('SignUp');
-  const handlePageChange = (page) => setCurrentPage(page);
-
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const login = { email, password };
 
     // need to check with seeded data that this works.
-    fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
+
+
+   const response = await fetch('/api/users/login', {
       method: 'post',
       mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
+        // 'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(login)
-    }).then(() => {
-      console.log('new login posted')
-    });
-  };
+
+    })
+    const data = await response.json();
+    if(data.user) {
+      alert('login successful')
+    } else {
+      alert('please check your username and password ')
+    }
+
+//     }).then((res, err) => {
+//       if(res){
+//       console.log('new login created')
+//       console.log('res',res);}
+//       // not giving us token in res because outside of user in response (insomnia)
+      
+//       // render home or profile page
+//       else {
+//         // if login fails
+//         console.log(err);
+//       }
+//     });
+//   };
   
   const handleChange = (e) => {
     if (e.target.name === 'email') {
@@ -67,12 +85,10 @@ const Login = () => {
 
         <button className="btn m-2">
         Login</button>
-
-        <button className="btn m-2"
-          >
+        
+        <button className="btn m-2">
           sign up here</button>
       </form>
-      
     </section>
   )
 }
