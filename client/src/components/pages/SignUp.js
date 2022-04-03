@@ -6,22 +6,27 @@ const SignUp = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const login = { email, password };
+    const login = { 
+      email: email,
+      password: password,
+      username: userName 
+    };
 
     // need to check with seeded data that this works.
-    fetch('https://webhook.site/f4f4b450-4382-419d-95fe-1ea326e49280', {
-      method: 'post',
-      mode: 'no-cors',
+    fetch('/api/users', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
       },
       body: JSON.stringify(login)
     }).then(() => {
-      console.log('new item posted')
+      console.log(login)
+      console.log('new user posted')
     });
   };
 
@@ -59,6 +64,13 @@ const SignUp = () => {
         <input className="m-2" 
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          type="text" 
+          name="name"/>
+
+        <label className="p-2" htmlFor="name">User Name :</label>
+        <input className="m-2" 
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
           type="text" 
           name="name"/>
 

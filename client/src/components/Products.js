@@ -53,13 +53,12 @@ const Products = () => {
             className="card mx-3"
             style={{ height: "500px", objectFit: "cover" }}
           >
-            <div>
-              {product.name}
-              {product.category}
+              <h4>{product.title}</h4>
+              <p>{product.category}</p>
               <img
                 className="img-fluid"
-                key={product.name}
-                alt={product.name} 
+                key={product.title}
+                alt={product.title} 
                 src={product.photo}
                 onClick={() => toggleModal(product.photo)}
               >
@@ -68,9 +67,9 @@ const Products = () => {
               {product.price.$numberDecimal}
               {product.city}
 
-              <button className="btn">Save for later</button>
-              <button className="btn">Venmo!</button>
-            </div>
+              <button className="btn m-2">Save for later</button>
+              <button className="btn m-2">Venmo!</button>
+            
           </div>
         ))}
       </section>

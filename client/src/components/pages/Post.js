@@ -56,9 +56,6 @@ const Post = () => {
       price: price,
       city: city
     };
-    console.log('item', item);
-    
-    console.log("CATEGORY", item.category);
 
     setIsPending(true);
 
