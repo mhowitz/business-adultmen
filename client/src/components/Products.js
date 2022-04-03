@@ -34,7 +34,7 @@ const Products = () => {
         <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}
       
-      <Row xs={1} sm={2} md={3} className="g-4">
+      <Row xs={1} sm={2} md={3} className="g-4 mt-4">
         
         {products.map((product, i) => (
           <Col>
