@@ -8,6 +8,7 @@ const productController = {
           .select("-__v")
           .sort("-createdAt")
 
+			console.log(productData);
 			res.json(productData)
 		} catch (error) {
 			res.status(500).json(error)
