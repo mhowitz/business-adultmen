@@ -8,13 +8,13 @@ export const reducer = (state, action) => {
         _id: action._id
       }
 
-    case "logout":
-      return {
-        ...state,
-        loggedIn: false,
-        username: "",
-        _id: ""
-      }
+    // case "logout":
+    //   return {
+    //     ...state,
+    //     loggedIn: false,
+    //     username: "",
+    //     _id: ""
+    //   }
 
     default:
       return state

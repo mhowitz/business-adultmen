@@ -1,12 +1,15 @@
 const { Product, User } = require("../models");
 const authMiddleware = require('../utils/auth');
+
 const productController = {
   getProducts: async function(req, res) {
     try {
 			const productData = 
         await Product.find({})
           .select("-__v")
+					.select("ownedBy")
           .sort("-createdAt")
+					.populate("ownedBy")
 
 			res.json(productData)
 		} catch (error) {
@@ -14,14 +17,14 @@ const productController = {
 		}
   },
   createProduct: async function (req, res) {
+		console.log("hi");
 		try {
-
-      		console.log(req.user);
 			const productData = await Product.create(req.body)
+			console.log("hello", productData)
 			const userData = await User.findByIdAndUpdate(
-				{_id: req.user._id},
-				 {$push: {ownedProducts: productData}});
-			res.json(productData)
+				{_id: req.body.ownedBy},
+				 {$addToSet: {ownedProducts: productData}});
+				 console.log("hello2", userData);
 		} catch (error) {
 			res.status(500).json(error)
 		}
