@@ -14,11 +14,12 @@ const Profile = () => {
         method: "GET",
         headers: {
           'Accept': "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
       });
       response = await response.json();
-      setOwnedProducts(response);
+      setOwnedProducts(response.ownedProducts);
+      console.log("ownedProducts", response.ownedProducts)
     }
     _newProducts().catch(console.error);
 
@@ -31,9 +32,14 @@ const Profile = () => {
         },
       });
       response = await response.json();
-      setSavedProducts(response);
+      setSavedProducts(response.savedProducts);
+      console.log("savedProducts", response.savedProducts)
     }
     _savedProducts().catch(console.error);
+
+    console.log("userState", userState);
+    
+    
   }, []);
 
   
@@ -43,8 +49,6 @@ const Profile = () => {
   // change page to post page when title clicked
   
   return (
-
-
 
     <>
       <section className=" vh-100">
