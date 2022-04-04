@@ -8,12 +8,13 @@ import SignUp from '../components/pages/SignUp';
 import Home from '../components/pages/Home';
 import Post from '../components/pages/Post';
 
+
 const Container = () => {
   const [currentPage, setCurrentPage] = useState('Login');
 
   const renderPage = () => {
     if(currentPage === 'Login') {
-      return <Login />;
+      return <Login handlePageChange={handlePageChange}/>;
     }
     else if(currentPage === 'Profile') {
       return <Profile />;

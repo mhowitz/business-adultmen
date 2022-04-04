@@ -39,7 +39,7 @@ const Products = () => {
         {products.map((product, i) => (
           <Col>
             <Card>
-              <Card.Img variant="top"               onClick={() => toggleModal(product.photo)}
+              <Card.Img variant="top" onClick={() => toggleModal(product.photo)}
               src={product.photo} />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>

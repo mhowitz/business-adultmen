@@ -2,9 +2,6 @@
   --primary-color: #204629;
   --secondary-color: #f3e8d5;
   --third-color: #90a778;
-  /* --primary-color: #B4A195;
-  --secondary-color: #FFF2E2;
-  --third-color: #2D2116; */
 }
 
 *,
@@ -16,8 +13,9 @@
 body {
   height: 100vh;
   width: 100vw;
-  color: #fff !important;
-   background-color: var(--primary-color)!important;
+  /* color: #fff !important; */
+   /* background-color: var(--primary-color)!important; */
+   background-image: linear-gradient(150deg, var(--primary-color) 50%, var(--secondary-color) 50%);
 }
 
 .height-100 {
@@ -41,12 +39,11 @@ body {
 }
 
 .card {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  background-color: var(--third-color) !important;
-  border-radius: 0 !important;
+  margin: 20px;
+  padding: 20px;
+  background-color: var(--third-color);
+  border-radius: 0;
+  border: var(--secondary-color);
 }
 
 html {
@@ -65,13 +62,14 @@ div:last-child {
 } */
 
 .btn {
-  background-color: var(--secondary-color) !important;
+  background-color: var(--secondary-color);
 }
 
 footer {
 	bottom: 0;
-  text-decoration: none !important;
-  list-style-type: none !important;
+  text-decoration: none;
+  list-style-type: none;
+  background-color: #204629;
 } 
 
 .nav-tabs {
@@ -79,13 +77,18 @@ footer {
   border-bottom: 0px !important;
 }
 
+
 a {
   color: var(--secondary-color)!important;
-  text-decoration: none !important;
-  list-style: none !important;
+  text-decoration: none;
+  list-style: none;
 }
+a:hover {
+  background-color: #90a778;
+}
+
 ul {
-  list-style: none !important;
+  list-style: none;
 }
 
 /* not working since position rel for cards on other pages, overlap nav bar */
@@ -136,6 +139,11 @@ ul {
 .wrapper .item {
   min-width: 180px;
   text-align: center;
-  background-color: green;
+  background-color: var(--third-color);
   margin: 4vw;
 }
+
+h4 {
+  color: var(--secondary-color);
+}
+
