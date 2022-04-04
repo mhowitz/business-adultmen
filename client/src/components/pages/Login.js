@@ -19,25 +19,25 @@ const Login = () => {
     // need to check with seeded data that this works.
 
 
-   const response = await fetch('api/users/login', {
+   const response = await fetch('/api/users/login', {
       method: 'POST',
-      mode: 'no-cors',
+      // mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
         // 'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({
-        email,
-        password
-      })
+      body: JSON.stringify(
+        {email,password}
+      )
 
     })
 
     const data = await response.json();
-    console.log(data);
+    
     if(data.user) {
       alert('login successful')
+      console.log(data.user)
     } else {
       alert('please check your username and password ')
     }
@@ -88,11 +88,11 @@ const Login = () => {
           type="password" 
           name="name"/>
 
-        <button className="btn m-2">
+        <button className="btn m-2" >
         Login</button>
         
-        <button className="btn m-2">
-          sign up here</button>
+        {/* <button className="btn m-2">
+          sign up here</button> */}
       </form>
     </section>
   )
