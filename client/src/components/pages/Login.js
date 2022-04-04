@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import SignUp from './SignUp';
 import Auth from '../../utils/auth';
+import { UserContext } from "../../contexts"
+import jwt_decode from "jwt-decode"
+
 
 import { validateEmail } from '../../utils/helpers';
 import auth from '../../utils/auth';
@@ -9,6 +12,8 @@ import auth from '../../utils/auth';
 
 const Login = ({handlePageChange}) => {
   
+  const [ userState, dispatch ] = useContext(UserContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,45 +21,44 @@ const Login = ({handlePageChange}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const login = { email, password };
-    // need to check with seeded data that this works.
-
 
    const response = await fetch('/api/users/login', {
-      method: 'post',
-      mode: 'no-cors',
+      method: 'POST',
+      // mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
         // 'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(login)
+      body: JSON.stringify(
+        {email,password}
+      )
 
     })
+
     const data = await response.json();
-    console.log(data)
+
     if(data.user) {
       alert('login successful')
+      const decoded = jwt_decode(data.user);
+      console.log(decoded);
+      dispatch({
+        type: "login",
+        username: decoded.data.username,
+        _id: decoded.data._id
+      })
+      console.log("userstate", userState)
+
     } else {
       alert('please check your username and password ')
     }
+  };
+
 
     Auth.login(data.username)
 
-//     }).then((res, err) => {
-//       if(res){
-//       console.log('new login created')
-//       console.log('res',res);}
-//       // not giving us token in res because outside of user in response (insomnia)
-      
-//       // render home or profile page
-//       else {
-//         // if login fails
-//         console.log(err);
-//       }
-//     });
-//   };
-  }
+
+
   const handleChange = (e) => {
     if (e.target.name === 'email') {
       const isValid = validateEmail(e.target.value);
@@ -84,14 +88,17 @@ const Login = ({handlePageChange}) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           onBlur ={handleChange}
-          type="text" 
+          type="password" 
           name="name"/>
+
 
         <button className="btn m-2">
         login</button>
         
         <button className="btn m-2" onClick={()=> handlePageChange("SignUp")}>
           Sign up here</button>
+
+     
       </form>
     </section>
   )
