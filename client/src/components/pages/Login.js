@@ -23,7 +23,7 @@ const Login = () => {
     // need to check with seeded data that this works.
 
 
-   const response = await fetch('api/users/login', {
+   const response = await fetch('/api/users/login', {
       method: 'POST',
       // mode: 'no-cors',
       headers: {
@@ -31,15 +31,14 @@ const Login = () => {
         'Content-type': 'application/json',
         // 'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({
-        email,
-        password
-      })
+      body: JSON.stringify(
+        {email,password}
+      )
 
     })
 
     const data = await response.json();
-    console.log(data);
+    
     if(data.user) {
       alert('login successful')
       const decoded = jwt_decode(data.user);
@@ -50,23 +49,11 @@ const Login = () => {
         _id: decoded.data._id
       })
       console.log("userstate", userState)
+
     } else {
       alert('please check your username and password ')
     }
 
-//     }).then((res, err) => {
-//       if(res){
-//       console.log('new login created')
-//       console.log('res',res);}
-//       // not giving us token in res because outside of user in response (insomnia)
-      
-//       // render home or profile page
-//       else {
-//         // if login fails
-//         console.log(err);
-//       }
-//     });
-  };
   
   const handleChange = (e) => {
     if (e.target.name === 'email') {
@@ -100,11 +87,11 @@ const Login = () => {
           type="password" 
           name="name"/>
 
-        <button className="btn m-2">
+        <button className="btn m-2" >
         Login</button>
         
-        <button className="btn m-2">
-          sign up here</button>
+        {/* <button className="btn m-2">
+          sign up here</button> */}
       </form>
     </section>
   )
