@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext} from 'react'
+import { UserContext } from "../../contexts/"
+
+
 
 const getImageDetails = async function(url) {
 
@@ -17,6 +20,7 @@ const getImageDetails = async function(url) {
 
 const Post = () => {
 
+  const [ userState, dispatch ] = useContext(UserContext);
   
   // states to grab user inputs
   const [title, setTitle] = useState();
@@ -24,11 +28,12 @@ const Post = () => {
   const[price, setPrice] = useState();
   const[description, setDescription] = useState();
   const[image, setImage] = useState();
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState("books");
   const [isPending, setIsPending] = useState(false);
 
   // verification that user enters correct data.
   const handleChange = (e) => {
+    console.log("userState", userState);
     if (e.target.name === 'price') {
       // checking for a string doesn't work blaahhhh
       if(e.target.value < 0 || e.target.value === String) {
@@ -47,6 +52,8 @@ const Post = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("userState", userState);
+    console.log("id", userState._id);
     console.log("category before", category);
     const item = { 
       title: title,
@@ -56,7 +63,7 @@ const Post = () => {
       price: price,
       city: city,
       // hard coded till we have login tokens working
-      ownedBy: "6248e8b0b102111350421ec6"
+      ownedBy: userState._id
     };
 
     setIsPending(true);
@@ -69,7 +76,7 @@ const Post = () => {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(item)
       }).then(() => {

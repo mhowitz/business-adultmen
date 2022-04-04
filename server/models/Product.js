@@ -10,7 +10,8 @@ const ProductSchema = new Schema(
     },
     ownedBy: {
       type: Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
+      require: true
     },
     title: {
       type: String,
@@ -20,13 +21,15 @@ const ProductSchema = new Schema(
     },
     photo: {
       type: String,
-      trim: true
+      trim: true,
+      required: true
     },
     description: {
       type: String,
       trim: true,
       maxLength: 280,
-      minLength: 1
+      minLength: 1,
+      required: true
     },
     category: {
       type: String,

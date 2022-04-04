@@ -8,9 +8,8 @@ const userController = {
   getUsers: async function(req, res) {
     try {
 			const userData = await User.find({})
-			.populate({
-				path: 'product'
-			})
+			.populate("ownedProducts")
+			.populate("saves");
 			console.log(userData);
 			res.json(userData);
 

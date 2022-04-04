@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import SignUp from './SignUp';
+import { UserContext } from "../../contexts"
+import jwt_decode from "jwt-decode"
 
 import { validateEmail } from '../../utils/helpers';
 // import { useNavigate } from "react-router-dom";
@@ -7,6 +9,8 @@ import { validateEmail } from '../../utils/helpers';
 
 const Login = () => {
   
+  const [ userState, dispatch ] = useContext(UserContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -37,24 +41,19 @@ const Login = () => {
     
     if(data.user) {
       alert('login successful')
-      console.log(data.user)
+      const decoded = jwt_decode(data.user);
+      console.log(decoded);
+      dispatch({
+        type: "login",
+        username: decoded.data.username,
+        _id: decoded.data._id
+      })
+      console.log("userstate", userState)
+
     } else {
       alert('please check your username and password ')
     }
 
-//     }).then((res, err) => {
-//       if(res){
-//       console.log('new login created')
-//       console.log('res',res);}
-//       // not giving us token in res because outside of user in response (insomnia)
-      
-//       // render home or profile page
-//       else {
-//         // if login fails
-//         console.log(err);
-//       }
-//     });
-  };
   
   const handleChange = (e) => {
     if (e.target.name === 'email') {

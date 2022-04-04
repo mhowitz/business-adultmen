@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // import Slider from "react-slick";
 import Products from "../Products";
+import { UserContext } from "../../contexts"
 
 const Profile = () => {
   const [ownedProducts, setOwnedProducts] = useState([]);
   const [savedProducts, setSavedProducts] = useState([]);
+  const [ userState, dispatch ] = useContext(UserContext);
 
   useEffect(() => {
-    async function _newProducts(req, res) {
-      let response = await fetch(`/api/users/owned/${req.header.id}`, {
+    async function _newProducts() {
+      let response = await fetch(`/api/users/owned/${userState._id}`, {
         method: "GET",
         headers: {
           'Accept': "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
       });
       response = await response.json();
-      setOwnedProducts(response);
+      setOwnedProducts(response.ownedProducts);
+      console.log("ownedProducts", response.ownedProducts)
     }
     _newProducts().catch(console.error);
 
     async function _savedProducts(req, res) {
-      let response = await fetch(`/api/users/saves/${req.header.id}`, {
+      let response = await fetch(`/api/users/saves/${userState._id}`, {
         method: "GET",
         headers: {
           'Accept': "application/json",
@@ -29,9 +32,14 @@ const Profile = () => {
         },
       });
       response = await response.json();
-      setSavedProducts(response);
+      setSavedProducts(response.savedProducts);
+      console.log("savedProducts", response.savedProducts)
     }
     _savedProducts().catch(console.error);
+
+    console.log("userState", userState);
+    
+    
   }, []);
 
   
@@ -41,8 +49,6 @@ const Profile = () => {
   // change page to post page when title clicked
   
   return (
-
-
 
     <>
       <section className=" vh-100">
