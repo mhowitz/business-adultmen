@@ -48,6 +48,7 @@ const Login = ({handlePageChange}) => {
         _id: decoded.data._id
       })
       console.log("userstate", userState)
+      Auth.login(data.username)
 
     } else {
       alert('please check your username and password ')
@@ -55,7 +56,7 @@ const Login = ({handlePageChange}) => {
   };
 
 
-    Auth.login(data.username)
+    
 
 
 
