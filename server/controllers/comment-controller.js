@@ -76,6 +76,21 @@ const commentController= {
           } catch (error ) {
               res.status(500).json(error)
           }
+      },
+      removeReply: async function({ params }, res) {
+          try {
+              const replyData = await Comment.findOneAndUpdate(
+                  {_id: params.commentId},
+                  { $pull: { replies: { replyId: params.replyId }}},
+                  { new: true }
+              )
+              if(!replyData) {
+                  res.status(404).json({ message: "no comment found with this id"})
+              }
+              res.json(replyData)
+          }catch(error) {
+              res.status(500).json(error)
+          }
       }
 }
 
