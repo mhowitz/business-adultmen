@@ -34,7 +34,8 @@ const Profile = () => {
         },
       });
       response = await response.json();
-      setSavedProducts(response.savedProducts);
+      console.log(response)
+      setSavedProducts(response);
       console.log("savedProducts", response.savedProducts)
     }
     _savedProducts().catch(console.error);
@@ -101,7 +102,26 @@ const Profile = () => {
       </Row>
 
         {/* bottom bar */}
-        <div className ="wrapper">
+      
+      <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+        
+        {savedProducts.map((product, i) => (
+          <Col>
+            <Card>
+              <Card.Img variant="top" onClick={() => toggleModal(product.photo)}
+              src={product.photo} />
+              <Card.Body>
+                <Card.Title>{product.title}</Card.Title>
+                <Card.Text>Category: {product.category}</Card.Text>
+                <Card.Text>City: {product.city}</Card.Text>
+                <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
+                <Card.Text> {product.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+        {/* <div className ="wrapper">
           <div className="item">
               <h1>Title</h1>
               <div>image</div>
@@ -115,7 +135,7 @@ const Profile = () => {
           <div className="item">box 4</div>
           <div className="item">box 5</div>
           <div className="item">box 6</div>
-        </div>
+        </div> */}
         
       </section>
     </>
