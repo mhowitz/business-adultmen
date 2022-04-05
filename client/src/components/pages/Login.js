@@ -1,13 +1,16 @@
 import React, { useState, useContext } from 'react';
 import SignUp from './SignUp';
+import Auth from '../../utils/auth';
 import { UserContext } from "../../contexts"
 import jwt_decode from "jwt-decode"
 
+
 import { validateEmail } from '../../utils/helpers';
+import auth from '../../utils/auth';
 // import { useNavigate } from "react-router-dom";
 
 
-const Login = () => {
+const Login = ({handlePageChange}) => {
   
   const [ userState, dispatch ] = useContext(UserContext);
 
@@ -18,10 +21,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const login = { email, password };
-
-    // need to check with seeded data that this works.
-
 
    const response = await fetch('/api/users/login', {
       method: 'POST',
@@ -38,7 +37,7 @@ const Login = () => {
     })
 
     const data = await response.json();
-    
+
     if(data.user) {
       alert('login successful')
       const decoded = jwt_decode(data.user);
@@ -49,13 +48,18 @@ const Login = () => {
         _id: decoded.data._id
       })
       console.log("userstate", userState)
+      Auth.login(data.username)
 
     } else {
       alert('please check your username and password ')
     }
   };
 
-  
+
+    
+
+
+
   const handleChange = (e) => {
     if (e.target.name === 'email') {
       const isValid = validateEmail(e.target.value);
@@ -88,11 +92,14 @@ const Login = () => {
           type="password" 
           name="name"/>
 
-        <button className="btn m-2" >
-        Login</button>
+
+        <button className="btn m-2">
+        login</button>
         
-        {/* <button className="btn m-2">
-          sign up here</button> */}
+        <button className="btn m-2" onClick={()=> handlePageChange("SignUp")}>
+          Sign up here</button>
+
+     
       </form>
     </section>
   )

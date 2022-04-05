@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className='width-100'>
+    <footer className='width-100' style={{backgroundColor:"#"}}>
     <div className="d-flex flex-column text-center">
       <ul className='noBullets'>
         <li>
