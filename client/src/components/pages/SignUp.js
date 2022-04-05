@@ -80,7 +80,6 @@ const SignUp = () => {
 
         <button className="btn m-2">Sign Up</button>
       </form>
-      
 
     </section>
   )

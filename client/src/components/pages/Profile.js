@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 // import Slider from "react-slick";
-import Products from "../Products";
 import { UserContext } from "../../contexts";
 import { Card, Row, Col } from "react-bootstrap";
 import Modal from "../Modal";
