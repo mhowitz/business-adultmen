@@ -64,15 +64,15 @@ const SignUp = () => {
         <input className="m-2" 
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          type="text" 
-          name="name"/>
+          type="password" 
+          name="password"/>
 
         <label className="p-2" htmlFor="name">User Name :</label>
         <input className="m-2" 
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           type="text" 
-          name="name"/>
+          name="username"/>
 
         <button className="btn m-2">Sign Up</button>
       </form>
