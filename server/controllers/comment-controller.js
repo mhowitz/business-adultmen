@@ -42,17 +42,18 @@ const commentController= {
           }
       },
       addReply: async function ({ params, body}, res) {
-          console.log(body);
+          console.log(body, params);
           try {
               const replyData = await Comment.findOneAndUpdate(
                   {_id: params.commentId,
                 },
-                  { $push: { replies: body, userId: params.userId }},
+                  { $push: { replies: body}},
                   {new: true, runValidators: true}
               )
               if(!replyData) {
                   res.status(404).json({ message: "no comment with this id"})
               }
+              console.log(replyData)
               res.json(replyData)
           } catch(error) {
               res.status(500).json(error)

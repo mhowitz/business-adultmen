@@ -12,7 +12,7 @@ const {
 router.route('/').get(getComments)
 router.route('/:userId/product/:productId', authMiddleware).post(addComment)
 
-router.route('/:userId/product/:productId/:commentId', authMiddleware).post(addReply)
+router.route('/product/:productId/reply/:commentId', authMiddleware).post(addReply)
 
 router.route('/:productId/delete/:commentId', authMiddleware).delete(removeComment)
 
