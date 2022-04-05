@@ -10,6 +10,7 @@ const productController = {
 					.select("ownedBy")
           .sort("-createdAt")
 					.populate("ownedBy")
+					.populate('comments')
 
 			res.json(productData)
 		} catch (error) {
