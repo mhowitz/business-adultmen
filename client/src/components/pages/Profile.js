@@ -8,20 +8,20 @@ import Modal from "../Modal";
 const Profile = () => {
   const [ownedProducts, setOwnedProducts] = useState([]);
   const [savedProducts, setSavedProducts] = useState([]);
-  const [ userState, dispatch ] = useContext(UserContext);
+  const [userState, dispatch] = useContext(UserContext);
 
   useEffect(() => {
     async function _newProducts() {
       let response = await fetch(`/api/users/owned/${userState._id}`, {
         method: "GET",
         headers: {
-          'Accept': "application/json",
-          "Content-Type": "application/json"
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
       });
       response = await response.json();
       setOwnedProducts(response.ownedProducts);
-      console.log("ownedProducts", response.ownedProducts)
+      console.log("ownedProducts", response.ownedProducts);
     }
     _newProducts().catch(console.error);
 
@@ -29,20 +29,18 @@ const Profile = () => {
       let response = await fetch(`/api/users/saves/${userState._id}`, {
         method: "GET",
         headers: {
-          'Accept': "application/json",
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
       response = await response.json();
-      console.log(response)
+      console.log(response);
       setSavedProducts(response);
-      console.log("savedProducts", response.savedProducts)
+      console.log("savedProducts", response.savedProducts);
     }
     _savedProducts().catch(console.error);
 
     console.log("userState", userState);
-    
-    
   }, []);
 
   const [currentPhoto, setCurrentPhoto] = useState();
@@ -51,16 +49,45 @@ const Profile = () => {
     setIsModalOpen(!isModalOpen);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
- 
-  // pull up a modal when user clicks photo
- 
-  // change page to post page when title clicked
-  
-  return (
 
+  const _unSaveProduct = async (clickedProduct) => {
+    console.log(userState);
+    const response = await fetch(`/api/products/unSave/${userState._id}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productId: clickedProduct,
+      }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const _deleteProduct = async (clickedProduct) => {
+    console.log(userState);
+    const response = await fetch(`/api/products/${clickedProduct}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
+
+  // pull up a modal when user clicks photo
+
+  // change page to post page when title clicked
+
+  return (
     <>
-     {isModalOpen && (
+      {isModalOpen && (
         <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}
       <section className=" vh-100">
@@ -83,44 +110,83 @@ const Profile = () => {
         </div> */}
 
         <Row xs={1} sm={2} md={3} className="g-4 mt-4">
-        
-        {ownedProducts.map((product, i) => (
-          <Col>
-            <Card>
-              <Card.Img variant="top" onClick={() => toggleModal(product.photo)}
-              src={product.photo} />
-              <Card.Body>
-                <Card.Title>{product.title}</Card.Title>
-                <Card.Text>Category: {product.category}</Card.Text>
-                <Card.Text>City: {product.city}</Card.Text>
-                <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
-                <Card.Text> {product.description}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+          {!ownedProducts.length && (
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title>No owned products!</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          )}
+
+          {ownedProducts.map((product, i) => (
+            <Col>
+              <Card>
+                <Card.Img
+                  variant="top"
+                  onClick={() => toggleModal(product.photo)}
+                  src={product.photo}
+                />
+                <Card.Body>
+                  <Card.Title>{product.title}</Card.Title>
+                  <Card.Text>Category: {product.category}</Card.Text>
+                  <Card.Text>City: {product.city}</Card.Text>
+                  <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
+                  <Card.Text> {product.description}</Card.Text>
+                  <button
+                    key={product._id}
+                    className="btn m-2"
+                    onClick={() => _deleteProduct(product._id)}
+                  >
+                    Sold
+                  </button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
 
         {/* bottom bar */}
-      
-      <Row xs={1} sm={2} md={3} className="g-4 mt-4">
-        
-        {savedProducts.map((product, i) => (
-          <Col>
-            <Card>
-              <Card.Img variant="top" onClick={() => toggleModal(product.photo)}
-              src={product.photo} />
-              <Card.Body>
-                <Card.Title>{product.title}</Card.Title>
-                <Card.Text>Category: {product.category}</Card.Text>
-                <Card.Text>City: {product.city}</Card.Text>
-                <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
-                <Card.Text> {product.description}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+
+        <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+
+        {!savedProducts.length && (
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title>No saved products!</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          )}
+
+          {savedProducts.map((product, i) => (
+            <Col>
+              <Card>
+                <Card.Img
+                  variant="top"
+                  onClick={() => toggleModal(product.photo)}
+                  src={product.photo}
+                />
+                <Card.Body>
+                  <Card.Title>{product.title}</Card.Title>
+                  <Card.Text>Category: {product.category}</Card.Text>
+                  <Card.Text>City: {product.city}</Card.Text>
+                  <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
+                  <Card.Text> {product.description}</Card.Text>
+                  <button
+                    key={product._id}
+                    className="btn m-2"
+                    onClick={() => _unSaveProduct(product._id)}
+                  >
+                    Unsave
+                  </button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
         {/* <div className ="wrapper">
           <div className="item">
               <h1>Title</h1>
@@ -136,10 +202,9 @@ const Profile = () => {
           <div className="item">box 5</div>
           <div className="item">box 6</div>
         </div> */}
-        
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
