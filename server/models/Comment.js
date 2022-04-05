@@ -13,9 +13,9 @@ const ReplySchema = new Schema(
       required: true
     },
     userId: {
-      type: String,
-      // required: true,
-      trim: true
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      require: true
     },
     createdAt: {
       type: Date,
@@ -34,7 +34,9 @@ const ReplySchema = new Schema(
 const CommentSchema = new Schema(
   {
     userId: {
-      type:String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      require: true
     },
     productId: {
       type: String,

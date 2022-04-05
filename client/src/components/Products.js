@@ -5,6 +5,8 @@ import { UserContext } from "../contexts";
 import Comments from './Comments'
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [useComment, setUseComment ] =useState('');
+  const [update, setUpdate] = useState(false);
   const [ userState, dispatch ] = useContext(UserContext);
 
   // const [saveItem, setSaveItem]= u
@@ -23,7 +25,7 @@ const Products = () => {
       setProducts(response);
     }
     newProducts().catch(console.error);
-  }, []);
+  }, [userState, useComment, update]);
 
   const _saveProduct = async  (e) => {
 
@@ -47,7 +49,7 @@ const Products = () => {
     console.log(data)
     
   }
-  const [useComment, setUseComment ] =useState('');
+  
 
   const _addComment = async (productId) => {
     console.log(userState)
@@ -73,7 +75,8 @@ const Products = () => {
 
   const handleChange= (event) => {
     event.preventDefault();
-    setUseComment({value: event.target.value})
+    setUseComment(event.target.value);
+    setUpdate(!update);
 };
 
   const [currentPhoto, setCurrentPhoto] = useState();
@@ -105,12 +108,13 @@ const Products = () => {
                {product.comments.map((comment, i) => (
                 <>
                     <Card.Text>{comment.commentBody}</Card.Text>
-                    <Card.Text>{comment.userId}</Card.Text>
+                    {comment.hasOwnProperty("userId") && (
+                      <Card.Text>{comment.userId.username}</Card.Text> )}
                   </>
                 ))}
                 <div className = "commentForm panel panel-default">
                   <div className="commentBox panel-body">
-                    <form className="form" onSubmit={_addComment(product._id)}>
+                    <form className="form" onSubmit={() => _addComment(product._id)}>
                       <input className="form-control" type="text" onBlur={(e)=> handleChange(e)} placeholder="Say something here...">
 
                       </input>
