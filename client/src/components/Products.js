@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import { Card, Row, Col } from "react-bootstrap";
 import { UserContext } from "../contexts";
-
+import Comments from './Comments'
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [useComment, setUseComment ] =useState('');
+  const [update, setUpdate] = useState(false);
   const [ userState, dispatch ] = useContext(UserContext);
 
   // const [saveItem, setSaveItem]= u
@@ -23,7 +25,7 @@ const Products = () => {
       setProducts(response);
     }
     newProducts().catch(console.error);
-  }, []);
+  }, [userState, useComment, update]);
 
   const _saveProduct = async  (e) => {
 
@@ -47,6 +49,36 @@ const Products = () => {
     console.log(data)
     
   }
+  
+
+  const _addComment = async (productId) => {
+    console.log(userState)
+    const response = await fetch(`/api/comments/${productId}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: userState._id,
+        commentBody: useComment
+      })
+    
+
+    })
+    if(!userState) {
+      alert('not logged in')
+    }
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const handleChange= (event) => {
+    event.preventDefault();
+    setUseComment(event.target.value);
+    setUpdate(!update);
+};
+
   const [currentPhoto, setCurrentPhoto] = useState();
   const toggleModal = (image) => {
     setCurrentPhoto(image);
@@ -73,6 +105,23 @@ const Products = () => {
                 <Card.Text>City: {product.city}</Card.Text>
                 <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
                 <Card.Text> {product.description}</Card.Text>
+               {product.comments.map((comment, i) => (
+                <>
+                    <Card.Text>{comment.commentBody}</Card.Text>
+                    {comment.hasOwnProperty("userId") && (
+                      <Card.Text>{comment.userId.username}</Card.Text> )}
+                  </>
+                ))}
+                <div className = "commentForm panel panel-default">
+                  <div className="commentBox panel-body">
+                    <form className="form" onSubmit={() => _addComment(product._id)}>
+                      <input className="form-control" type="text" onBlur={(e)=> handleChange(e)} placeholder="Say something here...">
+
+                      </input>
+                      <button className="btn m-2" type="submit"> Add comment </button>
+                    </form>
+                  </div>
+                </div>
                 <button key={product._id} className="btn m-2" onClick={()=> _saveProduct(product._id)} >Save for later</button>
                 <button className="btn m-2">Venmo!</button>
               </Card.Body>
