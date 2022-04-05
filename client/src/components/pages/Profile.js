@@ -9,40 +9,47 @@ const Profile = () => {
   const [savedProducts, setSavedProducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
-
-  useEffect(() => {
-    async function _newProducts() {
-      let response = await fetch(`/api/users/owned/${userState._id}`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      response = await response.json();
-      setOwnedProducts(response.ownedProducts);
-      console.log("ownedProducts", response.ownedProducts);
+  
+    useEffect(() => {
+      
+      async function _newProducts() {
+        let response = await fetch(`/api/users/owned/${userState._id}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        response = await response.json();
+        setOwnedProducts(response.ownedProducts);
+        console.log("ownedProducts", response.ownedProducts);
+      }
+      if(userState.loggedIn){
+      _newProducts().catch(console.error);
     }
-    _newProducts().catch(console.error);
 
-    async function _savedProducts(req, res) {
-      let response = await fetch(`/api/users/saves/${userState._id}`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      response = await response.json();
-      console.log(response);
-      setSavedProducts(response);
-      console.log("savedProducts", response.savedProducts);
-    }
-    _savedProducts().catch(console.error);
+      async function _savedProducts(req, res) {
+        let response = await fetch(`/api/users/saves/${userState._id}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        response = await response.json();
+        console.log(response);
+        setSavedProducts(response);
+        console.log("savedProducts", response.savedProducts);
+      }
+      if(userState.loggedIn){
+      _savedProducts().catch(console.error);
+      }
+      console.log("userState", userState);
 
-    console.log("userState", userState);
+    }, [userState, update]);
 
-  }, [userState, update]);
+
+
 
   const [currentPhoto, setCurrentPhoto] = useState();
   const toggleModal = (image) => {
@@ -90,6 +97,9 @@ const Profile = () => {
 
   return (
     <>
+      {!userState.loggedIn && (
+        <h1>please log in to view your posts!</h1>
+      )}
       {isModalOpen && (
         <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}
@@ -124,6 +134,8 @@ const Profile = () => {
           )}
 
           {ownedProducts.map((product, i) => (
+            
+            // top bar
             <Col>
               <Card>
                 <Card.Img
