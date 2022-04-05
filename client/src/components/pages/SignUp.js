@@ -1,6 +1,8 @@
-import React,{ useState} from 'react'
+import React,{ useState, useContext} from 'react'
 import auth from '../../utils/auth';
 import Auth from '../../utils/auth';
+import { UserContext } from "../../contexts"
+import jwt_decode from "jwt-decode"
 
 import { validateEmail } from '../../utils/helpers';
 
@@ -9,6 +11,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
+  const [ userState, dispatch ] = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +32,14 @@ const SignUp = () => {
     }).then(res => res.json())
     .then((data) => {
       console.log(data)
-      Auth.login(data.username)
+      // Auth.login(data.username)
+      const decoded = jwt_decode(data.user);
+      dispatch({
+        type: "login",
+        username: decoded.data.username,
+        _id: decoded.data._id
+      })
+      console.log("userstate", userState)
       console.log('new user posted')
     });
   };

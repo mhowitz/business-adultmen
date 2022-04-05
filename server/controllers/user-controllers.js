@@ -19,11 +19,11 @@ const userController = {
   },
   createUser: async function (req, res) {
 		try {
-			const userData = await User.create(req.body)
-			userData.password = bcrypt.hashSync(req.body.password, 10);
-			const token = signToken(userData);
-			res.json(userData);
-			return { token, userData };
+			const user = await User.create(req.body)
+			user.password = bcrypt.hashSync(req.body.password, 10);
+			const token = signToken(user);
+			console.log(user);
+			return res.json({status: 'ok', user: token})
 		} catch (error) {
 			res.status(500).json(error)
 		}
