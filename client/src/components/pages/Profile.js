@@ -8,6 +8,7 @@ import Modal from "../Modal";
 const Profile = () => {
   const [ownedProducts, setOwnedProducts] = useState([]);
   const [savedProducts, setSavedProducts] = useState([]);
+  const [update, setUpdate] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
 
   useEffect(() => {
@@ -41,7 +42,8 @@ const Profile = () => {
     _savedProducts().catch(console.error);
 
     console.log("userState", userState);
-  }, []);
+
+  }, [userState, update]);
 
   const [currentPhoto, setCurrentPhoto] = useState();
   const toggleModal = (image) => {
@@ -64,6 +66,7 @@ const Profile = () => {
     });
 
     const data = await response.json();
+    setUpdate(!update);
     console.log(data);
   };
 
@@ -78,6 +81,7 @@ const Profile = () => {
     });
 
     const data = await response.json();
+    setUpdate(!update);
     console.log(data);
   };
 
