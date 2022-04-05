@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import { Card, Row, Col } from "react-bootstrap";
+import { UserContext } from "../contexts";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [ userState, dispatch ] = useContext(UserContext);
+
+  // const [saveItem, setSaveItem]= u
 
   useEffect(() => {
     async function newProducts() {
@@ -21,6 +25,28 @@ const Products = () => {
     newProducts().catch(console.error);
   }, []);
 
+  const _saveProduct = async  (e) => {
+
+    console.log(userState)
+    const response = await fetch(`/api/users/saves/${userState._id}`, {
+      method : 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        productId: e
+      })
+    });
+    if(!userState.loggedIn){
+      alert('not logged in')
+      return;
+    }
+
+    const data= await response.json();
+    console.log(data)
+    
+  }
   const [currentPhoto, setCurrentPhoto] = useState();
   const toggleModal = (image) => {
     setCurrentPhoto(image);
@@ -47,7 +73,7 @@ const Products = () => {
                 <Card.Text>City: {product.city}</Card.Text>
                 <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
                 <Card.Text> {product.description}</Card.Text>
-                <button className="btn m-2">Save for later</button>
+                <button key={product._id} className="btn m-2" onClick={()=> _saveProduct(product._id)} >Save for later</button>
                 <button className="btn m-2">Venmo!</button>
               </Card.Body>
             </Card>
