@@ -49,9 +49,9 @@ const Products = () => {
   }
   const [useComment, setUseComment ] =useState('');
 
-  const _addComment = async (e) => {
+  const _addComment = async (productId) => {
     console.log(userState)
-    const response = await fetch(`/api/comments/${e}`, {
+    const response = await fetch(`/api/comments/${productId}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -64,9 +64,17 @@ const Products = () => {
     
 
     })
+    if(!userState) {
+      alert('not logged in')
+    }
     const data = await response.json();
     console.log(data);
   };
+
+  const handleChange= (event) => {
+    event.preventDefault();
+    setUseComment({value: event.target.value})
+};
 
   const [currentPhoto, setCurrentPhoto] = useState();
   const toggleModal = (image) => {
@@ -103,7 +111,7 @@ const Products = () => {
                 <div className = "commentForm panel panel-default">
                   <div className="commentBox panel-body">
                     <form className="form" onSubmit={_addComment(product._id)}>
-                      <input className="form-control" type="text" onBlur={(e)=>setUseComment(e.target.value)} placeholder="Say something here...">
+                      <input className="form-control" type="text" onBlur={(e)=> handleChange(e)} placeholder="Say something here...">
 
                       </input>
                       <button className="btn m-2" type="submit"> Add comment </button>
