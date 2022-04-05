@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 // import Slider from "react-slick";
 import Products from "../Products";
-import { UserContext } from "../../contexts"
+import { UserContext } from "../../contexts";
+import { Card, Row, Col } from "react-bootstrap";
+import Modal from "../Modal";
 
 const Profile = () => {
   const [ownedProducts, setOwnedProducts] = useState([]);
@@ -42,6 +44,12 @@ const Profile = () => {
     
   }, []);
 
+  const [currentPhoto, setCurrentPhoto] = useState();
+  const toggleModal = (image) => {
+    setCurrentPhoto(image);
+    setIsModalOpen(!isModalOpen);
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
  
   // pull up a modal when user clicks photo
@@ -51,10 +59,13 @@ const Profile = () => {
   return (
 
     <>
+     {isModalOpen && (
+        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
+      )}
       <section className=" vh-100">
         {/* top bar */}
-        <div className ="wrapper mt-4">
-          <Products/>
+        {/* <div className ="wrapper mt-4">
+  
           <div className="item">
             <h1>Title</h1>
             <div>image</div>
@@ -68,7 +79,26 @@ const Profile = () => {
           <div className="item">box 4</div>
           <div className="item">box 5</div>
           <div className="item">box 6</div>
-        </div>
+        </div> */}
+
+        <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+        
+        {ownedProducts.map((product, i) => (
+          <Col>
+            <Card>
+              <Card.Img variant="top" onClick={() => toggleModal(product.photo)}
+              src={product.photo} />
+              <Card.Body>
+                <Card.Title>{product.title}</Card.Title>
+                <Card.Text>Category: {product.category}</Card.Text>
+                <Card.Text>City: {product.city}</Card.Text>
+                <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
+                <Card.Text> {product.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
         {/* bottom bar */}
         <div className ="wrapper">
