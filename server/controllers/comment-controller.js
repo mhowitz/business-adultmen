@@ -18,19 +18,18 @@ const commentController= {
         console.log(body);
         try{
             const commentData = await Comment.create({
-                 userId: params.userId,
-                 productId: params.productId,
+                 userId: body.userId,
                  commentBody: body.commentBody
             })
             console.log(commentData)
             const productData = await Product.findOneAndUpdate(
               { _id: params.productId },
-              { $push: { comments: commentData._id } },
+              { $push: { comments: commentData} },
               { new: true }
-            ).populate('Product')
+            )
             console.log(productData);
 
-          if (!commentData || !productData) {
+          if (!productData) {
             res.status(404).json({ message: 'No user with this id!' });
             return;
           }

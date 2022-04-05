@@ -35,11 +35,9 @@ const CommentSchema = new Schema(
   {
     userId: {
       type:String,
-      required: true
     },
     productId: {
       type: String,
-      required: true
     },
     commentBody: {
       type: String,

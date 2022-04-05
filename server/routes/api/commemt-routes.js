@@ -10,7 +10,7 @@ const {
 } = require('../../controllers/comment-controller');
 
 router.route('/').get(getComments)
-router.route('/:userId/product/:productId', authMiddleware).post(addComment)
+router.route('/:productId', authMiddleware).post(addComment)
 
 router.route('/product/:productId/reply/:commentId', authMiddleware).post(addReply)
 
