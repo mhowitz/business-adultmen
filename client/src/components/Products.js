@@ -50,28 +50,28 @@ const Products = () => {
   }
   
 
-  const _addComment = async (productId) => {
-    console.log(userState)
-    const response = await fetch(`/api/comments/${productId}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        userId: userState._id,
-        commentBody: useComment
-      })
+  // const _addComment = async (productId) => {
+  //   console.log(userState)
+  //   const response = await fetch(`/api/comments/${productId}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       userId: userState._id,
+  //       commentBody: useComment
+  //     })
     
 
-    })
-    if(!userState) {
-      alert('not logged in')
-    }
-    const data = await response.json();
-    console.log(data);
-    newProducts();
-  };
+  //   })
+  //   if(!userState) {
+  //     alert('not logged in')
+  //   }
+  //   const data = await response.json();
+  //   console.log(data);
+  //   newProducts();
+  // };
 
   const handleChange= (event) => {
     event.preventDefault();
@@ -112,7 +112,7 @@ const Products = () => {
                       <Card.Text>{comment.userId.username}</Card.Text> )}
                   </>
                 ))} */}
-                <div className = "commentForm panel panel-default">
+                {/* <div className = "commentForm panel panel-default">
                   <div className="commentBox panel-body">
                     <form className="form" onSubmit={() => _addComment(product._id)}>
                       <input className="form-control" type="text" onBlur={(e)=> handleChange(e)} placeholder="Say something here...">
@@ -121,7 +121,7 @@ const Products = () => {
                       <button className="btn m-2" type="submit"> Add comment </button>
                     </form>
                   </div>
-                </div>
+                </div> */}
                 <button key={product._id} className="btn m-2" onClick={()=> _saveProduct(product._id)} >Save for later</button>
                 <button className="btn m-2">Venmo!</button>
               </Card.Body>

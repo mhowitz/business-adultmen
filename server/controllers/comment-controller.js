@@ -7,8 +7,6 @@ const commentController= {
                 //  .populate('product')
             .select("-__v")
             .sort("createdAt")
-       
-            console.log(commentData);
             res.json(commentData)
         } catch (error){
             res.status(500).json(error)
@@ -27,7 +25,6 @@ const commentController= {
               { $push: { comments: commentData} },
               { new: true }
             )
-            console.log(productData);
 
           if (!productData) {
             res.status(404).json({ message: 'No user with this id!' });
@@ -52,7 +49,6 @@ const commentController= {
               if(!replyData) {
                   res.status(404).json({ message: "no comment with this id"})
               }
-              console.log(replyData)
               res.json(replyData)
           } catch(error) {
               res.status(500).json(error)

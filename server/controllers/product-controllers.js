@@ -13,10 +13,6 @@ const productController = {
 					.populate({
 						path: 'comments',
 						populate: [
-						// {
-						// 	path: 'replies',
-						// 	model: "Comment"
-						// },
 						{
 							path: 'userId',
 							model: "User"
@@ -32,11 +28,10 @@ const productController = {
 		console.log("hi");
 		try {
 			const productData = await Product.create(req.body)
-			console.log("hello", productData)
+	
 			const userData = await User.findByIdAndUpdate(
 				{_id: req.body.ownedBy},
 					{$addToSet: {ownedProducts: productData}});
-			console.log("hello2", userData);
 			res.json(productData);
 		} catch (error) {
 			res.status(500).json(error)

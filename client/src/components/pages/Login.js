@@ -39,7 +39,6 @@ const Login = ({handlePageChange}) => {
     const data = await response.json();
 
     if(data.user) {
-      alert('login successful')
       const decoded = jwt_decode(data.user);
       console.log(decoded);
       dispatch({
@@ -49,8 +48,9 @@ const Login = ({handlePageChange}) => {
       })
       console.log("userState", userState)
       handlePageChange('Home');
+      setErrorMessage('')
     } else {
-      alert('please check your username and password ')
+      setErrorMessage("Invalid email or password, please try again!")
     }
   };
 
