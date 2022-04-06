@@ -70,7 +70,7 @@ const Post = ({handlePageChange}) => {
     setIsPending(true);
 
     const displayImage = await getImageDetails(item.photo);
-
+    console.log(displayImage);
     item.photo = displayImage.data.display_url;
 
     fetch('/api/products', {
