@@ -39,13 +39,21 @@ const Post = ({ handlePageChange }) => {
     title: "",
     // city: ""
   });
-  let isSubmittable = Boolean(error.title && error.description && error.category && error.price && error.city)
+  let isSubmittable = (error.title && error.description && error.category && error.price && error.city)
   // verification that user enters correct data.
+
+  const checkError = function () {
+    if (error.city || error.price || error.description || error.title || error.category) {
+      return false;
+    }
+    return true;
+  }
+
   const handleChange = (e) => {
     console.log("userState", userState);
-    console.log("title error", error.title);
-    console.log("description error", error.description);
-    console.log("it worked!", isSubmittable)
+    // console.log("title error", error.title);
+    // console.log("description error", error.description);
+    // console.log("it worked!", isSubmittable)
     if (e.target.name === 'price') {
       // checking for a string doesn't work blaahhhh
       if (e.target.value < 0 || e.target.value === String) {
@@ -123,9 +131,20 @@ const Post = ({ handlePageChange }) => {
             <input className="m-2"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              onBlur={(e) => {
+                if (e.target.value.length <= 100 && e.target.value.length >= 1) {
+                  setPrice(e.target.value)
+                  setError({ ...error, price: "" })
+                }
+                else {
+                  setError({ ...error, price: "You need a price!" })
+                }
+              }}
               type="price"
               name="price"
-              onBlur={handleChange} />
+            // onBlur={handleChange} 
+            />
+            {error.price ? (<p style={{ color: "red" }}>{error.price}</p>) : null}
 
             <label className="p-2" htmlFor="description" >Description: </label>
             <input className="m-2"
@@ -143,7 +162,7 @@ const Post = ({ handlePageChange }) => {
               name="description"
             // onBlur={handleChange}
             />
-            {error.description ? (<p>{error.description}</p>) : null}
+            {error.description ? (<p style={{ color: "red" }}>{error.description}</p>) : null}
 
             <label className="p-2" htmlFor="imageUrl">Img URL from imagery </label>
             <input className="m-2"
@@ -171,7 +190,7 @@ const Post = ({ handlePageChange }) => {
               // onChange={(e) => setTitle(e.target.value)}
               onBlur={(e) => {
                 if (e.target.value.length <= 25 && e.target.value.length >= 1) {
-                  setDescription(e.target.value)
+                  setTitle(e.target.value)
                   setError({ ...error, title: "" })
                 }
                 else {
@@ -180,30 +199,42 @@ const Post = ({ handlePageChange }) => {
               }}
               type="text"
               name="title"
-              // onBlur={handleChange}
-              />
-              {error.title ? (<p>{error.title}</p>) : null}
+            // onBlur={handleChange}
+            />
+            {error.title ? (<p style={{ color: "red" }}>{error.title}</p>) : null}
 
             <label className="p-2" htmlFor="Category">City</label>
             <input className="m-2"
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              // onChange={(e) => setCity(e.target.value)}
+              onBlur={(e) => {
+                if (e.target.value.length <= 25 && e.target.value.length >= 1) {
+                  setCity(e.target.value)
+                  setError({ ...error, title: "" })
+                }
+                else {
+                  setError({ ...error, title: "You need a city" })
+                }
+              }}
               type="text"
               name="city"
-              onBlur={handleChange} />
-            {(isSubmittable) && Object.values(error).reduce((total, current) => !total && !current) ? (
+            // onBlur={handleChange}
+            />
+            {error.city ? (<p style={{ color: "red" }}>{error.city}</p>) : null}
+
+            {/* {(isSubmittable) && Object.values(error).reduce((total, current) => !total && !current) ? (
               isPending ? <button className="btn btn-primary m-2" disabled>Submitting Post...</button>
                 : <button className="btn btn-primary m-2">Submit</button>
             ) : (
               <button className="btn btn-primary m-2" disabled>Submit</button>
-            )}
-            {/* { !isPending && !error.description && <button className="btn btn-primary m-2" >Submit</button>}
-        { isPending && !error.description && <button className="btn btn-primary m-2" disabled>Submitting Post...</button>}
-        {error.description && <button className="btn btn-primary m-2" disabled>Submit</button>} */}
-            {error.description ? (
+            )} */}
+            {!isPending && checkError() && <button className="btn m-2" >Submit</button>}
+            {isPending && checkError() && <button className="btn m-2" disabled>Submitting Post...</button>}
+            {!checkError() && <button className="btn m-2" disabled>Submit</button>}
+            {/* {checkError() ? (
               <p>{error.description}</p>
             ) : null
-            }
+            } */}
           </form>
         </section>
       )}
