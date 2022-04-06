@@ -164,7 +164,6 @@ const Profile = () => {
               </Card>
             </Col>
           )}
-
           {savedProducts.map((product, i) => (
             <Col>
               <Card>

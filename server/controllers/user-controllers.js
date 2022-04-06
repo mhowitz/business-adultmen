@@ -93,21 +93,34 @@ const userController = {
 	},
   saveProduct: async function (req, res) {
     try {
-      const userData = await User.findByIdAndUpdate(req.params.id, {$addToSet: {saves: req.body.productId}})
-	  .populate({
-		  path: 'product'
+      const userData = await User.findByIdAndUpdate(
+		  req.params.userId,
+		  {$addToSet: {saves: req.body.productId}},
+		   {new: true})
+		   .populate({
+			path: 'saves',
+			populate: [
+			// {
+			// 	path: 'replies',
+			// 	model: "Comment"
+			// },
+			{
+				path: 'productId',
+				model: 'Product'
 
-	  })
+			}]
+		})
+		
       res.json(userData);
+	  console.log(userData);
     } catch (error) {
       res.status(500).json(error)
     }
   },
   getSavedProducts: async function (req, res) {
     try {
-      const productData = await User.findById(req.params.id)
-        .populate("saves");
-      res.json(productData.saves);
+      const productData = await User.findById(req.params.userId)
+      res.json(productData);
     } catch (error) {
       res.status(500).json(error)
     }
