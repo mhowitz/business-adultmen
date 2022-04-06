@@ -120,7 +120,15 @@ const userController = {
   getSavedProducts: async function (req, res) {
     try {
       const productData = await User.findById(req.params.userId)
-      res.json(productData);
+	  .populate({
+		path: 'saves',
+		populate: [
+		{
+			path: 'productId',
+			model: 'Product'
+
+		}]})
+		res.json(productData)
     } catch (error) {
       res.status(500).json(error)
     }

@@ -31,7 +31,7 @@ const Profile = () => {
       response = await response.json();
       console.log(response);
       setSavedProducts(response);
-      console.log("savedProducts", response.savedProducts);
+      console.log("savedProducts", response.saves.savedProducts);
     }
 
     async function _newProducts() {
@@ -162,7 +162,7 @@ const Profile = () => {
         {/* bottom bar */}
 
         <Row xs={1} sm={2} md={3} className="g-4 mt-4">
-
+{/* 
         {!savedProducts.length && (
             <Col>
               <Card>
@@ -196,7 +196,7 @@ const Profile = () => {
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+          ))} */}
         </Row>
         {/* <div className ="wrapper">
           <div className="item">
