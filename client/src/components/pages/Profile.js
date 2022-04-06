@@ -95,8 +95,9 @@ const Profile = () => {
   return (
     <>
       {!userState.loggedIn && (
-        <h1>please log in to view your posts!</h1>
-      )}
+        <div className="d-flex justify-content-center align-items-center" style={{height:"5vh"}}>
+          <h1 className="text-danger">please log in to view your posts!</h1>
+        </div>      )}
       {isModalOpen && (
         <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}

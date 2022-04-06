@@ -1,6 +1,8 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { Card} from "react-bootstrap";
 import { UserContext } from "../contexts";
+import Products from './Products';
+
 function Modal({ onClose, currentProduct }) {
   const [ userState, dispatch ] = useContext(UserContext);
   const [useComment, setUseComment ] =useState('');
@@ -54,29 +56,23 @@ function Modal({ onClose, currentProduct }) {
 
   return (
     <div className="modalBackdrop">
-      <div className="modalContainer d-flex flex-column align-items-center justify-content-center">
+      <div className="card-border modalContainer d-flex flex-column align-items-center justify-content-center">
         {/* <h3 className="modalTitle">{name}</h3> */}
-        <img src={currentProduct.photo} alt="current category" />
-        <div className = "commentForm panel panel-default">
-                  <div className="commentBox panel-body">
-                    <form className="form" onSubmit={() => _addComment(currentProduct._id)}>
-                      <input className="form-control" type="text" onBlur={(e)=> handleChange(e)} placeholder="Say something here...">
-
-                      </input>
-                      <button className="btn m-2" type="submit"> Add comment </button>
-                    </form>
-                  </div>
-                </div>
+        <Card>
+          <Card.Img variant="top"
+          src={currentProduct.photo}></Card.Img>
+            <Card.Text>Description: {currentProduct.description}</Card.Text>
+        {/* <img src={currentProduct.photo} alt="current category" /> */}
         {currentProduct.comments.map((comment, i) => (
-          <>
-
-              <Card.Text>{comment.commentBody}</Card.Text>
+          <Card.Body>
+              <Card.Text>Comments: {comment.commentBody}</Card.Text>
               {comment.hasOwnProperty("userId") && (
-                <Card.Text>{comment.userId.username}</Card.Text> )}
-            </>
+                <Card.Text>User: {comment.userId.username}</Card.Text> )}
+          </Card.Body>
           ))}
-        <button className="modalButton" type="button" onClick={onClose}>
-          Close this modal
+          </Card>
+        <button className="btn" type="button" onClick={onClose}>
+          take me back
         </button>
       </div>
     </div>

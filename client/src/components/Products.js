@@ -96,7 +96,7 @@ const Products = () => {
         
         {products.map((product, i) => (
           <Col>
-            <Card>
+            <Card className="card-border shadow">
               <Card.Img variant="top" onClick={() => toggleModal(product)}
               src={product.photo} />
               <Card.Body>
@@ -104,7 +104,7 @@ const Products = () => {
                 <Card.Text>Category: {product.category}</Card.Text>
                 <Card.Text>City: {product.city}</Card.Text>
                 <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
-                <Card.Text> {product.description}</Card.Text>
+                <Card.Text>Description: {product.description}</Card.Text>
                {/* {product.comments.map((comment, i) => (
                 <>
                     <Card.Text>{comment.commentBody}</Card.Text>
@@ -123,7 +123,7 @@ const Products = () => {
                   </div>
                 </div> */}
                 <button key={product._id} className="btn m-2" onClick={()=> _saveProduct(product._id)} >Save for later</button>
-                <button className="btn m-2">Venmo!</button>
+                <button className="btn m-2">Contact</button>
               </Card.Body>
             </Card>
           </Col>

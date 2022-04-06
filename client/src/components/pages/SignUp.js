@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode"
 
 import { validateEmail } from '../../utils/helpers';
 
-const SignUp = () => {
+const SignUp = ({handlePageChange}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +40,8 @@ const SignUp = () => {
         _id: decoded.data._id
       })
       console.log("userstate", userState)
-      console.log('new user posted')
+      console.log('new user posted');
+      handlePageChange('Home');
     });
   };
 
@@ -61,8 +62,8 @@ const SignUp = () => {
   };
 
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 height-100 mt-4">
-      <form className="card p-5 mt-3"
+    <section className="diagonal-bar d-flex justify-content-around align-items-center p-5 height-100 mt-4">
+      <form className="card p-5 mt-3 card-border"
         onSubmit={handleSubmit}>
         <h1 className= "text-center pb-4" data-testid='h1tag'>Sign Up</h1>
         
