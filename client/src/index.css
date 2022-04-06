@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&display=swap');
+
+html {
+  font-family: "BIZ UDPMincho", serif !important;
+  font-size: 22px;
+}
+
+
+:root {
+  --primary-color: #204629;
+  --secondary-color: #f3e8d5;
+  --third-color: #90a778;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  /* color: #fff !important; */
+   background-color: var(--third-color)!important;
+   /* background-image: linear-gradient(150deg, var(--primary-color) 50%, var(--secondary-color) 50%); */
+}
+
+.diagonal-bar {
+     background-image: linear-gradient(150deg, var(--primary-color) 50%, var(--secondary-color) 50%);
+}
+
+.height-100 {
+  height: 100vh;
+}
+
+.height-150 {
+  height: 150vh;
+}
+
+.height-20 {
+  height: 8vh;
+}
+
+.height-36 {
+  height: 36vh;
+}
+
+.width-100 {
+  width: 100vw;
+}
+
+.card {
+  margin: 20px;
+  padding: 20px;
+  background-color: var(--secondary-color);
+  border-radius: 0;
+}
+
+
+div:last-child {
+  margin-botom: 0;
+}
+
+/* .red {
+  background-color: red;
+} */
+
+.btn {
+  background-color: var(--third-color);
+}
+
+h2 {
+  color: var(--secondary-color);
+  /* -webkit-text-stroke: 3px var(--primary-color) */
+}
+
+footer {
+	bottom: 0;
+  text-decoration: none;
+  list-style-type: none;
+  background-color: var(--third-color);
+  color: var(--secondary-color)
+} 
+
+.nav-tabs {
+  background-color: var(--third-color) !important;
+  border-bottom: 0px !important;
+}
+
+.nav-tabs:active {
+  background-color: var(--third-color);
+}
+
+a {
+  color: var(--secondary-color)!important;
+  text-decoration: none;
+  list-style: none;
+}
+
+a:hover {
+  background-color: #90a778;
+}
+
+ul {
+  list-style: none;
+}
+
+/* not working since position rel for cards on other pages, overlap nav bar */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  padding-bottom: 2rem;
+  z-index: 1;
+}
+
+.modalBackdrop {
+	background: var(--third-color);
+	bottom: 0;
+	left: 0;
+	overflow: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+.modalContainer {
+	background: var(--darker);
+	border-radius: 5px;
+	max-width: 100%;
+  height: 100%;
+	margin: 50px auto;
+	padding: 15px;
+	width: 960px;
+}
+
+.wrapper{
+  max-height: 400px;
+  border-bottom: 8px solid #ddd;
+  display: flex;
+  overflow-x: auto;
+}
+
+.wrapper::-webkit-scrollbar{
+  width: 0;
+}
+
+.wrapper .item {
+  min-width: 180px;
+  text-align: center;
+  background-color: var(--third-color);
+  margin: 4vw;
+}
+
+h4 {
+  color: var(--secondary-color);
+}
+
+.card-border{
+  border-style: solid;
+  border-color: var(--primary-color);
+  border-width: medium;
+}
+
