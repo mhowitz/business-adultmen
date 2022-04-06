@@ -39,18 +39,14 @@ const Login = ({handlePageChange}) => {
     const data = await response.json();
 
     if(data.user) {
-      alert('login successful')
       const decoded = jwt_decode(data.user);
-      console.log(decoded);
       dispatch({
         type: "login",
         username: decoded.data.username,
         _id: decoded.data._id
       })
-      console.log("userState", userState)
       handlePageChange('Home');
     } else {
-      alert('please check your username and password ')
     }
   };
 

@@ -11,11 +11,9 @@ const getImageDetails = async function(url) {
     return fetch(apiUrl).then((response) => {
       return response.json()
     }).then((data) => {
-      console.log(data);
       return data;
     })
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -53,9 +51,6 @@ const Post = ({handlePageChange}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("userState", userState);
-    console.log("id", userState._id);
-    console.log("category before", category);
     const item = { 
       title: title,
       photo: image, 
@@ -81,10 +76,8 @@ const Post = ({handlePageChange}) => {
         },
         body: JSON.stringify(item)
       }).then(() => {
-        console.log('new item posted')
         setIsPending(false);
         handlePageChange('Profile');
-        console.log('we made it past page change fxn')
       })
         .catch(() => {
           setIsPending(false);
