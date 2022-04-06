@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&display=swap');
+
+html {
+  font-family: "BIZ UDPMincho", serif !important;
+  font-size: 22px;
+}
+
+
 :root {
   --primary-color: #204629;
   --secondary-color: #f3e8d5;
@@ -14,8 +22,12 @@ body {
   height: 100vh;
   width: 100vw;
   /* color: #fff !important; */
-   /* background-color: var(--primary-color)!important; */
-   background-image: linear-gradient(150deg, var(--primary-color) 50%, var(--secondary-color) 50%);
+   background-color: var(--third-color)!important;
+   /* background-image: linear-gradient(150deg, var(--primary-color) 50%, var(--secondary-color) 50%); */
+}
+
+.diagonal-bar {
+     background-image: linear-gradient(150deg, var(--primary-color) 50%, var(--secondary-color) 50%);
 }
 
 .height-100 {
@@ -41,17 +53,10 @@ body {
 .card {
   margin: 20px;
   padding: 20px;
-  background-color: var(--third-color);
+  background-color: var(--secondary-color);
   border-radius: 0;
-  border: var(--secondary-color);
 }
 
-html {
-  font-family: "Martel Sans", sans-serif !important;
-  font-size: 22px;
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200&display=swap");
 
 div:last-child {
   margin-botom: 0;
@@ -62,14 +67,20 @@ div:last-child {
 } */
 
 .btn {
-  background-color: var(--secondary-color);
+  background-color: var(--third-color);
+}
+
+h2 {
+  color: var(--secondary-color);
+  /* -webkit-text-stroke: 3px var(--primary-color) */
 }
 
 footer {
 	bottom: 0;
   text-decoration: none;
   list-style-type: none;
-  background-color: #204629;
+  background-color: var(--third-color);
+  color: var(--secondary-color)
 } 
 
 .nav-tabs {
@@ -77,12 +88,16 @@ footer {
   border-bottom: 0px !important;
 }
 
+.nav-tabs:active {
+  background-color: var(--third-color);
+}
 
 a {
   color: var(--secondary-color)!important;
   text-decoration: none;
   list-style: none;
 }
+
 a:hover {
   background-color: #90a778;
 }
@@ -101,7 +116,7 @@ ul {
 }
 
 .modalBackdrop {
-	background: rgba(0, 0, 0, .65);
+	background: var(--third-color);
 	bottom: 0;
 	left: 0;
 	overflow: auto;
@@ -119,10 +134,6 @@ ul {
 	margin: 50px auto;
 	padding: 15px;
 	width: 960px;
-}
-
-.modalButton {
-  width: 20%;
 }
 
 .wrapper{
@@ -145,5 +156,11 @@ ul {
 
 h4 {
   color: var(--secondary-color);
+}
+
+.card-border{
+  border-style: solid;
+  border-color: var(--primary-color);
+  border-width: medium;
 }
 

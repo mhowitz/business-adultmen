@@ -92,7 +92,7 @@ const Post = ({handlePageChange}) => {
 
   return (
     <section className="d-flex justify-content-around align-items-center p-5 height-150">
-      <form className="card p-5" id ="contact-form red"
+      <form className="card-border card p-5" id ="contact-form red"
         onSubmit = {handleSubmit}>
 
         <h1 className= "text-center pb-4" data-testid='h1tag'>Post a New Item</h1>
