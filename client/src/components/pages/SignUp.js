@@ -33,7 +33,6 @@ const SignUp = ({handlePageChange}) => {
       body: JSON.stringify(login)
     }).then(res => res.json())
     .then((data) => {
-      console.log(data)
       // Auth.login(data.username)
       const decoded = jwt_decode(data.user);
       dispatch({
@@ -41,8 +40,6 @@ const SignUp = ({handlePageChange}) => {
         username: decoded.data.username,
         _id: decoded.data._id
       })
-      console.log("userstate", userState)
-      console.log('new user posted');
       handlePageChange('Home');
     });
   };

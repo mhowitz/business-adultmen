@@ -1,72 +1,72 @@
-const { Schema, model, Types } = require('mongoose');
-const dateFormat = require('../utils/dateFormat')
-const User = require('./User')
+const { Schema, model, Types } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
+const User = require("./User");
 
 const ProductSchema = new Schema(
   {
     productId: {
       type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId()
+      default: () => new Types.ObjectId(),
     },
     ownedBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      require: true
+      require: true,
     },
     title: {
       type: String,
       required: true,
       trim: true,
-      minlength: 2
+      minlength: 2,
     },
     photo: {
       type: String,
       trim: true,
-      required: true
+      required: true,
     },
     description: {
       type: String,
       trim: true,
       maxLength: 280,
       minLength: 1,
-      required: true
+      required: true,
     },
     category: {
       type: String,
       trim: true,
       maxLength: 50,
       minLength: 1,
-      required: true
+      required: true,
     },
     price: {
       type: Schema.Types.Decimal128,
-      required: true
+      required: true,
     },
     city: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: createdAtVal => dateFormat(createdAtVal)
+      get: (createdAtVal) => dateFormat(createdAtVal),
     },
     comments: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Comment"
-      }
+        ref: "Comment",
+      },
     ],
   },
   {
     toJSON: {
-      virtuals: true
-    }
+      virtuals: true,
+    },
   }
 );
 
-ProductSchema.virtual('commentCount').get(function() {
+ProductSchema.virtual("commentCount").get(function () {
   return this.comments.length;
 });
 
@@ -87,6 +87,6 @@ ProductSchema.virtual('commentCount').get(function() {
 //   });
 // });
 
-const Product = model('Product', ProductSchema);
+const Product = model("Product", ProductSchema);
 
 module.exports = Product;

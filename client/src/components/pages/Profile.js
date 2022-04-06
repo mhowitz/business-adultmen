@@ -12,10 +12,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (userState.loggedIn) {
-      _newProducts().catch(console.error);
-      _savedProducts().catch(console.error);
+      _newProducts().catch();
+      _savedProducts().catch();
     }
-    console.log("userState", userState);
   }, []);
 
   async function _savedProducts(req, res) {
@@ -27,9 +26,7 @@ const Profile = () => {
       },
     });
     const data = await response.json();
-    console.log(data.saves);
     setSavedProducts(data.saves);
-    console.log("savedProducts", data.saves);
   }
 
   async function _newProducts() {
@@ -42,7 +39,6 @@ const Profile = () => {
     });
     response = await response.json();
     setOwnedProducts(response.ownedProducts);
-    console.log("ownedProducts", response.ownedProducts);
   }
 
   const [currentPhoto, setCurrentPhoto] = useState();
@@ -53,7 +49,6 @@ const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const _unSaveProduct = async (clickedProduct) => {
-    console.log(userState);
     const response = await fetch(`/api/products/unSave/${userState._id}`, {
       method: "POST",
       headers: {
@@ -67,11 +62,9 @@ const Profile = () => {
 
     const data = await response.json();
     _savedProducts();
-    console.log(data);
   };
 
   const _deleteProduct = async (clickedProduct) => {
-    console.log(userState);
     const response = await fetch(`/api/products/${clickedProduct}`, {
       method: "POST",
       headers: {
@@ -82,7 +75,6 @@ const Profile = () => {
 
     const data = await response.json();
     _newProducts();
-    console.log(data);
   };
 
   // pull up a modal when user clicks photo

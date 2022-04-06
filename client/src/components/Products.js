@@ -10,7 +10,7 @@ const Products = () => {
   const [ userState, dispatch ] = useContext(UserContext);
 
   useEffect(() => {
-    newProducts().catch(console.error);
+    newProducts().catch();
   }, []);
 
   async function newProducts() {
@@ -22,13 +22,11 @@ const Products = () => {
       },
     });
     response = await response.json();
-    console.log(response);
     setProducts(response);
   }
 
   const _saveProduct = async  (e) => {
 
-    console.log(userState)
     const response = await fetch(`/api/users/saves/${userState._id}`, {
       method : 'POST',
       headers: {
@@ -45,13 +43,11 @@ const Products = () => {
     }
 
     const data= await response.json();
-    console.log(data)
     
   }
   
 
   const _addComment = async (productId) => {
-    console.log(userState)
     const response = await fetch(`/api/comments/${productId}`, {
       method: 'POST',
       headers: {
@@ -69,7 +65,6 @@ const Products = () => {
       alert('not logged in')
     }
     const data = await response.json();
-    console.log(data);
     newProducts();
   };
 
@@ -105,13 +100,6 @@ const Products = () => {
                 <Card.Text>City: {product.city}</Card.Text>
                 <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
                 <Card.Text>Description: {product.description}</Card.Text>
-               {/* {product.comments.map((comment, i) => (
-                <>
-                    <Card.Text>{comment.commentBody}</Card.Text>
-                    {comment.hasOwnProperty("userId") && (
-                      <Card.Text>{comment.userId.username}</Card.Text> )}
-                  </>
-                ))} */}
                 <div className = "commentForm panel panel-default">
                   <div className="commentBox panel-body">
                     <form className="form" onSubmit={() => _addComment(product._id)}>
