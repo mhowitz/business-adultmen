@@ -11,44 +11,41 @@ const Profile = () => {
   const [userState, dispatch] = useContext(UserContext);
   
     useEffect(() => {
-      
-      async function _newProducts() {
-        let response = await fetch(`/api/users/owned/${userState._id}`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-        response = await response.json();
-        setOwnedProducts(response.ownedProducts);
-        console.log("ownedProducts", response.ownedProducts);
-      }
-      if(userState.loggedIn){
-      _newProducts().catch(console.error);
-    }
 
-      async function _savedProducts(req, res) {
-        let response = await fetch(`/api/users/saves/${userState._id}`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-        response = await response.json();
-        console.log(response);
-        setSavedProducts(response);
-        console.log("savedProducts", response.savedProducts);
-      }
       if(userState.loggedIn){
-      _savedProducts().catch(console.error);
+        _newProducts().catch(console.error);
+        _savedProducts().catch(console.error);
       }
       console.log("userState", userState);
 
-    }, [userState, update]);
+    }, []);
 
+    async function _savedProducts(req, res) {
+      let response = await fetch(`/api/users/saves/${userState._id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data  = await response.json();
+      console.log(data.saves);
+      setSavedProducts(data.saves);
+      console.log("savedProducts", data.saves);
+    }
 
+    async function _newProducts() {
+      let response = await fetch(`/api/users/owned/${userState._id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      response = await response.json();
+      setOwnedProducts(response.ownedProducts);
+      console.log("ownedProducts", response.ownedProducts);
+    }
 
 
   const [currentPhoto, setCurrentPhoto] = useState();
@@ -72,7 +69,7 @@ const Profile = () => {
     });
 
     const data = await response.json();
-    setUpdate(!update);
+    _savedProducts();
     console.log(data);
   };
 
@@ -87,7 +84,7 @@ const Profile = () => {
     });
 
     const data = await response.json();
-    setUpdate(!update);
+    _newProducts();
     console.log(data);
   };
 
@@ -176,7 +173,6 @@ const Profile = () => {
               </Card>
             </Col>
           )}
-
           {savedProducts.map((product, i) => (
             <Col>
               <Card>
@@ -203,24 +199,10 @@ const Profile = () => {
             </Col>
           ))}
         </Row>
-        {/* <div className ="wrapper">
-          <div className="item">
-              <h1>Title</h1>
-              <div>image</div>
-              <p>description</p>
-              <p>user posted</p>
-              <button>Un-save</button>
-          </div>
-          <div className="item">box 1</div>
-          <div className="item">box 2</div>
-          <div className="item">box 3</div>
-          <div className="item">box 4</div>
-          <div className="item">box 5</div>
-          <div className="item">box 6</div>
-        </div> */}
+      
       </section>
     </>
   );
-};
+}; 
 
 export default Profile;

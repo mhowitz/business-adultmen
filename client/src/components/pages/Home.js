@@ -4,7 +4,8 @@ import Products from "../Products";
 const Home = () => {
   return (
     <div className="vertical3">
-      <h4 className="text-center">Money Bags Marketplace</h4>
+
+      <h2 className="text-center">Money Bags Marketplace</h2>
       <Products />
     </div>
   );

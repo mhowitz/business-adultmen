@@ -33,7 +33,7 @@ router
 // router.post('/logout', authMiddleware, userLogout)
 
 router
-  .route('/saves/:id', authMiddleware)
+  .route('/saves/:userId', authMiddleware)
   .post(saveProduct)
   .get(getSavedProducts)
 
