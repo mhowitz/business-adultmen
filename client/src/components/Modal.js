@@ -61,13 +61,21 @@ function Modal({ onClose, currentProduct }) {
         <Card>
           <Card.Img variant="top"
           src={currentProduct.photo}></Card.Img>
-            <Card.Text>Description: {currentProduct.description}</Card.Text>
-        {/* <img src={currentProduct.photo} alt="current category" /> */}
+            <Card.Text>Description: <small>{currentProduct.description}</small></Card.Text>
+                <div className = "form-inline">
+                  <div className="commentBox panel-body form-inline">
+                    <form className="form-inline" onSubmit={() => _addComment(currentProduct._id)}>
+                      <input className="form-control" type="text" onBlur={(e)=> handleChange(e)} placeholder="Say something here..."></input>
+                      <button className="btn m-2" type="submit"> Add comment </button>
+                    </form>
+                  </div>
+                </div>
         {currentProduct.comments.map((comment, i) => (
           <Card.Body>
-              <Card.Text>Comments: {comment.commentBody}</Card.Text>
-              {comment.hasOwnProperty("userId") && (
-                <Card.Text>User: {comment.userId.username}</Card.Text> )}
+          {comment.hasOwnProperty("userId") && (
+                <Card.Text className="h6">Added by: {comment.userId.username}</Card.Text>)}
+                <Card.Text> {'  '}{comment.commentBody}</Card.Text>
+
           </Card.Body>
           ))}
           </Card>
