@@ -28,10 +28,10 @@ const Profile = () => {
           "Content-Type": "application/json",
         },
       });
-      response = await response.json();
-      console.log(response);
-      setSavedProducts(response);
-      console.log("savedProducts", response.saves.savedProducts);
+      const data  = await response.json();
+      console.log(data.saves);
+      setSavedProducts(data.saves);
+      console.log("savedProducts", data.saves);
     }
 
     async function _newProducts() {
@@ -162,7 +162,7 @@ const Profile = () => {
         {/* bottom bar */}
 
         <Row xs={1} sm={2} md={3} className="g-4 mt-4">
-{/* 
+
         {!savedProducts.length && (
             <Col>
               <Card>
@@ -196,26 +196,12 @@ const Profile = () => {
                 </Card.Body>
               </Card>
             </Col>
-          ))} */}
+          ))}
         </Row>
-        {/* <div className ="wrapper">
-          <div className="item">
-              <h1>Title</h1>
-              <div>image</div>
-              <p>description</p>
-              <p>user posted</p>
-              <button>Un-save</button>
-          </div>
-          <div className="item">box 1</div>
-          <div className="item">box 2</div>
-          <div className="item">box 3</div>
-          <div className="item">box 4</div>
-          <div className="item">box 5</div>
-          <div className="item">box 6</div>
-        </div> */}
+      
       </section>
     </>
   );
-};
+}; 
 
 export default Profile;
