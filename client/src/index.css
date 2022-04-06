@@ -137,7 +137,7 @@ ul {
 }
 
 .wrapper{
-  max-height: 400px;
+  min-height: 750px;
   border-bottom: 8px solid #ddd;
   display: flex;
   overflow-x: auto;
@@ -148,7 +148,7 @@ ul {
 }
 
 .wrapper .item {
-  min-width: 180px;
+  min-width: 300px;
   text-align: center;
   background-color: var(--third-color);
   margin: 4vw;
@@ -164,3 +164,21 @@ h4 {
   border-width: medium;
 }
 
+.profile-title-top {
+  margin-left: 2rem;
+  margin-bottom: 0 !important;
+  text-decoration: underline;
+}
+
+.profile-title-bottom {
+  margin-top:20px;
+  margin-left: 2rem;
+  margin-bottom: 200px;
+  text-decoration: underline;
+}
+
+.row-card{
+  min-height: 750px !important;
+  min-width: 300px !important;
+  margin: 8px !important;
+}
