@@ -2,30 +2,29 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import { Card, Row, Col } from "react-bootstrap";
 import { UserContext } from "../contexts";
-import Comments from './Comments'
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [useComment, setUseComment ] =useState('');
   const [update, setUpdate] = useState(false);
   const [ userState, dispatch ] = useContext(UserContext);
 
-  // const [saveItem, setSaveItem]= u
-
   useEffect(() => {
-    async function newProducts() {
-      let response = await fetch("/api/products", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      response = await response.json();
-      console.log(response);
-      setProducts(response);
-    }
     newProducts().catch(console.error);
-  }, [userState, useComment, update]);
+  }, []);
+
+  async function newProducts() {
+    let response = await fetch("/api/products", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+    console.log(response);
+    setProducts(response);
+  }
 
   const _saveProduct = async  (e) => {
 
@@ -71,6 +70,7 @@ const Products = () => {
     }
     const data = await response.json();
     console.log(data);
+    newProducts();
   };
 
   const handleChange= (event) => {
@@ -79,9 +79,9 @@ const Products = () => {
     setUpdate(!update);
 };
 
-  const [currentPhoto, setCurrentPhoto] = useState();
-  const toggleModal = (image) => {
-    setCurrentPhoto(image);
+  const [currentProduct, setCurrentProduct] = useState({});
+  const toggleModal = (product) => {
+    setCurrentProduct(product);
     setIsModalOpen(!isModalOpen);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -89,7 +89,7 @@ const Products = () => {
   return (
     <div>
       {isModalOpen && (
-        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
+        <Modal currentProduct={currentProduct} onClose={toggleModal} />
       )}
       
       <Row xs={1} sm={2} md={3} className="g-4 mt-4">
@@ -97,7 +97,7 @@ const Products = () => {
         {products.map((product, i) => (
           <Col>
             <Card>
-              <Card.Img variant="top" onClick={() => toggleModal(product.photo)}
+              <Card.Img variant="top" onClick={() => toggleModal(product)}
               src={product.photo} />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
@@ -105,13 +105,13 @@ const Products = () => {
                 <Card.Text>City: {product.city}</Card.Text>
                 <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
                 <Card.Text> {product.description}</Card.Text>
-               {product.comments.map((comment, i) => (
+               {/* {product.comments.map((comment, i) => (
                 <>
                     <Card.Text>{comment.commentBody}</Card.Text>
                     {comment.hasOwnProperty("userId") && (
                       <Card.Text>{comment.userId.username}</Card.Text> )}
                   </>
-                ))}
+                ))} */}
                 <div className = "commentForm panel panel-default">
                   <div className="commentBox panel-body">
                     <form className="form" onSubmit={() => _addComment(product._id)}>

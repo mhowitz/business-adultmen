@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 // import Slider from "react-slick";
-import Products from "../Products";
 import { UserContext } from "../../contexts";
 import { Card, Row, Col } from "react-bootstrap";
 import Modal from "../Modal";
@@ -10,21 +9,16 @@ const Profile = () => {
   const [savedProducts, setSavedProducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
+  
+    useEffect(() => {
 
-  useEffect(() => {
-    async function _newProducts() {
-      let response = await fetch(`/api/users/owned/${userState._id}`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      response = await response.json();
-      setOwnedProducts(response.ownedProducts);
-      console.log("ownedProducts", response.ownedProducts);
-    }
-    _newProducts().catch(console.error);
+      if(userState.loggedIn){
+        _newProducts().catch(console.error);
+        _savedProducts().catch(console.error);
+      }
+      console.log("userState", userState);
+
+    }, []);
 
     async function _savedProducts(req, res) {
       let response = await fetch(`/api/users/saves/${userState._id}`, {
@@ -39,11 +33,20 @@ const Profile = () => {
       setSavedProducts(response);
       console.log("savedProducts", response.savedProducts);
     }
-    _savedProducts().catch(console.error);
 
-    console.log("userState", userState);
+    async function _newProducts() {
+      let response = await fetch(`/api/users/owned/${userState._id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      response = await response.json();
+      setOwnedProducts(response.ownedProducts);
+      console.log("ownedProducts", response.ownedProducts);
+    }
 
-  }, [userState, update]);
 
   const [currentPhoto, setCurrentPhoto] = useState();
   const toggleModal = (image) => {
@@ -66,7 +69,7 @@ const Profile = () => {
     });
 
     const data = await response.json();
-    setUpdate(!update);
+    _savedProducts();
     console.log(data);
   };
 
@@ -81,7 +84,7 @@ const Profile = () => {
     });
 
     const data = await response.json();
-    setUpdate(!update);
+    _newProducts();
     console.log(data);
   };
 
@@ -91,6 +94,9 @@ const Profile = () => {
 
   return (
     <>
+      {!userState.loggedIn && (
+        <h1>please log in to view your posts!</h1>
+      )}
       {isModalOpen && (
         <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}
@@ -125,6 +131,8 @@ const Profile = () => {
           )}
 
           {ownedProducts.map((product, i) => (
+            
+            // top bar
             <Col>
               <Card>
                 <Card.Img
