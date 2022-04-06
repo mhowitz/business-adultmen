@@ -39,9 +39,13 @@ const Post = ({ handlePageChange }) => {
     title: "",
     // city: ""
   });
+  let isSubmittable = Boolean(error.title && error.description && error.category && error.price && error.city)
   // verification that user enters correct data.
   const handleChange = (e) => {
     console.log("userState", userState);
+    console.log("title error", error.title);
+    console.log("description error", error.description);
+    console.log("it worked!", isSubmittable)
     if (e.target.name === 'price') {
       // checking for a string doesn't work blaahhhh
       if (e.target.value < 0 || e.target.value === String) {
@@ -187,7 +191,7 @@ const Post = ({ handlePageChange }) => {
               type="text"
               name="city"
               onBlur={handleChange} />
-            {(title && description && category && price && city) && Object.values(error).reduce((total, current) => !total && !current) ? (
+            {(isSubmittable) && Object.values(error).reduce((total, current) => !total && !current) ? (
               isPending ? <button className="btn btn-primary m-2" disabled>Submitting Post...</button>
                 : <button className="btn btn-primary m-2">Submit</button>
             ) : (
