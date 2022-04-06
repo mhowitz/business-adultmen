@@ -62,7 +62,7 @@ const Login = ({handlePageChange}) => {
   }
  
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 height-100">
+    <section className="diagonal-bar d-flex justify-content-around align-items-center p-5 height-100">
       <form className=" card-border card p-5" id="logInForm" onSubmit ={handleSubmit}>
         <h1 className= "text-center pb-4" data-testid='h1tag'>Log in</h1>
         
