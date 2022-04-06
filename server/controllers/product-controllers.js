@@ -35,8 +35,9 @@ const productController = {
 			console.log("hello", productData)
 			const userData = await User.findByIdAndUpdate(
 				{_id: req.body.ownedBy},
-				 {$addToSet: {ownedProducts: productData}});
-				 console.log("hello2", userData);
+					{$addToSet: {ownedProducts: productData}});
+			console.log("hello2", userData);
+			res.json(productData);
 		} catch (error) {
 			res.status(500).json(error)
 		}
