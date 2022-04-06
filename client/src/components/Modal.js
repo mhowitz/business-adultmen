@@ -8,7 +8,7 @@ function Modal({ onClose, currentPhoto }) {
         {/* <h3 className="modalTitle">{name}</h3> */}
         <img src={currentPhoto} alt="current category" />
         <button className="modalButton" type="button" onClick={onClose}>
-          Close this modal
+          Close
         </button>
       </div>
     </div>

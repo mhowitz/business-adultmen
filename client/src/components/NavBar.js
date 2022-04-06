@@ -5,7 +5,7 @@ import Auth from "../utils/auth";
 const Navbar = ({ currentPage, handlePageChange }) => {
   return (
     // <div className= "d-flex justify-content-between">
-    <ul className="nav nav-tabs height-20 d-flex justify-content-between">
+    <ul className="nav nav-tabs height-20 d-flex m-auto">
       <li className="nav-item text-white">
         <a
           href="#home"
@@ -19,8 +19,11 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           </span>
         </a>
       </li>
+
+      
       {/* {!Auth.loggedIn ? (
         <> */}
+
           <li className="nav-item">
             <a
               href="#login"
@@ -42,7 +45,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
                 currentPage === "SignUp" ? "nav-link active" : "nav-link"
               }
             >
-              Sign Up
+              sign up
             </a>
           </li>
         {/* </>
@@ -68,8 +71,17 @@ const Navbar = ({ currentPage, handlePageChange }) => {
         </a>
       </li>
     </ul>
-    // </div>
   );
 };
+
+{/* <Navbar>
+ <Navbar.Brand href="/">MyBrand</Navbar.Brand>
+<Navbar.Toggle />
+<Navbar.Collapse>
+//         <Nav className="justify-content-end" style={{ width: "100%" }}>
+//             ...
+//         </Nav>
+//     </Navbar.Collapse>
+// </Navbar>  */}
 
 export default Navbar;
