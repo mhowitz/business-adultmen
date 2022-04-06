@@ -164,9 +164,16 @@ h4 {
   border-width: medium;
 }
 
-.profile-title {
+.profile-title-top {
   margin-left: 2rem;
   margin-bottom: 0 !important;
+  text-decoration: underline;
+}
+
+.profile-title-bottom {
+  margin-top:20px;
+  margin-left: 2rem;
+  margin-bottom: 200px;
   text-decoration: underline;
 }
 
