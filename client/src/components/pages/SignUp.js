@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode"
 
 import { validateEmail } from '../../utils/helpers';
 
-const SignUp = () => {
+const SignUp = ({handlePageChange}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +40,8 @@ const SignUp = () => {
         _id: decoded.data._id
       })
       console.log("userstate", userState)
-      console.log('new user posted')
+      console.log('new user posted');
+      handlePageChange('Home');
     });
   };
 

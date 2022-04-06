@@ -20,7 +20,7 @@ const Container = () => {
       return <Profile />;
     }
     else if(currentPage === 'SignUp') {
-      return <SignUp />;
+      return <SignUp handlePageChange={handlePageChange}/>;
     }
     else if(currentPage === 'Home') {
       return <Home />;
