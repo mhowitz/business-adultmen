@@ -10,20 +10,21 @@ const Products = () => {
   const [ userState, dispatch ] = useContext(UserContext);
 
   useEffect(() => {
-    async function newProducts() {
-      let response = await fetch("/api/products", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      response = await response.json();
-      console.log(response);
-      setProducts(response);
-    }
     newProducts().catch(console.error);
-  }, [userState, useComment, update]);
+  }, []);
+
+  async function newProducts() {
+    let response = await fetch("/api/products", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+    console.log(response);
+    setProducts(response);
+  }
 
   const _saveProduct = async  (e) => {
 
@@ -69,6 +70,7 @@ const Products = () => {
     }
     const data = await response.json();
     console.log(data);
+    newProducts();
   };
 
   const handleChange= (event) => {
