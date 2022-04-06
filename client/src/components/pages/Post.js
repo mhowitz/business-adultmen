@@ -18,7 +18,7 @@ const getImageDetails = async function(url) {
   }
 }
 
-const Post = () => {
+const Post = ({handlePageChange}) => {
 
   const [ userState, dispatch ] = useContext(UserContext);
   
@@ -82,6 +82,8 @@ const Post = () => {
       }).then(() => {
         console.log('new item posted')
         setIsPending(false);
+        handlePageChange('Profile');
+        console.log('we made it past page change fxn')
       })
         .catch(() => {
           setIsPending(false);

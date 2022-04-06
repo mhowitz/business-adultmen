@@ -47,18 +47,12 @@ const Login = ({handlePageChange}) => {
         username: decoded.data.username,
         _id: decoded.data._id
       })
-      console.log("userstate", userState)
-      // Auth.login(data.username)
-
+      console.log("userState", userState)
+      handlePageChange('Home');
     } else {
       alert('please check your username and password ')
     }
   };
-
-
-    
-
-
 
   const handleChange = (e) => {
     if (e.target.name === 'email') {
