@@ -101,10 +101,37 @@ const Profile = () => {
       {isModalOpen && (
         <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}
+
       <section className=" vh-100">
+      <h2 className="profile-title mt-3">My Posted Items</h2>
+
         {/* top bar */}
-        {/* <div className ="wrapper mt-4">
-  
+        <div className ="wrapper mt-4">
+         {ownedProducts.map((product, i) => (
+          <div className="">
+            <Card className="card-border row-card">
+              <Card.Img
+                variant="top"
+                onClick={() => toggleModal(product.photo)}
+                src={product.photo}
+              />
+              <Card.Body>
+                <Card.Title>{product.title}</Card.Title>
+                <Card.Text>Category: {product.category}</Card.Text>
+                <Card.Text>City: {product.city}</Card.Text>
+                <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
+                {/* <Card.Text> {product.description}</Card.Text> */}
+                <button
+                  key={product._id}
+                  className="btn m-2"
+                  onClick={() => _deleteProduct(product._id)}
+                >
+                  Sold
+                </button>
+              </Card.Body>
+            </Card>
+          </div>  
+         ))}
           <div className="item">
             <h1>Title</h1>
             <div>image</div>
@@ -118,9 +145,10 @@ const Profile = () => {
           <div className="item">box 4</div>
           <div className="item">box 5</div>
           <div className="item">box 6</div>
-        </div> */}
+        </div>
 
-        <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+
+        <Row xs={1} sm={2} md={3} className="g-4">
           {!ownedProducts.length && (
             <Col>
               <Card>
@@ -132,7 +160,7 @@ const Profile = () => {
           )}
 
           {ownedProducts.map((product, i) => (
-            
+  
             // top bar
             <Col>
               <Card>
@@ -162,7 +190,8 @@ const Profile = () => {
 
         {/* bottom bar */}
 
-        <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+        <h2 className="profile-title">My Saved Items</h2>
+        <Row xs={1} sm={2} md={3} className="g-4">
 
         {!savedProducts.length && (
             <Col>
