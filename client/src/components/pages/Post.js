@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/"
 
 
 const getImageDetails = async function(url) {
+  
 
   var apiUrl = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_API_URL}&image=${url}`;
   try {
@@ -91,7 +92,15 @@ const Post = ({handlePageChange}) => {
   }
 
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 height-150">
+    <>
+      {!userState.loggedIn && (
+        <div className="d-flex justify-content-center align-items-center" style={{height:"75vh"}}>
+          <h1 className="text-danger">please log in to view your posts!</h1>
+        </div>
+        )}
+      {userState.loggedIn && (
+      <section className="d-flex justify-content-around align-items-center p-5 height-150">
+      
       <form className="card p-5" id ="contact-form red"
         onSubmit = {handleSubmit}>
 
@@ -153,7 +162,9 @@ const Post = ({handlePageChange}) => {
         { isPending && <button className="btn btn-primary m-2" disabled>Submitting Post...</button>}
 
       </form>
-    </section>  
+      </section>  
+      )}
+    </>
     )
 }
 

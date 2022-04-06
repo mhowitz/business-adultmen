@@ -26,7 +26,7 @@ const Container = () => {
       return <Home />;
     }
     else if(currentPage === 'Post') {
-      return <Post />;
+      return <Post handlePageChange={handlePageChange}/>;
     }
   }
 
