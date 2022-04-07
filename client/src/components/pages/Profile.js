@@ -104,6 +104,17 @@ const Profile = () => {
 
       <section className=" vh-100">
         <h2 className="profile-title-top mt-3">My Posted Items</h2>
+        <Row xs={1} sm={2} md={3} className="g-4">
+          {!savedProducts.length && (
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title>No products posted!</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          )}
+        </Row>
 
         {/* top bar */}
         {(userState.loggedIn && ownedProducts.length > 0) ? (
