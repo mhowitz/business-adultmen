@@ -9,6 +9,10 @@ const Profile = () => {
   const [savedProducts, setSavedProducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({});
+
 
   useEffect(() => {
     if (userState.loggedIn) {
@@ -42,11 +46,7 @@ const Profile = () => {
   }
 
   const [currentPhoto, setCurrentPhoto] = useState();
-  const toggleModal = (image) => {
-    setCurrentPhoto(image);
-    setIsModalOpen(!isModalOpen);
-  };
-  const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
   const _unSaveProduct = async (clickedProduct) => {
     const response = await fetch(`/api/products/unSave/${userState._id}`, {
@@ -78,6 +78,12 @@ const Profile = () => {
   };
 
   // pull up a modal when user clicks photo
+
+  const toggleModal = (product) => {
+    setCurrentProduct(product);
+    setIsModalOpen(!isModalOpen);
+  };
+
 
   // change page to post page when title clicked
 
