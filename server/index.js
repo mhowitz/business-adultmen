@@ -1,11 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const jsonwebtoken = require('jsonwebtoken');
-const { authMiddleware } = require('./utils/auth');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -17,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
 
-mongoose.connect('mongodb://localhost:27017/business-adultmen', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/business-adultmen', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
