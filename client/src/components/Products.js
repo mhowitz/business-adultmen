@@ -44,7 +44,8 @@ const Products = () => {
     const data = await response.json();
   };
 
-  const _addComment = async (productId) => {
+  const _addComment = async (e, productId) => {
+    e.preventDefault();
     const response = await fetch(`/api/comments/${productId}`, {
       method: "POST",
       headers: {
@@ -60,6 +61,9 @@ const Products = () => {
       alert("not logged in");
     }
     const data = await response.json();
+    const commentFormInput = document.getElementById('commentFormInput');
+    commentFormInput.reset();
+
     newProducts();
   };
 
@@ -81,16 +85,15 @@ const Products = () => {
       {isModalOpen && (
         <Modal currentProduct={currentProduct} onClose={toggleModal} />
       )}
-
-      <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+      
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4 mt-4">
+        
         {products.map((product, i) => (
           <Col>
             <Card className="card-border shadow">
-              <Card.Img
-                variant="top"
-                onClick={() => toggleModal(product)}
-                src={product.photo}
-              />
+              <Card.Img variant="top img-hover" 
+              onClick={() => toggleModal(product)}
+              src={product.photo} />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>Category: {product.category}</Card.Text>
@@ -102,19 +105,27 @@ const Products = () => {
                     <div className="commentForm panel panel-default">
                       <div className="commentBox panel-body">
                         <form
-                          className="form"
-                          onSubmit={() => _addComment(product._id)}
+                          className="form-inline"
+                          id="commentFormInput"
+                          onSubmit={(e) => _addComment(e, product._id)}
                         >
-                          <input
-                            className="form-control"
-                            type="text"
-                            onBlur={(e) => handleChange(e)}
-                            placeholder="Say something here..."
-                          ></input>
-                          <button className="btn m-2" type="submit">
-                            {" "}
-                            Add comment{" "}
-                          </button>
+                          <div className="form-row d-flex flex-wrap-wrap">
+                            <div className="col-9">
+                              <input
+                                className="form-control "
+                                type="text"
+                                onBlur={(e) => handleChange(e)}
+                                placeholder="Say something here..."
+                              ></input>
+                            </div>
+                            <div className="col-3">
+                              <button className="btn mx-2" type="submit">
+                               Post
+                              </button>
+                            </div>
+
+                          </div>
+
                         </form>
                       </div>
                     </div>

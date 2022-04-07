@@ -47,6 +47,7 @@ const Login = ({handlePageChange}) => {
       })
       handlePageChange('Home');
     } else {
+      setErrorMessage('log in failed')
     }
   };
 
@@ -62,7 +63,7 @@ const Login = ({handlePageChange}) => {
   }
  
   return (
-    <section className="diagonal-bar d-flex justify-content-around align-items-center p-5 height-100">
+    <section className="diagonal-bar d-flex justify-content-around align-items-center p-5 vh-100">
       <form className=" card-border card p-5 d-flex" id="logInForm" onSubmit ={handleSubmit}>
         <h1 className= "text-center pb-4" data-testid='h1tag'>Log in</h1>
         
@@ -88,6 +89,7 @@ const Login = ({handlePageChange}) => {
         
         <button className="btn m-2" onClick={()=> handlePageChange("SignUp")}>
           Sign up here</button>
+        <p>{errorMessage}</p>
 
      
       </form>
