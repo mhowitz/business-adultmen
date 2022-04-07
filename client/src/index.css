@@ -140,12 +140,12 @@ ul {
 .wrapper{
   max-height: 750px;
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
-.wrapper::-webkit-scrollbar{
-  width: 0;
-}
+/* .wrapper::-webkit-scrollbar{
+  width: 10px;
+} */
 
 .wrapper .item {
   min-width: 180px;
