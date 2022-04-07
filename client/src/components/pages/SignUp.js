@@ -70,8 +70,8 @@ const SignUp = ({handlePageChange}) => {
   }
 
   return (
-    <section className="diagonal-bar d-flex justify-content-around align-items-center p-5 height-100 mt-4">
-      <form className="card p-5 mt-3 card-border"
+    <section className="diagonal-bar d-flex justify-content-around align-items-center p-5 height-100">
+      <form className="card p-5 mt-3 card-border signUpForm"
         onSubmit={handleSubmit}>
         <h1 className= "text-center pb-4" data-testid='h1tag'>Sign Up</h1>
         

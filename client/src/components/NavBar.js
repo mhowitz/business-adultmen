@@ -5,7 +5,7 @@ import Auth from "../utils/auth";
 const Navbar = ({ currentPage, handlePageChange }) => {
   return (
     <>
-      <div className=" nav nav-tabs d-inline-flex justify-content-between w-100">
+      <div className=" nav nav-tabs d-inline-flex justify-content-between w-100 align-items-center">
         <a
           href="#home"
           onClick={() => handlePageChange("Home")}
@@ -14,7 +14,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           className={currentPage === "Home" ? "nav-link active" : "nav-link"}
         >
           <span>
-            <img src={logo} alt="flying money" width="100" height="100" />
+            <img src={logo} alt="flying money" width="60" height="60" />
           </span>
         </a>
 
