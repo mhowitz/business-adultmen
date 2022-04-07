@@ -9,6 +9,10 @@ const Profile = () => {
   const [savedProducts, setSavedProducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({});
+
 
   useEffect(() => {
     if (userState.loggedIn) {
@@ -42,11 +46,7 @@ const Profile = () => {
   }
 
   const [currentPhoto, setCurrentPhoto] = useState();
-  const toggleModal = (image) => {
-    setCurrentPhoto(image);
-    setIsModalOpen(!isModalOpen);
-  };
-  const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
   const _unSaveProduct = async (clickedProduct) => {
     const response = await fetch(`/api/products/unSave/${userState._id}`, {
@@ -79,10 +79,21 @@ const Profile = () => {
 
   // pull up a modal when user clicks photo
 
+  const toggleModal = (product) => {
+    setCurrentProduct(product);
+    setIsModalOpen(!isModalOpen);
+  };
+
+
   // change page to post page when title clicked
 
   return (
     <>
+      {isModalOpen && (
+        <Modal currentProduct={currentProduct}
+        onClose={toggleModal} />
+      )}
+
       {!userState.loggedIn && (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -92,12 +103,19 @@ const Profile = () => {
         </div>
       )}
 
-      {isModalOpen && (
-        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
-      )}
-
       <section className=" vh-100">
         <h2 className="profile-title-top mt-3">My Posted Items</h2>
+        <Row xs={1} sm={2} md={3} className="g-4">
+          {!savedProducts.length && (
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title>No products posted!</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          )}
+        </Row>
 
         {/* top bar */}
         {(userState.loggedIn && ownedProducts.length > 0) ? (
@@ -107,7 +125,7 @@ const Profile = () => {
                 <Card className="card-border row-card">
                   <Card.Img
                     variant="top"
-                    onClick={() => toggleModal(product.photo)}
+                    onClick={() => toggleModal(product)}
                     src={product.photo}
                   />
                   <Card.Body>
@@ -161,7 +179,7 @@ const Profile = () => {
                 <Card className="card-border row-card">
                   <Card.Img
                     variant="top"
-                    onClick={() => toggleModal(product.photo)}
+                    onClick={() => toggleModal(product)}
                     src={product.photo}
                   />
                   <Card.Body>

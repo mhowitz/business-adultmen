@@ -138,8 +138,7 @@ ul {
 }
 
 .wrapper{
-  max-height: 400px;
-  border-bottom: 8px solid #ddd;
+  max-height: 750px;
   display: flex;
   overflow-x: auto;
 }
@@ -170,6 +169,32 @@ h4 {
   border-color:#90a778 !important;
 }
 
+.row-card {
+  padding: 10px;
+  margin: 5px;
+  height: 650px;
+  width: 250px;
+}
+
+.profile-title-top {
+  margin-top: 20px;
+  margin-bottom: 0px !important;
+  padding-left: 4%;
+  text-decoration: underline;
+}
+
+.profile-title-bottom {
+  text-decoration: underline;
+  padding-left: 4%;
+  margin-top:10px;
+  margin-bottom: 25px !important;
+}
+
+.img-hover:hover {
+  opacity: 0.5 !important;
+}
+
+
  @media screen and (max-width:575px){
   
   .nav-tabs {
@@ -189,6 +214,11 @@ h4 {
   .signUpForm {
     padding: 10px !important;
     margin-top: 10px;
+  }
+
+  .wrapper{
+    display: block;
+    align-items: center;
   }
 }
 

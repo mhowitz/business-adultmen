@@ -47,6 +47,7 @@ const Login = ({handlePageChange}) => {
       })
       handlePageChange('Home');
     } else {
+      setErrorMessage('log in failed')
     }
   };
 
@@ -88,6 +89,7 @@ const Login = ({handlePageChange}) => {
         
         <button className="btn m-2" onClick={()=> handlePageChange("SignUp")}>
           Sign up here</button>
+        <p>{errorMessage}</p>
 
      
       </form>
