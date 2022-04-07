@@ -88,9 +88,17 @@ footer {
   background-color: var(--third-color) !important;
   border-bottom: 0px !important;
 }
-
+.nav-tabs:hover{
+  border: var(--third-color);
+}
 .nav-tabs:active {
   background-color: var(--third-color);
+  border: var(--primary-color);
+  border-radius: 0rem !important;
+}
+.nav-tabs .nav-link {
+  /* border: var(--primary-color); */
+  border-radius: 0rem !important;
 }
 
 a {
