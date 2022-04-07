@@ -111,7 +111,7 @@ const Post = ({ handlePageChange }) => {
         </div>
       )}
       {userState.loggedIn && (
-        <section className="d-flex justify-content-around align-items-center p-5 height-150 diagonal-bar">
+        <section className="d-flex justify-content-around align-items-center p-5 height-100 diagonal-bar">
 
           <form className="card-border card p-5 " id="contact-form red"
 
