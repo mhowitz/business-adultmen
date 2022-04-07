@@ -6,14 +6,15 @@ import { faXmark} from '@fortawesome/free-solid-svg-icons'
 function Modal({ onClose, currentProduct }) {
 
   return (
-    <div className="modalBackdrop" >
-    <div className="d-flex flex-row-reverse m-3">
+  
+
+       
+    <div className="modalBackdrop diagonal-bar">
+      <div className="modalContainer d-flex flex-column align-items-center justify-content-center">
+      <div className="d-flex flex-row-reverse m-3">
     <FontAwesomeIcon icon={faXmark} className="fa-2x" onClick={onClose}/>
     </div>
-
-      <div className="modalContainer d-flex flex-column align-items-center justify-content-center">
-
-        <Card className="overflow-auto p-3 card-border">
+        <Card className="overflow-auto card-border pt-4 ">
         <Card.Text className="h2 d-flex justify-content-center">{currentProduct.title}</Card.Text>
           <Card.Img variant="top"
             src={currentProduct.photo}></Card.Img>

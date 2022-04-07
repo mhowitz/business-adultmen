@@ -88,9 +88,17 @@ footer {
   background-color: var(--third-color) !important;
   border-bottom: 0px !important;
 }
-
+.nav-tabs:hover{
+  border: var(--third-color);
+}
 .nav-tabs:active {
   background-color: var(--third-color);
+  border: var(--primary-color);
+  border-radius: 0rem !important;
+}
+.nav-tabs .nav-link {
+  /* border: var(--primary-color); */
+  border-radius: 0rem !important;
 }
 
 a {
@@ -117,7 +125,7 @@ ul {
 }
 
 .modalBackdrop {
-	background: var(--third-color);
+	/* background: var(--third-color); */
 	bottom: 0;
 	left: 0;
 	/* overflow: auto; */
@@ -135,17 +143,18 @@ ul {
 	margin: 50px auto;
 	padding: 15px;
 	width: 960px;
+  padding-bottom: 5rem;
 }
 
 .wrapper{
   max-height: 750px;
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
-.wrapper::-webkit-scrollbar{
-  width: 0;
-}
+/* .wrapper::-webkit-scrollbar{
+  width: 10px;
+} */
 
 .wrapper .item {
   min-width: 180px;

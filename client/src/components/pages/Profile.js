@@ -127,7 +127,7 @@ const Profile = () => {
             {ownedProducts.map((product, i) => (
               <div className="">
                 <Card className="card-border row-card">
-                  <Card.Img
+                  <Card.Img className="img-hover"
                     variant="top"
                     onClick={() => toggleModal(product)}
                     src={product.photo}
@@ -181,7 +181,7 @@ const Profile = () => {
             {savedProducts.map((product, i) => (
               <div className="">
                 <Card className="card-border row-card">
-                  <Card.Img
+                  <Card.Img className="img-hover"
                     variant="top"
                     onClick={() => toggleModal(product)}
                     src={product.photo}

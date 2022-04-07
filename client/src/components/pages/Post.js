@@ -113,9 +113,9 @@ const Post = ({ handlePageChange }) => {
         </div>
       )}
       {userState.loggedIn && (
-        <section className="d-flex justify-content-around align-items-center p-5 height-150">
+        <section className="d-flex justify-content-around align-items-center p-5 height-150 diagonal-bar">
 
-          <form className="card-border card p-5" id="contact-form red"
+          <form className="card-border card p-5 " id="contact-form red"
 
             onSubmit={handleSubmit}>
 
@@ -158,9 +158,10 @@ const Post = ({ handlePageChange }) => {
             />
             {error.description ? (<p style={{ color: "red" }}>{error.description}</p>) : null}
 
-            <label className="p-2" htmlFor="imageUrl">Img URL from imagery </label>
+            <label className="p-2" htmlFor="imageUrl">Img URL from Imgbb.com</label>
             <input className="m-2"
               value={image}
+              placeholder="Upload images to imgbb.com"
               onChange={(e) => setImage(e.target.value)}
               type="text"
               name="image"
@@ -174,8 +175,17 @@ const Post = ({ handlePageChange }) => {
               name="category">
 
               <option value="" disabled selected> Choose a category... </option>
-              <option value="books">books</option>
-              <option value="junk">junk</option>
+              <option value="Books">Books</option>
+              <option value="Junk">Junk</option>
+              <option value="Sports">Sports</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Appliances">Appliances</option>
+              <option value="Decoration">Decoration</option>
+              <option value="Technology">Technology</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Auto">Auto</option>
+              <option value="Animals">Animals</option>
+              <option value="Misc">Misc</option>
             </select>
 
             <label className="p-2" htmlFor="Category">Title</label>
