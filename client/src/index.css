@@ -68,6 +68,7 @@ div:last-child {
 
 .btn {
   background-color: var(--third-color);
+  color: var(--primary-color);
 }
 
 h2 {
@@ -164,3 +165,33 @@ h4 {
   border-width: medium;
 }
 
+.nav-link.active {
+  background-color: var(--primary-color) !important;
+  border-color:#90a778 !important;
+}
+
+ @media screen and (max-width:575px){
+  
+  .nav-tabs {
+    font-size: 16px;
+    display:inline-block !important;
+  }
+  .nav-item {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+  }
+
+  #logInForm {
+    padding: 10px !important;
+    margin-top: 10px;
+  }
+
+  .signUpForm {
+    padding: 10px !important;
+    margin-top: 10px;
+  }
+}
+
+ol, ul, dl {
+  margin-top: none;
+}

@@ -39,18 +39,14 @@ const Login = ({handlePageChange}) => {
     const data = await response.json();
 
     if(data.user) {
-      alert('login successful')
       const decoded = jwt_decode(data.user);
-      console.log(decoded);
       dispatch({
         type: "login",
         username: decoded.data.username,
         _id: decoded.data._id
       })
-      console.log("userState", userState)
       handlePageChange('Home');
     } else {
-      alert('please check your username and password ')
     }
   };
 
@@ -66,8 +62,8 @@ const Login = ({handlePageChange}) => {
   }
  
   return (
-    <section className="d-flex justify-content-around align-items-center p-5 height-100">
-      <form className=" card-border card p-5" id="logInForm" onSubmit ={handleSubmit}>
+    <section className="diagonal-bar d-flex justify-content-around align-items-center p-5 height-100">
+      <form className=" card-border card p-5 d-flex" id="logInForm" onSubmit ={handleSubmit}>
         <h1 className= "text-center pb-4" data-testid='h1tag'>Log in</h1>
         
         <label className="p-2" htmlFor="email">Email address :</label>

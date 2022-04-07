@@ -3,7 +3,6 @@ import { Card, Row, Col } from "react-bootstrap";
 
 const Comments = (comments) => {
     // const comments = product.comments || [];
-    console.log(comments);
     return (
         <Card.Text>
             {comments.map((comment) => (
