@@ -107,7 +107,7 @@ const Post = ({ handlePageChange }) => {
     <>
       {!userState.loggedIn && (
         <div className="d-flex justify-content-center align-items-center" style={{ height: "75vh" }}>
-          <h1 className="text-danger">please log in to view your posts!</h1>
+          <h1 className="text-danger">Please sign-up and login to post a product.</h1>
         </div>
       )}
       {userState.loggedIn && (

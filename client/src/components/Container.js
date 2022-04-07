@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from "../contexts"
 
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -11,12 +12,21 @@ import Post from '../components/pages/Post';
 
 const Container = () => {
   const [currentPage, setCurrentPage] = useState('Login');
+  const [userState, dispatch] = useContext(UserContext);
+
+  const redirectLoggedOut = () => {
+    return <SignUp handlePageChange={handlePageChange}/>;
+  }
+
 
   const renderPage = () => {
     if(currentPage === 'Login') {
       return <Login handlePageChange={handlePageChange}/>;
     }
     else if(currentPage === 'Profile') {
+      if(!userState.loggedIn) {
+        return <SignUp handlePageChange={handlePageChange}/>;
+      }
       return <Profile />;
     }
     else if(currentPage === 'SignUp') {
@@ -26,6 +36,9 @@ const Container = () => {
       return <Home />;
     }
     else if(currentPage === 'Post') {
+      if(!userState.loggedIn) {
+        return <SignUp handlePageChange={handlePageChange}/>;
+      }
       return <Post handlePageChange={handlePageChange}/>;
     }
   }
