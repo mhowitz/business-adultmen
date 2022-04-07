@@ -174,6 +174,8 @@ const Profile = () => {
 
         {userState.loggedIn && (
           <div className="wrapper mt-4">
+            <button>scroll left</button>
+
             {savedProducts.map((product, i) => (
               <div className="">
                 <Card className="card-border row-card">
@@ -199,6 +201,7 @@ const Profile = () => {
                 </Card>
               </div>
             ))}
+            <button>scroll right</button>
           </div>
         )}
       </section>
