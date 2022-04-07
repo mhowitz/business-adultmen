@@ -211,6 +211,11 @@ h4 {
     padding: 10px !important;
     margin-top: 10px;
   }
+
+  .wrapper{
+    display: block;
+    align-items: center;
+  }
 }
 
 ol, ul, dl {
