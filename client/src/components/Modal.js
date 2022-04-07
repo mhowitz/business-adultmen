@@ -5,10 +5,10 @@ import Products from './Products';
 function Modal({ onClose, currentProduct }) {
 
   return (
-    <div className="modalBackdrop">
-      <div className="card-border pt-4 modalContainer d-flex flex-column align-items-center justify-content-center">
+    <div className="modalBackdrop diagonal-bar">
+      <div className="modalContainer d-flex flex-column align-items-center justify-content-center">
 
-        <Card className="overflow-auto">
+        <Card className="overflow-auto card-border pt-4 ">
         <Card.Text className="h3">{currentProduct.title}</Card.Text>
           <Card.Img variant="top"
             src={currentProduct.photo}></Card.Img>
