@@ -25,6 +25,7 @@ const Post = ({ handlePageChange }) => {
   const [title, setTitle] = useState();
   const [city, setCity] = useState();
   const [price, setPrice] = useState();
+  const [contactEmail, setContactEmail]= useState();
   const [description, setDescription] = useState();
   const [image, setImage] = useState();
   const [category, setCategory] = useState("books");
@@ -77,6 +78,7 @@ const Post = ({ handlePageChange }) => {
       category: category,
       price: price,
       city: city,
+      email: contactEmail,
       // hard coded till we have login tokens working
       ownedBy: userState._id
     };
@@ -213,20 +215,22 @@ const Post = ({ handlePageChange }) => {
             // onBlur={handleChange}
             />
             {error.city ? (<p style={{ color: "red" }}>{error.city}</p>) : null}
+              <label className ="p-2" htrmlFor="Email">Contact Email</label>
 
-            {/* {(isSubmittable) && Object.values(error).reduce((total, current) => !total && !current) ? (
-              isPending ? <button className="btn btn-primary m-2" disabled>Submitting Post...</button>
-                : <button className="btn btn-primary m-2">Submit</button>
-            ) : (
-              <button className="btn btn-primary m-2" disabled>Submit</button>
-            )} */}
+              <input className="m-2"
+              value={contactEmail}
+              onBlur={(e) => {
+                setContactEmail(e.target.value)
+              }}
+              type="email"
+              name="email"
+              placeholder='So people can contact you!'>
+
+              </input>
             {!isPending && checkError() && <button className="btn m-2" >Submit</button>}
             {isPending && checkError() && <button className="btn m-2" disabled>Submitting Post...</button>}
             {!checkError() && <button className="btn m-2" disabled>Submit</button>}
-            {/* {checkError() ? (
-              <p>{error.description}</p>
-            ) : null
-            } */}
+
           </form>
         </section>
       )}

@@ -31,14 +31,14 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           className={currentPage === "Home" ? "nav-link active" : "nav-link"}
         >
           <span>
-            <img src={logo} alt="flying money" width="60" height="60" />
+            <img src={logo} alt="flying money" width="100" height="100" />
           </span>
         </a>
 
-        <ul className="height-20 d-flex justify-content-end align-items-center">
-          <li className="nav-item text-white"></li>
+        <ul className="height-20 d-flex  justify-content-end align-items-center">
+          <li className="nav-item text-white "></li>
 
-          <li className="nav-item">
+          <li className="nav-item h5 mb-0">
           {!userState.loggedIn && (
             <a
               href="#login"
@@ -53,7 +53,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
             )}
 
           </li>
-          <li className="nav-item">
+          <li className="nav-item h5 mb-0">
           {!userState.loggedIn ? (
             <a
               href="#signup"
@@ -70,11 +70,11 @@ const Navbar = ({ currentPage, handlePageChange }) => {
               href="#logOut"
               onClick={() => logOutHandler()}
               // Check to see if the currentPage is `logOut`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
-              className={
+              className={ 
                 currentPage === "logOut" ? "nav-link active" : "nav-link"
               }
             >
-           Logout
+           logout
             </a>
 
           )}
@@ -85,7 +85,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
       ) : null} */}
           {userState.loggedIn && (
             <>
-              <li className="nav-item">
+              <li className="nav-item h5 mb-0">
                 <a
                   href="#Profile"
                   onClick={() => handlePageChange("Profile")}
@@ -97,7 +97,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
                   my stuff
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item h5 mb-0">
                 <a
                   href="#Post"
                   onClick={() => handlePageChange("Post")}
@@ -117,16 +117,6 @@ const Navbar = ({ currentPage, handlePageChange }) => {
   );
 };
 
-{
-  /* <Navbar>
- <Navbar.Brand href="/">MyBrand</Navbar.Brand>
-<Navbar.Toggle />
-<Navbar.Collapse>
-//         <Nav className="justify-content-end" style={{ width: "100%" }}>
-//             ...
-//         </Nav>
-//     </Navbar.Collapse>
-// </Navbar>  */
-}
+
 
 export default Navbar;

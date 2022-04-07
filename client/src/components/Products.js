@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import { Card, Row, Col } from "react-bootstrap";
 import { UserContext } from "../contexts";
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faHeart, faEnvelope, faComment } from '@fortawesome/free-solid-svg-icons'
+// import  Mailto  from "react-mailto";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [useComment, setUseComment] = useState("");
@@ -72,13 +74,13 @@ const Products = () => {
     setUseComment(event.target.value);
     setUpdate(!update);
   };
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
   const toggleModal = (product) => {
     setCurrentProduct(product);
     setIsModalOpen(!isModalOpen);
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   return (
     <div>
@@ -90,16 +92,17 @@ const Products = () => {
         
         {products.map((product, i) => (
           <Col>
-            <Card className="card-border shadow">
-              <Card.Img variant="top img-hover" 
+            <Card className=" shadow ">
+              <Card.Img className="card-img-top" variant="top img-hover" 
               onClick={() => toggleModal(product)}
               src={product.photo} />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
-                <Card.Text>Category: {product.category}</Card.Text>
-                <Card.Text>City: {product.city}</Card.Text>
                 <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
-                <Card.Text>Description: {product.description}</Card.Text>
+                {/* <Card.Text>Category: {product.category}</Card.Text> */}
+                <Card.Text>{product.city} on {product.createdAt}</Card.Text>
+                
+                {/* <Card.Text>Description: {product.description}</Card.Text> */}
                 {userState.loggedIn && (
                   <>
                     <div className="commentForm panel panel-default">
@@ -110,7 +113,7 @@ const Products = () => {
                           onSubmit={(e) => _addComment(e, product._id)}
                         >
                           <div className="form-row d-flex flex-wrap-wrap">
-                            <div className="col-9">
+                            <div className="col-10">
                               <input
                                 className="form-control "
                                 type="text"
@@ -118,9 +121,9 @@ const Products = () => {
                                 placeholder="Say something here..."
                               ></input>
                             </div>
-                            <div className="col-3">
+                            <div className="col-2">
                               <button className="btn mx-2" type="submit">
-                               Post
+                               <FontAwesomeIcon icon={faComment}/>
                               </button>
                             </div>
 
@@ -134,9 +137,19 @@ const Products = () => {
                       className="btn m-2"
                       onClick={() => _saveProduct(product._id)}
                     >
-                      Save for later
+                      <FontAwesomeIcon icon={faHeart}/>
                     </button>
-                    <button className="btn m-2">Contact</button>
+                    
+                     
+                     <a href={`mailto:${product.email}`}>
+                     <button className="btn m-2" key={product._id}>
+                     <FontAwesomeIcon icon={faEnvelope}/>
+                     </button> 
+                     </a>
+                      
+                 
+          
+                    
                   </>
                 )}
               </Card.Body>

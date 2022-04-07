@@ -108,7 +108,7 @@ const Profile = () => {
         <h2 className="d-flex justify-content-center">{userState.username}'s profile</h2>
       )}
 
-        <h2 className="profile-title-top mt-3">My Posted Items</h2>
+        <h2 className="profile-title-top pb-3 mt-3">Selling</h2>
         <Row xs={1} sm={2} md={3} className="g-4">
           {!savedProducts.length && (
             <Col>
@@ -134,13 +134,13 @@ const Profile = () => {
                   />
                   <Card.Body>
                     <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>Category: {product.category}</Card.Text>
-                    <Card.Text>City: {product.city}</Card.Text>
+                    <Card.Text>{product.category}</Card.Text>
+                    <Card.Text>{product.city}</Card.Text>
                     <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
                     {/* <Card.Text> {product.description}</Card.Text> */}
                     <button
                       key={product._id}
-                      className="btn m-2"
+                      className="btn m-2 "
                       onClick={() => _deleteProduct(product._id)}
                     >
                       Sold
