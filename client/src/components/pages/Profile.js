@@ -103,7 +103,11 @@ const Profile = () => {
         </div>
       )}
 
-      <section className=" vh-100">
+      <section className="">
+      {userState.loggedIn &&(
+        <h2 className="d-flex justify-content-center">{userState.username}'s profile</h2>
+      )}
+
         <h2 className="profile-title-top mt-3">My Posted Items</h2>
         <Row xs={1} sm={2} md={3} className="g-4">
           {!savedProducts.length && (

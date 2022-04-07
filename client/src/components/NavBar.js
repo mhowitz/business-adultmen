@@ -5,6 +5,20 @@ import Auth from "../utils/auth";
 
 const Navbar = ({ currentPage, handlePageChange }) => {
   const [userState, dispatch] = useContext(UserContext);
+  
+  const logOutHandler = () =>{
+    if(userState.loggedIn) {
+      dispatch({
+        type: "logout"
+      })
+
+      console.log(userState)
+    }
+    else {
+      return;
+    }
+  
+  }
 
   return (
     <>
@@ -25,6 +39,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
           <li className="nav-item text-white"></li>
 
           <li className="nav-item">
+          {!userState.loggedIn && (
             <a
               href="#login"
               onClick={() => handlePageChange("Login")}
@@ -35,8 +50,11 @@ const Navbar = ({ currentPage, handlePageChange }) => {
             >
               log in
             </a>
+            )}
+
           </li>
           <li className="nav-item">
+          {!userState.loggedIn ? (
             <a
               href="#signup"
               onClick={() => handlePageChange("SignUp")}
@@ -47,7 +65,22 @@ const Navbar = ({ currentPage, handlePageChange }) => {
             >
               sign up
             </a>
+          ) : (
+            <a
+              href="#logOut"
+              onClick={() => logOutHandler()}
+              // Check to see if the currentPage is `logOut`, and if so we use the active link class from bootstrap. Otherwise, we set it to a normal nav-link
+              className={
+                currentPage === "logOut" ? "nav-link active" : "nav-link"
+              }
+            >
+           Logout
+            </a>
+
+          )}
+
           </li>
+   
           {/* </>
       ) : null} */}
           {userState.loggedIn && (
