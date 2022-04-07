@@ -89,6 +89,11 @@ const Profile = () => {
 
   return (
     <>
+      {isModalOpen && (
+        <Modal currentProduct={currentProduct}
+        onClose={toggleModal} />
+      )}
+
       {!userState.loggedIn && (
         <div
           className="d-flex justify-content-center align-items-center"
@@ -96,10 +101,6 @@ const Profile = () => {
         >
           <h1 className="text-danger">please log in to view your posts!</h1>
         </div>
-      )}
-
-      {isModalOpen && (
-        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
       )}
 
       <section className=" vh-100">
@@ -124,7 +125,7 @@ const Profile = () => {
                 <Card className="card-border row-card">
                   <Card.Img
                     variant="top"
-                    onClick={() => toggleModal(product.photo)}
+                    onClick={() => toggleModal(product)}
                     src={product.photo}
                   />
                   <Card.Body>
@@ -178,7 +179,7 @@ const Profile = () => {
                 <Card className="card-border row-card">
                   <Card.Img
                     variant="top"
-                    onClick={() => toggleModal(product.photo)}
+                    onClick={() => toggleModal(product)}
                     src={product.photo}
                   />
                   <Card.Body>

@@ -87,12 +87,13 @@ const Products = () => {
         <Modal currentProduct={currentProduct} onClose={toggleModal} />
       )}
       
-      <Row xs={1} sm={2} md={3} className="g-4 mt-4">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4 mt-4">
         
         {products.map((product, i) => (
           <Col>
             <Card className="card-border shadow">
-              <Card.Img variant="top" onClick={() => toggleModal(product)}
+              <Card.Img variant="top img-hover" 
+              onClick={() => toggleModal(product)}
               src={product.photo} />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
