@@ -47,10 +47,16 @@ const ProductSchema = new Schema(
       required: true,
       trim: true,
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, "Must match an email address!"],
+    },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (createdAtVal) => dateFormat(createdAtVal),
+      get: createdAtVal => dateFormat(createdAtVal),
     },
     comments: [
       {
@@ -62,6 +68,7 @@ const ProductSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true
     },
   }
 );

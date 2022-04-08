@@ -30,6 +30,7 @@ const Profile = () => {
       },
     });
     const data = await response.json();
+    console.log(data)
     setSavedProducts(data.saves);
   }
 
@@ -45,7 +46,7 @@ const Profile = () => {
     setOwnedProducts(response.ownedProducts);
   }
 
-  const [currentPhoto, setCurrentPhoto] = useState();
+  // const [currentPhoto, setCurrentPhoto] = useState();
  
 
   const _unSaveProduct = async (clickedProduct) => {
@@ -108,7 +109,7 @@ const Profile = () => {
         <h2 className="d-flex justify-content-center">{userState.username}'s profile</h2>
       )}
 
-        <h2 className="profile-title-top mt-3">My Posted Items</h2>
+        <h2 className="profile-title-top pb-3 mt-3">Selling</h2>
         <Row xs={1} sm={2} md={3} className="g-4">
           {!savedProducts.length && (
             <Col>
@@ -126,21 +127,21 @@ const Profile = () => {
             <div className="wrapper mt-4">
             {ownedProducts.map((product, i) => (
               <div className="">
-                <Card className="card-border row-card">
-                  <Card.Img className="img-hover"
+                <Card className=" row-card">
+                  <Card.Img className="img-hover card-img-top"
                     variant="top"
                     onClick={() => toggleModal(product)}
                     src={product.photo}
                   />
-                  <Card.Body>
+                  <Card.Body className="d-flex flex-column">
                     <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>Category: {product.category}</Card.Text>
-                    <Card.Text>City: {product.city}</Card.Text>
+                    <Card.Text>{product.category}</Card.Text>
+                    <Card.Text>{product.city}</Card.Text>
                     <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
                     {/* <Card.Text> {product.description}</Card.Text> */}
                     <button
                       key={product._id}
-                      className="btn m-2"
+                      className="btn w-100 mt-auto"
                       onClick={() => _deleteProduct(product._id)}
                     >
                       Sold
@@ -163,7 +164,7 @@ const Profile = () => {
         ) : (<></>)}
         {/* bottom bar */}
 
-        <h2 className="profile-title-bottom mb-2">My Saved Items</h2>
+        <h2 className="profile-title-bottom mt-3">My Saved Items</h2>
         <Row xs={1} sm={2} md={3} className="g-4">
           {!savedProducts.length && (
             <Col>
@@ -180,13 +181,13 @@ const Profile = () => {
           <div className="wrapper mt-4">
             {savedProducts.map((product, i) => (
               <div className="">
-                <Card className="card-border row-card">
+                <Card className=" row-card">
                   <Card.Img className="img-hover"
                     variant="top"
                     onClick={() => toggleModal(product)}
                     src={product.photo}
                   />
-                  <Card.Body>
+                  <Card.Body className="d-flex flex-column">
                     <Card.Title>{product.title}</Card.Title>
                     <Card.Text>Category: {product.category}</Card.Text>
                     <Card.Text>City: {product.city}</Card.Text>
@@ -194,7 +195,7 @@ const Profile = () => {
                     {/* <Card.Text> {product.description}</Card.Text> */}
                     <button
                       key={product._id}
-                      className="btn m-2"
+                      className="btn mt-auto w-100"
                       onClick={() => _unSaveProduct(product._id)}
                     >
                       Remove

@@ -20,7 +20,7 @@ html {
 
 body {
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   /* color: #fff !important; */
    background-color: var(--third-color)!important;
    /* background-image: linear-gradient(150deg, var(--primary-color) 50%, var(--secondary-color) 50%); */
@@ -34,6 +34,9 @@ body {
   height: 100vh;
 }
 
+.height-125 {
+  height: 125vh;
+}
 .height-150 {
   height: 150vh;
 }
@@ -52,16 +55,24 @@ body {
 
 .card {
   margin: 20px;
-  padding: 20px;
+  /* padding: 20px; */
   background-color: var(--secondary-color);
   border-radius: 0;
+ 
 }
 
+
+.product-card{
+  height: 60vh;
+}
 
 div:last-child {
   margin-botom: 0;
 }
 
+.a{
+  text-decoration: none;
+}
 /* .red {
   background-color: red;
 } */
@@ -135,6 +146,14 @@ ul {
 	z-index: 1;
 }
 
+#contact-form {
+  margin: 20px;
+  /* padding: 20px; */
+  background-color: var(--secondary-color);
+  border-radius: 0;
+  height: 80vh;
+}
+
 .modalContainer {
 	background: var(--darker);
 	border-radius: 5px;
@@ -180,25 +199,31 @@ h4 {
 
 .row-card {
   padding: 10px;
-  margin: 5px;
-  height: 650px;
-  width: 250px;
+  margin: 15px;
+  height: 600px;
+  width: 300px;
 }
 
 .profile-title-top {
   margin-top: 20px;
   margin-bottom: 0px !important;
   padding-left: 4%;
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  color: var(--primary-color)
 }
 
 .profile-title-bottom {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   padding-left: 4%;
-  margin-top:10px;
+  margin-top:20px;
   margin-bottom: 25px !important;
+  color: var(--primary-color)
 }
-
+.img-hover {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
 .img-hover:hover {
   opacity: 0.5 !important;
 }
@@ -228,6 +253,9 @@ h4 {
   .wrapper{
     display: block;
     align-items: center;
+  }
+  .mx-3{
+    margin-left: 0;
   }
 }
 

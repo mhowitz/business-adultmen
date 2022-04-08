@@ -110,31 +110,35 @@ const userController = {
   },
   getSavedProducts: async function (req, res) {
     try {
-      const productData = await User.findById(req.params.userId).populate(
-        "saves"
-      );
-      // path: 'saves',
-      // populate: [
-      // {
-      // 	path: 'productId',
-      // 	model: 'Product'
-
-      // }]})
-      res.json(productData);
+      const productData = await User.findById(req.params.userId)
+        .populate({
+          path: 'saves',
+          populate: {
+            path: 'comments',
+            model: 'Comment'
+          }
+        })
+        res.json(productData);
+        console.log(productData);
     } catch (error) {
       res.status(500).json(error);
     }
   },
   getOwnedProducts: async function (req, res) {
     try {
-      const userData = await User.findById(req.params.id).populate(
-        "ownedProducts"
-      );
+      const userData = await User.findById(req.params.id).populate({
+        path: 'ownedProducts',
+        populate: {
+          path: 'comments',
+          model: 'Comment'
+        }
+      })
       res.json(userData);
     } catch (error) {
       res.status(500).json(error);
     }
   },
 };
+
 
 module.exports = userController;
