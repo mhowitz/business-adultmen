@@ -92,27 +92,27 @@ const Products = () => {
         
         {products.map((product, i) => (
           <Col>
-            <Card className=" shadow ">
+            <Card className="product-card shadow ">
               <Card.Img className="card-img-top" variant="top img-hover" 
               onClick={() => toggleModal(product)}
               src={product.photo} />
-              <Card.Body>
+              <Card.Body className="d-flex flex-column">
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
                 {/* <Card.Text>Category: {product.category}</Card.Text> */}
-                <Card.Text>{product.city} on {product.createdAt}</Card.Text>
+                <Card.Text>Posted from {product.city} on {product.createdAt}</Card.Text>
                 
                 {/* <Card.Text>Description: {product.description}</Card.Text> */}
                 {userState.loggedIn && (
                   <>
-                    <div className="commentForm panel panel-default">
+                    <div className="commentForm panel panel-default mt-auto">
                       <div className="commentBox panel-body">
                         <form
                           className="form-inline"
                           id="commentFormInput"
                           onSubmit={(e) => _addComment(e, product._id)}
                         >
-                          <div className="form-row d-flex flex-wrap-wrap">
+                          <div className="form-row d-flex flex-wrap-wrap ">
                             <div className="col-10">
                               <input
                                 className="form-control "
@@ -132,20 +132,21 @@ const Products = () => {
                         </form>
                       </div>
                     </div>
+                    <div className="mt-auto ">
                     <button
                       key={product._id}
-                      className="btn m-2"
+                      className="btn col-5 mx-3"
                       onClick={() => _saveProduct(product._id)}
                     >
-                      <FontAwesomeIcon icon={faHeart}/>
-                    </button>
-                    
-                     
+                      <FontAwesomeIcon icon={faHeart}/> Save</button>
+                  
                      <a href={`mailto:${product.email}`}>
-                     <button className="btn m-2" key={product._id}>
-                     <FontAwesomeIcon icon={faEnvelope}/>
+                     <button className="btn col-5" key={product._id}>
+                     <FontAwesomeIcon icon={faEnvelope}/> Contact
                      </button> 
                      </a>
+                    </div>
+
                       
                  
           

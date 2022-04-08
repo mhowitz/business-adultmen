@@ -113,9 +113,9 @@ const Post = ({ handlePageChange }) => {
         </div>
       )}
       {userState.loggedIn && (
-        <section className="d-flex justify-content-around align-items-center p-5 height-100 diagonal-bar">
+        <section className="d-flex justify-content-around align-items-center p-5 height-125 diagonal-bar">
 
-          <form className="card-border card p-5 " id="contact-form red"
+          <form className="card-border card  p-5 " id="contact-form red"
 
             onSubmit={handleSubmit}>
 
@@ -225,7 +225,7 @@ const Post = ({ handlePageChange }) => {
             // onBlur={handleChange}
             />
             {error.city ? (<p style={{ color: "red" }}>{error.city}</p>) : null}
-              <label className ="p-2" htrmlFor="Email">Contact Email</label>
+              <label className ="p-2" htmlFor="Email">Contact Email</label>
 
               <input className="m-2"
               value={contactEmail}
