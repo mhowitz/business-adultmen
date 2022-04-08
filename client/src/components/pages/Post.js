@@ -147,7 +147,7 @@ const Post = ({ handlePageChange }) => {
                   setError({ ...error, description: "" })
                 }
                 else {
-                  setError({ ...error, description: "Description needs to be between 4 and 100 characters!" })
+                  setError({ ...error, description: "must be 4-100 characters!" })
                 }
               }}
               type="text"

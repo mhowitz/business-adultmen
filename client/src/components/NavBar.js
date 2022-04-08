@@ -22,7 +22,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
 
   return (
     <>
-      <div className=" nav nav-tabs d-inline-flex justify-content-between w-100 align-items-center">
+      <div className=" nav nav-tabs d-inline-flex justify-content-between w-100 align-items-center responsive-nav">
         <a
           href="#home"
           onClick={() => handlePageChange("Home")}
