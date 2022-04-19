@@ -115,10 +115,11 @@ const Products = () => {
                   <div className="commentForm panel panel-default mt-auto">
                     <div className="commentBox panel-body">  
                       <form
-                        className="form-inline"
+                        className="row"
                         id="commentFormInput"
                         onSubmit={(e) => _addComment(e, product._id)}
                       >
+                      <div className="row">
                         <div className="col-10">
                           <input
                             className="form-control-sm"
@@ -131,6 +132,7 @@ const Products = () => {
                           <button className="btn mx-2" type="submit">
                             <FontAwesomeIcon icon={faComment} />
                           </button>
+                      </div>
                         </div>
                       </form>
                     </div>
