@@ -96,23 +96,23 @@ const Products = () => {
           // <Col>
           <Card className="product-card shadow ">
             <Card.Img
-              className="card-img-top"
+              className="card-img-top mt-2"
               variant="top img-hover"
               onClick={() => toggleModal(product)}
               src={product.photo}
             />
             <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
-              <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
+              <Card.Title className="card-title">{product.title}</Card.Title>
+              <Card.Text className="card-price">$ {product.price.$numberDecimal}</Card.Text>
               {/* <Card.Text>Category: {product.category}</Card.Text> */}
-              <Card.Text>
-                Posted from {product.city} on {product.createdAt}
+              <Card.Text className="card-posted-at">
+                Posted from {product.city} | {product.createdAt}
               </Card.Text>
 
               {/* <Card.Text>Description: {product.description}</Card.Text> */}
               {userState.loggedIn && (
                 <>
-                  <div className="commentForm panel panel-default mt-auto">
+                  <div className="commentForm panel panel-default mt-3">
                     <div className="commentBox panel-body">  
                       <form
                         className="row"
@@ -120,7 +120,7 @@ const Products = () => {
                         onSubmit={(e) => _addComment(e, product._id)}
                       >
                       <div className="row">
-                        <div className="col-10">
+                        <div className="col-8">
                           <input
                             className="form-control-sm"
                             type="text"
@@ -137,7 +137,7 @@ const Products = () => {
                       </form>
                     </div>
                   </div>
-                  <div className="mt-auto ">
+                  <div className="mt-3 ">
                     <button
                       key={product._id}
                       className="btn col-5 mx-3"
