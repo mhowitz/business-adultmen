@@ -91,7 +91,7 @@ const Products = () => {
         <Modal currentProduct={currentProduct} onClose={toggleModal} />
       )}
 
-      <Row xs={1} sm={2} md={3} lg={4} className="g-4 mt-4">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4 mt-4 d-flex justify-content-center">
         {products.map((product, i) => (
           // <Col>
           <Card className="product-card shadow ">
