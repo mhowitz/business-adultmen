@@ -236,7 +236,7 @@ h4 {
 }
 
 .card-posted-at {
-  font-size: 12px;
+  font-size: 13px;
   margin: 0;
 }
 
@@ -245,6 +245,11 @@ h4 {
   font-weight: bold;
   color: var(--primary-color);
   margin: 0;
+}
+
+.comment-font {
+  font-size: 18px;
+  text-decoration: underline;
 }
 
 

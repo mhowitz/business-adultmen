@@ -15,6 +15,7 @@ const Products = () => {
   const [update, setUpdate] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
 
+
   useEffect(() => {
     newProducts().catch();
   }, []);
@@ -84,6 +85,13 @@ const Products = () => {
     setCurrentProduct(product);
     setIsModalOpen(!isModalOpen);
   };
+  function titleLength(product){
+
+    if(product.title.length > 2){
+      console.log('your over 5 characters')
+    }
+
+  }
 
   return (
     <div>
