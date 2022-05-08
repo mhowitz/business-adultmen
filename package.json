@@ -18,6 +18,8 @@
     "dotenv": "^16.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15",
     "prop-types": "^15.8.1",
