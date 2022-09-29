@@ -2,14 +2,19 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "./Modal";
 import { Card, Row, Col } from "react-bootstrap";
 import { UserContext } from "../contexts";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faHeart, faEnvelope, faComment } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHeart,
+  faEnvelope,
+  faComment,
+} from "@fortawesome/free-solid-svg-icons";
 // import  Mailto  from "react-mailto";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [useComment, setUseComment] = useState("");
   const [update, setUpdate] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
+
 
   useEffect(() => {
     newProducts().catch();
@@ -63,7 +68,7 @@ const Products = () => {
       alert("not logged in");
     }
     const data = await response.json();
-    const commentFormInput = document.getElementById('commentFormInput');
+    const commentFormInput = document.getElementById("commentFormInput");
     commentFormInput.reset();
 
     newProducts();
@@ -80,82 +85,86 @@ const Products = () => {
     setCurrentProduct(product);
     setIsModalOpen(!isModalOpen);
   };
+  function titleLength(product){
 
+    if(product.title.length > 2){
+      console.log('your over 5 characters')
+    }
+
+  }
 
   return (
     <div>
       {isModalOpen && (
         <Modal currentProduct={currentProduct} onClose={toggleModal} />
       )}
-      
-      <Row xs={1} sm={2} md={3} lg={4} className="g-4 mt-4">
-        
+
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4 mt-4 d-flex justify-content-center">
         {products.map((product, i) => (
-          <Col>
-            <Card className="product-card shadow ">
-              <Card.Img className="card-img-top" variant="top img-hover" 
+          // <Col>
+          <Card className="product-card shadow ">
+            <Card.Img
+              className="card-img-top mt-2"
+              variant="top img-hover"
               onClick={() => toggleModal(product)}
-              src={product.photo} />
-              <Card.Body className="d-flex flex-column">
-                <Card.Title>{product.title}</Card.Title>
-                <Card.Text>$ {product.price.$numberDecimal}</Card.Text>
-                {/* <Card.Text>Category: {product.category}</Card.Text> */}
-                <Card.Text>Posted from {product.city} on {product.createdAt}</Card.Text>
-                
-                {/* <Card.Text>Description: {product.description}</Card.Text> */}
-                {userState.loggedIn && (
-                  <>
-                    <div className="commentForm panel panel-default mt-auto">
-                      <div className="commentBox panel-body">
-                        <form
-                          className="form-inline"
-                          id="commentFormInput"
-                          onSubmit={(e) => _addComment(e, product._id)}
-                        >
-                          <div className="form-row d-flex flex-wrap-wrap ">
-                            <div className="col-10">
-                              <input
-                                className="form-control "
-                                type="text"
-                                onBlur={(e) => handleChange(e)}
-                                placeholder="Say something here..."
-                              ></input>
-                            </div>
-                            <div className="col-2">
-                              <button className="btn mx-2" type="submit">
-                               <FontAwesomeIcon icon={faComment}/>
-                              </button>
-                            </div>
+              src={product.photo}
+            />
+            <Card.Body>
+              <Card.Title className="card-title">{product.title}</Card.Title>
+              <Card.Text className="card-price">$ {product.price.$numberDecimal}</Card.Text>
+              {/* <Card.Text>Category: {product.category}</Card.Text> */}
+              <Card.Text className="card-posted-at">
+                Posted from {product.city} | {product.createdAt}
+              </Card.Text>
 
-                          </div>
-
-                        </form>
+              {/* <Card.Text>Description: {product.description}</Card.Text> */}
+              {userState.loggedIn && (
+                <>
+                  <div className="commentForm panel panel-default mt-3">
+                    <div className="commentBox panel-body">  
+                      <form
+                        className="row"
+                        id="commentFormInput"
+                        onSubmit={(e) => _addComment(e, product._id)}
+                      >
+                      <div className="row">
+                        <div className="col-8">
+                          <input
+                            className="form-control-sm"
+                            type="text"
+                            onBlur={(e) => handleChange(e)}
+                            placeholder="Say something here..."
+                          ></input>
+                        </div>
+                        <div className="col-2">
+                          <button className="btn mx-2" type="submit">
+                            <FontAwesomeIcon icon={faComment} />
+                          </button>
                       </div>
+                        </div>
+                      </form>
                     </div>
-                    <div className="mt-auto ">
+                  </div>
+                  <div className="mt-3 ">
                     <button
                       key={product._id}
                       className="btn col-5 mx-3"
                       onClick={() => _saveProduct(product._id)}
                     >
-                      <FontAwesomeIcon icon={faHeart}/> Save</button>
-                  
-                     <a href={`mailto:${product.email}`}>
-                     <button className="btn col-5" key={product._id}>
-                     <FontAwesomeIcon icon={faEnvelope}/> Contact
-                     </button> 
-                     </a>
-                    </div>
+                      <FontAwesomeIcon icon={faHeart} /> Save
+                    </button>
 
-                      
-                 
-          
-                    
-                  </>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
+                    <a href={`mailto:${product.email}`}>
+                      <button className="btn col-5" key={product._id}>
+                        <FontAwesomeIcon icon={faEnvelope} /> Contact
+                      </button>
+                    </a>
+                  </div>
+                </>
+              )}
+            </Card.Body>
+          </Card>
+          // </Col>
         ))}
       </Row>
     </div>
